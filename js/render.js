@@ -27,18 +27,9 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
   const width = universe.width();
   const height = universe.height();
   let cell_pointer = universe.cells();
-  let light_pointer = universe.lights();
-  let sprite_pointer = universe.sprite();
   let cells = new Uint8Array(memory.buffer, cell_pointer, width * height * 4);
-  let lights = new Uint8Array(memory.buffer, light_pointer, width * height * 4);
-  let sprite = new Uint8Array(
-    memory.buffer,
-    sprite_pointer,
-    width * height * 4
-  );
+
   const dataTexture = regl.texture({ width, height, data: cells });
-  const lightTexture = regl.texture({ width, height, data: lights });
-  const spriteTexture = regl.texture({ width, height, data: sprite });
 
   let drawSand = regl({
     blend: {
@@ -64,28 +55,7 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
         cells = new Uint8Array(memory.buffer, cell_pointer, width * height * 4);
         return dataTexture({ width, height, data: cells });
       },
-      lightTexture: () => {
-        light_pointer = universe.lights();
 
-        lights = new Uint8Array(
-          memory.buffer,
-          light_pointer,
-          width * height * 4
-        );
-
-        return lightTexture({ width, height, data: lights });
-      },
-      spriteTexture: () => {
-        sprite_pointer = universe.sprite();
-
-        sprite = new Uint8Array(
-          memory.buffer,
-          sprite_pointer,
-          width * height * 4
-        );
-
-        return spriteTexture({ width, height, data: sprite });
-      },
       resolution: ({ viewportWidth, viewportHeight }) => [
         viewportWidth,
         viewportHeight

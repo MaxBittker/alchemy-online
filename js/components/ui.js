@@ -18,7 +18,6 @@ skiplist.push("Plastic");
 // skiplist.push("GoldFish");
 
 window.species = Species;
-let pallette_data = pallette();
 
 const OrganicButton = ({ onClick, className, style, children }) => {
   return (
@@ -36,10 +35,6 @@ const OrganicButton = ({ onClick, className, style, children }) => {
 const ElementButton = (name, selectedElement, setElement) => {
   let elementID = Species[name];
 
-  let color = pallette_data[elementID];
-  if (elementID == Species.Daphnia) {
-    color = pallette_data[Species.Zoop];
-  }
   let selected = elementID == selectedElement;
 
   let background = "inherit";
@@ -57,9 +52,8 @@ const ElementButton = (name, selectedElement, setElement) => {
       }}
       style={{
         background,
-        backgroundColor: color,
-        borderColor: color,
-        color: name == "Air" ? "black" : "white",
+        // backgroundColor: color,
+        // borderColor: color,
         filter: selected || `saturate(0.4) `
       }}
     >
@@ -126,7 +120,6 @@ class Index extends React.Component {
     if (window.confirm("Reset your ecosystem?")) {
       this.play();
       this.setState({ currentSubmission: null });
-      localStorage.setItem("last_tchotchke", null);
 
       reset();
     }
@@ -174,23 +167,7 @@ class Index extends React.Component {
       console.log("store failed");
     }
 
-    const sprite = new Uint8Array(
-      memory.buffer,
-      universe.sprite(),
-      width * height * 4
-    );
-
-    // fill imgData with data from sprite
-    for (var i = 0; i < width * height * 4; i++) {
-      imgData.data[i] = sprite[i];
-    }
-    // put data to context at (0, 0)
-    context.putImageData(imgData, 0, 0);
-
-    let spriteData = canvas.toDataURL("image/png");
-    let spriteDataString = JSON.stringify(spriteData);
     try {
-      localStorage.setItem("sprite_data", spriteDataString);
     } catch {
       console.log("store failed");
     }
@@ -201,30 +178,13 @@ class Index extends React.Component {
     let date = new Date();
     return `${date.getMonth()}-${date.getDate()}`;
   }
-  findTchotchke() {
-    if (localStorage.getItem("last_tchotchke") == this.currentDateString()) {
-      return;
-    }
-    randomIco().then(a => {
-      this.setState(({ tchotchkes }) => {
-        localStorage.setItem("last_tchotchke", this.currentDateString());
 
-        if (this.state.tchotchkes.size >= 2) {
-          tchotchkes.delete(Array.from(tchotchkes)[0]);
-        }
-
-        tchotchkes.add(a.url);
-        return { tchotchkes };
-      });
-    });
-  }
   load() {
     console.log("loading");
 
     window.setInterval(() => this.findTchotchke(), 1000 * 60 * 5);
 
     var cellData = JSON.parse(localStorage.getItem("cell_data"));
-    var spriteData = JSON.parse(localStorage.getItem("sprite_data"));
 
     if (!cellData) {
       console.log("no save");
@@ -262,27 +222,6 @@ class Index extends React.Component {
       window.setInterval(() => this.upload(), 1000 * 10);
     };
 
-    var canvas2 = document.createElement("canvas");
-    canvas2.width = width;
-    canvas2.height = height;
-    var ctx2 = canvas2.getContext("2d");
-
-    var img2 = new Image();
-    img2.src = spriteData;
-    img2.onload = () => {
-      ctx2.drawImage(img2, 0, 0);
-      var imgData = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
-
-      const spriteData = new Uint8Array(
-        memory.buffer,
-        universe.sprite(),
-        width * height * 4
-      );
-
-      for (var i = 0; i < width * height * 4; i++) {
-        spriteData[i] = imgData.data[i];
-      }
-    };
     // universe.flush_undos();
     // universe.push_undo();
     // this.pause();
@@ -303,7 +242,7 @@ class Index extends React.Component {
         : "";
 
     let activeSpecies = Object.keys(Species).filter(
-      name => !skiplist.includes(name)
+      name => !skiplist.includes(name) && name.length > 2
     );
     // if (tutorial) {
     //   activeSpecies = ["Sand", "Water"];

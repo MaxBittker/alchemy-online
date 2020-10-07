@@ -13,25 +13,6 @@ use std::f32;
 // use std::float;
 use wasm_bindgen::prelude::*;
 // use web_sys::console;
-#[wasm_bindgen]
-#[repr(C)]
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct Light {
-    sun: u8,
-    sparkle: u8,
-    b: u8,
-    a: u8,
-}
-
-#[wasm_bindgen]
-#[repr(C)]
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct Pixel {
-    r: u8,
-    g: u8,
-    b: u8,
-    a: u8,
-}
 
 #[wasm_bindgen]
 #[repr(C)]
@@ -56,9 +37,6 @@ impl Cell {
     pub fn update(&self, api: SandApi) {
         self.species.update(*self, api);
     }
-    pub fn blocked_light(&self) -> f32 {
-        self.species.blocked_light()
-    }
 }
 
 static EMPTY_CELL: Cell = Cell {
@@ -81,8 +59,6 @@ pub struct Universe {
     height: i32,
     cells: Vec<Cell>,
     undo_stack: VecDeque<Vec<Cell>>,
-    lights: Vec<Light>,
-    sprite: Vec<Pixel>,
     generation: u8,
     time: u8,
     total_gas: u32,
@@ -129,11 +105,6 @@ impl<'a> SandApi<'a> {
         self.universe.cells[i].clock = self.universe.generation;
     }
 
-    pub fn get_light(&mut self) -> Light {
-        let idx = self.universe.get_index(self.x, self.y);
-
-        self.universe.lights[idx]
-    }
     pub fn use_co2(&mut self) -> bool {
         if (1 + rand_int(self.universe.total_gas as i32 / 3) as u32) > self.universe.co2 {
             return false;
@@ -167,81 +138,6 @@ impl Universe {
             for y in 0..self.height {
                 let idx = self.get_index(x, y);
                 self.cells[idx] = EMPTY_CELL;
-                self.sprite[idx] = Pixel {
-                    r: 0,
-                    g: 0,
-                    b: 0,
-                    a: 0,
-                }
-            }
-        }
-    }
-    pub fn calculate_light(&mut self) {
-        let time = ((self.time as f32) / 255.) * f32::consts::PI * 2.;
-
-        // let time: f32 = 0.1;
-        let mut dx = time.sin();
-        let mut dy = time.cos();
-
-        let mut brightness = 255.0;
-        if dy < 0.5 {
-            brightness = 30.0 + (225.0 * (dy / 0.5)) as f32;
-        }
-        if dy < -0.1 {
-            dx = 0.0;
-            dy = 1.0;
-        }
-
-        let start_y = if dy > 0. { 0 } else { self.height - 1 };
-        for start_x in 0..self.width {
-            self.cast_ray(brightness, start_x, start_y, dx, dy);
-        }
-
-        let start_x = if dx > 0. { 0 } else { self.width - 1 };
-        for start_y in 0..self.height {
-            self.cast_ray(brightness, start_x, start_y, dx, dy);
-        }
-    }
-    pub fn cast_ray(&mut self, brightness: f32, x: i32, y: i32, dx: f32, dy: f32) {
-        let ray_length =
-            (((self.width * self.width) + (self.height * self.height)) as f32).sqrt() as i32;
-
-        let mut sunlight: f32 = brightness;
-        for r in 0..ray_length {
-            let rx = (r as f32 * dx) as i32 + x;
-            let ry = (r as f32 * dy) as i32 + y;
-
-            let idx = self.get_index(rx, ry);
-            if rx < 0
-                || ry < 0
-                || rx >= self.width
-                || ry >= self.height
-                || idx > self.get_max_index()
-            {
-                break;
-            }
-            let cell = self.get_cell(rx, ry);
-            let blocked_light =
-                (sunlight) * (1.0 - cell.blocked_light()) * ((r / ray_length) as f32) * 5.;
-            sunlight = (sunlight) * cell.blocked_light();
-
-            // let brx = rx - (dy * 0.) as i32;
-            // let mut brx = rx + rand_dir() * 2;
-            // let mut bry = ry + rand_dir() * 2;
-            // if brx < 0 || brx > self.width - 1 {
-            //     brx = rx;
-            // }
-            // if bry < 0 || bry > self.height - 1 {
-            //     bry = ry;
-            // }
-            // let bounce_idx = self.get_index(brx, bry);
-            // self.lights[bounce_idx].sparkle += blocked_light as u8;
-
-            self.lights[idx].sun = sunlight as u8;
-            self.lights[idx].b = self.lights[idx].b.saturating_sub(2);
-            // self.lights[idx].sparkle = self.lights[idx].sparkle.saturating_sub(4);
-            if brightness < 70. && cell.species == Species::Zoop && cell.age > 4 {
-                self.lights[idx].b = 210 - (brightness * 3.0) as u8;
             }
         }
     }
@@ -275,7 +171,6 @@ impl Universe {
             }
         }
         // self.time = self.time.wrapping_add(1);
-        self.calculate_light();
     }
 
     pub fn width(&self) -> i32 {
@@ -297,37 +192,6 @@ impl Universe {
     }
     pub fn cells(&self) -> *const Cell {
         self.cells.as_ptr()
-    }
-    pub fn lights(&self) -> *const Light {
-        self.lights.as_ptr()
-    }
-
-    pub fn sprite(&self) -> *const Pixel {
-        self.sprite.as_ptr()
-    }
-    pub fn place_sprite(&mut self, xi: i32, yi: i32, typebuf: js_sys::Uint8Array) {
-        let mut data = vec![0; typebuf.length() as usize];
-        typebuf.copy_to(&mut data[..]);
-        for x in 0..16 {
-            for y in 0..16 {
-                let idx = (x + (y * 16)) * 4;
-                let r = data[idx];
-                let g = data[idx + 1];
-                let b = data[idx + 2];
-                let a = data[idx + 3];
-                let nx = xi + x as i32;
-                let ny = yi + y as i32;
-
-                if nx < 0 || nx > self.width - 1 || ny < 0 || ny > self.height - 1 {
-                    continue;
-                }
-                let sidx = self.get_index(nx, ny);
-                if a > 100 {
-                    self.sprite[sidx] = Pixel { r, g, b, a };
-                    self.cells[sidx] = Cell::new(Species::Plastic);
-                }
-            }
-        }
     }
 
     pub fn paint(&mut self, x: i32, y: i32, size: i32, species: Species) {
@@ -361,14 +225,6 @@ impl Universe {
                         age: 0,
                         clock: self.generation,
                     };
-                    if species == Species::Air {
-                        self.sprite[i] = Pixel {
-                            r: 0,
-                            g: 0,
-                            b: 0,
-                            a: 0,
-                        };
-                    }
                 }
             }
         }
@@ -404,29 +260,11 @@ impl Universe {
     pub fn new(width: i32, height: i32) -> Universe {
         let cells = (0..width * height).map(|_| EMPTY_CELL).collect();
 
-        let lights: Vec<Light> = (0..width * height)
-            .map(|_i| Light {
-                sun: 0,
-                sparkle: 0,
-                b: 0,
-                a: 0,
-            })
-            .collect();
-        let sprite: Vec<Pixel> = (0..width * height)
-            .map(|_i| Pixel {
-                r: 0,
-                g: 0,
-                b: 0,
-                a: 0,
-            })
-            .collect();
         let total_gas = (width * height * 10) as u32;
         Universe {
             width,
             height,
             cells,
-            lights,
-            sprite,
             time: 0,
             total_gas,
             o2: total_gas / 2,
@@ -452,11 +290,6 @@ impl Universe {
         let i = self.get_index(x, y);
         return self.cells[i];
     }
-
-    // fn get_light(&self, x: i32, y: i32) -> Light {
-    //     let i = self.get_index(x, y);
-    //     return self.lights[i];
-    // }
 
     fn update_cell(cell: Cell, api: SandApi) {
         if cell.clock == api.universe.generation {

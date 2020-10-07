@@ -1,13 +1,10 @@
 import { Universe, Species } from "../crate/pkg";
 
 import { startWebGL } from "./render";
-import { startPlotter } from "./plot";
 import { fps } from "./fps";
 import {} from "./paint";
 import {} from "./app";
 import {} from "./setup";
-import { startSky } from "./shaderToy";
-import { getTchotchkes } from "./tchotchkes";
 
 let n = 200;
 let h = n / 2;
@@ -97,22 +94,6 @@ window.addEventListener("deviceorientation", resize, true);
 window.addEventListener("resize", resize);
 
 let drawSand = startWebGL({ canvas, universe });
-let sky_ratio = canvasSize / n;
-
-let sky;
-try {
-  sky = startSky(sky_ratio * 2);
-} catch (e) {
-  console.error("skys haunted");
-  sky = {
-    frame: () => {}
-  };
-}
-// let plotcanvas = document.getElementById("plot-canvas");
-// let { drawPlot, recordDataPoint } = startPlotter({
-// canvas: plotcanvas,
-// universe
-// });
 
 let t = parseInt(localStorage.getItem("time"), 10) || 0;
 const renderLoop = () => {
@@ -123,7 +104,7 @@ const renderLoop = () => {
     var dayTime = (t / 50) % 255;
 
     if (!window.paused) {
-      // fps.render(); // new
+      fps.render(); // new
 
       universe.tick();
       t += 1;
@@ -141,10 +122,7 @@ const renderLoop = () => {
     }
   }
   window.t = t;
-  let skyTime = dayTime / 255;
-  window.skyTime = skyTime;
   drawSand.draw();
-  sky.frame(skyTime);
   // drawPlot();
 
   window.animWebationId = requestAnimationFrame(renderLoop);
@@ -163,16 +141,5 @@ window.universe = universe;
 renderLoop();
 
 window.UI.load();
-// getTchotchkes().then(images => {
-//   images.forEach((image, i) => {
-//     // console.log(image);
-//     universe.place_sprite(
-//       10 + Math.random() * 150,
-//       10 + Math.random() * 150,
-//       image.data
-//     );
-//   });
-// });
-// debugger;
 
 export { canvas, width, height, ratio, universe, reset };

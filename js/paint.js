@@ -1,5 +1,4 @@
 import { height, universe, width, ratio } from "./index.js";
-import { icoToImage } from "./tchotchkes";
 
 import { Species } from "../crate/pkg";
 
@@ -42,28 +41,10 @@ const sub = (a, b) => {
 let painting = false;
 let lastPaint = null;
 let repeat = null;
-function tryPlaceTchotchke(event) {
-  let url = window.UI.state.selectedTchotchke;
-  if (url) {
-    window.UI.setState(({ tchotchkes }) => {
-      tchotchkes.delete(url);
-      document.documentElement.style.cursor = `default`;
-      return { tchotchkes, selectedTchotchke: null };
-    });
-    const [x, y] = convertEventCoordinates(event);
 
-    icoToImage(url).then(image => {
-      universe.place_sprite(x - 8, y - 8, image.data);
-      window.UI.upload();
-    });
-    return true;
-  } else return false;
-}
 canvas.addEventListener("mousedown", event => {
   event.preventDefault();
-  if (tryPlaceTchotchke(event)) {
-    return;
-  }
+
   universe.push_undo();
 
   painting = true;
@@ -97,9 +78,7 @@ canvas.addEventListener("touchstart", event => {
     event.preventDefault();
   }
   let touches = Array.from(event.touches);
-  if (tryPlaceTchotchke(touches[0])) {
-    return;
-  }
+
   universe.push_undo();
 
   painting = true;

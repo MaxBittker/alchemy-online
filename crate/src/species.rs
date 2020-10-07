@@ -77,37 +77,6 @@ impl Species {
             Species::Plastic => {}
         }
     }
-    pub fn blocked_light(&self) -> f32 {
-        (100.0
-            - match self {
-                Species::Water => 1.0,
-                Species::Fish => 25.0,
-                Species::GoldFish => 25.0,
-                Species::FishTail => 25.0,
-                Species::GoldFishTail => 25.0,
-
-                Species::Plant => 20.0,
-                Species::Grass => 35.0,
-                Species::Biofilm => 3.0,
-
-                Species::Algae => 18.0,
-                Species::Bacteria => 10.0,
-                Species::Waste => 10.0,
-                Species::Nitrogen => 10.0,
-                Species::Zoop => 10.0,
-                Species::Daphnia => 5.0,
-
-                Species::Air => 0.0,
-                Species::Bubble => 2.0,
-                Species::Glass => 0.0,
-
-                Species::Stone => 50.0,
-                Species::Wood => 50.0,
-                Species::Sand => 10.0,
-                Species::Plastic => 5.0,
-            })
-            / 100.0
-    }
 }
 
 pub fn update_waste(cell: Cell, mut api: SandApi) {
@@ -442,7 +411,7 @@ pub fn update_algae(cell: Cell, mut api: SandApi) {
     if split_energy == 0 {
         api.set(0, 0, nbr);
     }
-    let mut photosynth: u8 = api.get_light().sun.saturating_sub(30) / 5;
+    let mut photosynth: u8 = 0;
     if photosynth > 0 && !api.use_co2() {
         photosynth = 0; //need co2
     }
@@ -522,7 +491,7 @@ pub fn update_zoop(cell: Cell, mut api: SandApi) {
         api.set(0, 0, WASTE);
         return;
     }
-    let sun = api.get_light().sun;
+    let sun = 1;
     if age < ZOOP_PADDING || sun > 150 {
         //sinking
         let dx = rand_dir();
@@ -550,7 +519,7 @@ pub fn update_zoop(cell: Cell, mut api: SandApi) {
         }
     } else if age == ZOOP_PADDING {
         // kick
-        let (mut dx, mut dy) = if api.get_light().sun < 30 {
+        let (mut dx, mut dy) = if 1 < 30 {
             rand_vec_ennnws() // climb at night
         } else {
             rand_vec_8() // wander
@@ -646,7 +615,7 @@ pub fn update_daphnia(cell: Cell, mut api: SandApi) {
         api.set(0, 0, dnbr);
         api.set(dx * dy, dy, cell);
     } else {
-        if !api.can_use_oxygen() || api.get_light().sun > 20 || rand_int(10) > 5 {
+        if !api.can_use_oxygen() || 1 > 20 || rand_int(10) > 5 {
             //gestate
             return;
         }
@@ -904,7 +873,7 @@ pub fn update_plant(cell: Cell, mut api: SandApi) {
     //     return;
     // }
 
-    let light = api.get_light().sun;
+    let light = 1;
 
     if energy > 50
         && age == 0
