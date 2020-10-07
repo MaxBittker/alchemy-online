@@ -8,15 +8,6 @@ import { height, universe, width, reset } from "../index.js";
 import { exportGif, pallette } from "../render.js";
 import Menu from "./menu.js";
 
-let skiplist = ["FishTail", "Biofilm", "GoldFishTail"];
-skiplist.push("Waste");
-skiplist.push("Bubble");
-skiplist.push("Plant");
-skiplist.push("Zoop");
-skiplist.push("Nitrogen");
-skiplist.push("Plastic");
-// skiplist.push("GoldFish");
-
 window.species = Species;
 
 const OrganicButton = ({ onClick, className, style, children }) => {
@@ -52,8 +43,7 @@ const ElementButton = (name, selectedElement, setElement) => {
       }}
       style={{
         background,
-        // backgroundColor: color,
-        // borderColor: color,
+
         filter: selected || `saturate(0.4) `
       }}
     >
@@ -76,11 +66,9 @@ class Index extends React.Component {
       ff: false,
       submitting: false,
       size: 1,
-      tchotchkes: new Set(),
       dataURL: null,
       currentSubmission: null,
-      selectedElement: Species.Sand,
-      tutorialProgress
+      selectedElement: Species.Sand
     };
     window.UI = this;
     // this.load();
@@ -170,8 +158,6 @@ class Index extends React.Component {
     } catch {
       console.log("store failed");
     }
-
-    // this.load();
   }
   currentDateString() {
     let date = new Date();
@@ -223,25 +209,14 @@ class Index extends React.Component {
   }
 
   render() {
-    let {
-      ff,
-      selectedElement,
-      currentSubmission,
-      selectedTchotchke,
-      tchotchkes,
-      tutorialProgress
-    } = this.state;
+    let { ff, selectedElement, currentSubmission } = this.state;
     let hash =
       currentSubmission && currentSubmission.id
         ? `#${currentSubmission.id}`
         : "";
 
-    let activeSpecies = Object.keys(Species).filter(
-      name => !skiplist.includes(name) && name.length > 2
-    );
-    // if (tutorial) {
-    //   activeSpecies = ["Sand", "Water"];
-    // }
+    let activeSpecies = Object.keys(Species).filter(name => name.length > 2);
+
     return (
       <div className="window fade" id="HUD">
         <div className="title-bar">
@@ -287,7 +262,7 @@ class Index extends React.Component {
               </OrganicButton>
             </Link>
 
-            {/* <OrganicButton
+            <OrganicButton
               onClick={() => {
                 // reset();
                 universe.pop_undo();
@@ -295,7 +270,7 @@ class Index extends React.Component {
               style={{ fontSize: 35 }}
             >
               ↜
-            </OrganicButton> */}
+            </OrganicButton>
             {/* 
             <OrganicButton
               onClick={() => {
@@ -310,38 +285,9 @@ class Index extends React.Component {
             </OrganicButton> */}
 
             {activeSpecies.map(n =>
-              ElementButton(n, selectedTchotchke || selectedElement, id =>
-                this.setState({ selectedElement: id, selectedTchotchke: null })
+              ElementButton(n, selectedElement, id =>
+                this.setState({ selectedElement: id })
               )
-            )}
-            {tchotchkes.size > 0 && (
-              <span className="tchotchkes">
-                {Array.from(tchotchkes).map(url => (
-                  <img
-                    onClick={() => {
-                      document.documentElement.style.cursor = `url("${url}"), default`;
-
-                      this.setState({ selectedTchotchke: url });
-                    }}
-                    className={selectedTchotchke == url ? "selected" : ""}
-                    src={url}
-                    key={url}
-                  ></img>
-                ))}
-              </span>
-            )}
-            {selectedTchotchke && (
-              <button
-                className="discard"
-                onClick={() => {
-                  window.UI.setState(({ tchotchkes }) => {
-                    tchotchkes.delete(selectedTchotchke);
-                    return { tchotchkes, selectedTchotchke: null };
-                  });
-                }}
-              >
-                Discard
-              </button>
             )}
 
             {this.state.dataURL && (
@@ -356,96 +302,6 @@ class Index extends React.Component {
             )}
           </div>
         </div>
-        {tutorialProgress < 4 && (
-          <React.Fragment>
-            <div className="welcome-scrim"></div>
-            <div className="window" id="welcome">
-              <div className="title-bar">
-                <div className="title-bar-text">Orb.Farm</div>
-                <div className="title-bar-controls">
-                  <button
-                    aria-label="Minimize"
-                    onClick={() => {
-                      this.setState({
-                        tutorialProgress: tutorialProgress + 1
-                      });
-                      if (tutorialProgress == 3) {
-                        localStorage.setItem("tutorialProgress", 4);
-                      }
-                    }}
-                  ></button>
-                  <button aria-label="Maximize"></button>
-                  <button
-                    aria-label="Close"
-                    onClick={() => {
-                      this.setState({
-                        tutorialProgress: tutorialProgress + 1
-                      });
-                      if (tutorialProgress == 3) {
-                        localStorage.setItem("tutorialProgress", 4);
-                      }
-                    }}
-                  ></button>
-                </div>
-              </div>
-              <div className="window-body">
-                <div className="welcome-right-column">
-                  <div className="field-row-stacked welcome-speech">
-                    {
-                      [
-                        <span>
-                          <h1>Welcome to Orb.Farm!</h1>{" "}
-                          <p>
-                            This is your personal aquatic ecosystem to nurture,
-                            sculpt, and observe.
-                          </p>
-                        </span>,
-                        <p>
-                          My advice? Start with the basics. Fill your tank with{" "}
-                          {ElementButton("Sand", null, () => {})} and{" "}
-                          {ElementButton("Water", null, () => {})}. Or vice
-                          versa!
-                        </p>,
-                        <p>
-                          From there, introduce lifeforms such as adorable{" "}
-                          {ElementButton("Daphnia", null, () => {})} — just
-                          don't forget some tasty{" "}
-                          {ElementButton("Algae", null, () => {})} for us to eat
-                          when we hatch.
-                        </p>,
-                        <span>
-                          <p>
-                            Balance the needs of your ecosystem to achieve a
-                            stable Orb community.
-                          </p>
-                          <h1>And have fun!</h1>{" "}
-                        </span>
-                      ][tutorialProgress]
-                    }
-                  </div>
-                </div>
-                <img id="daphnia" src={daphniaImg}></img>
-                <span>
-                  {/* <img id="bubblebig" src={bubblebig}></img> */}
-                  <p id="welcome-progress">{tutorialProgress + 1}/4</p>
-                  <OrganicButton
-                    className="next-button"
-                    onClick={() => {
-                      this.setState({
-                        tutorialProgress: tutorialProgress + 1
-                      });
-                      if (tutorialProgress == 3) {
-                        localStorage.setItem("tutorialProgress", 4);
-                      }
-                    }}
-                  >
-                    {tutorialProgress < 3 ? "Next >" : "Begin!"}
-                  </OrganicButton>
-                </span>
-              </div>
-            </div>
-          </React.Fragment>
-        )}
       </div>
     );
   }

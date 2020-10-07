@@ -53,7 +53,6 @@ let resize = () => {
       }
     } else {
       // landscape wide
-
       canvasStyle = `height: ${window.innerHeight}px`;
       canvasSize = window.innerHeight;
       let hudWidth = (screen_width - window.innerHeight) / 2 - 7;
