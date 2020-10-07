@@ -161,7 +161,6 @@ class Index extends React.Component {
     let dataString = JSON.stringify(cellData);
     try {
       localStorage.setItem("cell_data", dataString);
-      localStorage.setItem("o2", universe.o2());
       localStorage.setItem("time", window.t);
     } catch {
       console.log("store failed");
@@ -213,10 +212,6 @@ class Index extends React.Component {
 
       for (var i = 0; i < width * height * 4; i++) {
         cellsData[i] = imgData.data[i];
-      }
-      if (localStorage.getItem("o2")) {
-        let o2 = parseInt(localStorage.getItem("o2"), 10);
-        universe.set_o2(o2);
       }
 
       window.setInterval(() => this.upload(), 1000 * 10);

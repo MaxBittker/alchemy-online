@@ -32,8 +32,6 @@ const fps = new (class {
 
     // Render the statistics.
     this.fps.textContent = `FPS:${Math.round(mean)}`;
-    // O2: ${window.u.O2() / 1000}
-    // CO2: ${window.u.CO2() / 1000}`;
   }
 })();
 

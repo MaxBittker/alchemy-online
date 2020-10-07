@@ -182,6 +182,7 @@ const paint = event => {
   if (!painting) {
     return;
   }
+
   if (
     window.UI.state.selectedElement == Species.Fish ||
     window.UI.state.selectedElement == Species.GoldFish

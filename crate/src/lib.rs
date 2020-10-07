@@ -46,13 +46,6 @@ static EMPTY_CELL: Cell = Cell {
     clock: 0,
 };
 
-static WASTE: Cell = Cell {
-    species: Species::Waste,
-    energy: 0,
-    age: 0,
-    clock: 0,
-};
-
 #[wasm_bindgen]
 pub struct Universe {
     width: i32,
@@ -61,9 +54,6 @@ pub struct Universe {
     undo_stack: VecDeque<Vec<Cell>>,
     generation: u8,
     time: u8,
-    total_gas: u32,
-    o2: u32,
-    co2: u32,
 }
 
 pub struct SandApi<'a> {
@@ -104,36 +94,11 @@ impl<'a> SandApi<'a> {
         self.universe.cells[i] = v;
         self.universe.cells[i].clock = self.universe.generation;
     }
-
-    pub fn use_co2(&mut self) -> bool {
-        if (1 + rand_int(self.universe.total_gas as i32 / 3) as u32) > self.universe.co2 {
-            return false;
-        }
-        self.universe.co2 = self.universe.co2.saturating_sub(1);
-        self.universe.o2 = self.universe.o2.saturating_add(1);
-
-        return true;
-    }
-    pub fn can_use_oxygen(&mut self) -> bool {
-        (1 + rand_int(self.universe.total_gas as i32 / 3) as u32) < self.universe.o2
-    }
-
-    pub fn use_oxygen(&mut self) -> bool {
-        if !self.can_use_oxygen() {
-            return false;
-        }
-        self.universe.o2 = self.universe.o2.saturating_sub(1);
-        self.universe.co2 = self.universe.co2.saturating_add(1);
-
-        return true;
-    }
 }
 
 #[wasm_bindgen]
 impl Universe {
     pub fn reset(&mut self) {
-        self.o2 = self.total_gas / 2;
-        self.co2 = self.total_gas / 2;
         for x in 0..self.width {
             for y in 0..self.height {
                 let idx = self.get_index(x, y);
@@ -181,15 +146,6 @@ impl Universe {
         self.height
     }
 
-    pub fn o2(&self) -> u32 {
-        self.o2
-    }
-    pub fn total_gas(&self) -> u32 {
-        self.total_gas
-    }
-    pub fn co2(&self) -> u32 {
-        self.co2
-    }
     pub fn cells(&self) -> *const Cell {
         self.cells.as_ptr()
     }
@@ -249,10 +205,6 @@ impl Universe {
     pub fn set_time(&mut self, t: u8) {
         self.time = t;
     }
-    pub fn set_o2(&mut self, v: u32) {
-        self.o2 = v;
-        self.co2 = self.total_gas - v;
-    }
     pub fn inc_time(&mut self) {
         self.time = self.time.wrapping_add(1);
     }
@@ -266,9 +218,6 @@ impl Universe {
             height,
             cells,
             time: 0,
-            total_gas,
-            o2: total_gas / 2,
-            co2: total_gas / 2,
             undo_stack: VecDeque::with_capacity(50),
             generation: 0,
         }
