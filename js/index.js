@@ -57,7 +57,6 @@ let resize = () => {
 
   let canvasStyle = "";
   let HUDStyle = "";
-  let gaugeFloat = "left";
 
   if (screen_width - 150 > screen_height) {
     if (screen_width - window.innerHeight < 400) {
@@ -91,8 +90,6 @@ let resize = () => {
   }
   HUD.style = HUDStyle;
   canvas.style = canvasStyle;
-  let gauge = document.querySelector(".gauge");
-  gauge.style.float = gaugeFloat;
 };
 
 resize();
@@ -136,9 +133,7 @@ const renderLoop = () => {
       }
     }
     universe.set_time(dayTime);
-    window.gauge.setState({
-      angle: 45 + (270 * universe.o2()) / universe.total_gas()
-    });
+
     // recordDataPoint();
     let elapsed_time = performance.now() - now;
     if (elapsed_time > 13) {

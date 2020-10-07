@@ -7,12 +7,6 @@ import { Species } from "../../crate/pkg/sandtable";
 import { height, universe, width, reset } from "../index.js";
 import { exportGif, pallette } from "../render.js";
 import Menu from "./menu.js";
-import { icos, randomIco } from "../tchotchkes";
-import daphniaImg from "../../assets/daphniaAlpha.gif";
-import bubblebig from "../../assets/bubblebig.png";
-import bubblemed from "../../assets/bubblemed.png";
-import bubblesmall from "../../assets/bubblesmall.png";
-import { Gauge } from "../gauge";
 
 let skiplist = ["FishTail", "Biofilm", "GoldFishTail"];
 skiplist.push("Waste");
@@ -335,7 +329,6 @@ class Index extends React.Component {
           </div>
         </div>
         <div className="window-body hud-body">
-          <Gauge></Gauge>
           <div id="hud-buttons">
             <OrganicButton
               onClick={() => this.toggleFF()}

@@ -1,0 +1,1 @@
+/home/max/workspace/tile-toy/crate/target/wasm32-unknown-unknown/release/libsandtable.rlib: /home/max/workspace/tile-toy/crate/src/lib.rs /home/max/workspace/tile-toy/crate/src/species.rs /home/max/workspace/tile-toy/crate/src/utils.rs build.rs
