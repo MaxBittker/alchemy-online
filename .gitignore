@@ -1,4 +1,7 @@
 # Logs
+
+/target/
+
 logs
 *.log
 npm-debug.log*
