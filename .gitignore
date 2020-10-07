@@ -10,7 +10,7 @@ node_modules
 dist
 crate/pkg
 crate/target
-crate/target/
+crate/target/*
 crate/wasm-pack.log
 crate/Cargo.lock
 .firebase
