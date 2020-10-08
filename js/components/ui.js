@@ -7,6 +7,7 @@ import { Species } from "../../crate/pkg/sandtable";
 import { height, universe, width, reset } from "../index.js";
 import { exportGif, pallette } from "../render.js";
 import Menu from "./menu.js";
+import { Matrix, Editor } from "./matrix";
 
 window.species = Species;
 
@@ -220,7 +221,7 @@ class Index extends React.Component {
     return (
       <div className="window fade" id="HUD">
         <div className="title-bar">
-          <div className="title-bar-text">Orb.farm</div>
+          <div className="title-bar-text">Tile Toy</div>
           <div className="title-bar-controls">
             <button
               aria-label="Minimize"
@@ -258,7 +259,7 @@ class Index extends React.Component {
               }}
             >
               <OrganicButton style={{ width: "calc(100% - 4px)" }}>
-                info
+                Info
               </OrganicButton>
             </Link>
 
@@ -267,7 +268,7 @@ class Index extends React.Component {
                 // reset();
                 universe.pop_undo();
               }}
-              style={{ fontSize: 35 }}
+              style={{ fontSize: 18 }}
             >
               ↜
             </OrganicButton>
@@ -289,14 +290,11 @@ class Index extends React.Component {
                 this.setState({ selectedElement: id })
               )
             )}
+            <Editor></Editor>
 
             {this.state.dataURL && (
               <Menu close={() => this.closeMenu()}>
-                <h4>~~~Share your Orb!~~~~</h4>
-
                 <img src={this.state.dataURL} className="submissionImg" />
-                <h4>Orb.Farm</h4>
-                <h4>Tell your friends!</h4>
                 <div style={{ display: "flex" }}></div>
               </Menu>
             )}

@@ -47,10 +47,6 @@ let resize = () => {
       let hudWidth = screen_width - window.innerHeight - 12;
 
       HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
-
-      if (hudWidth < 300) {
-        gaugeFloat = "none";
-      }
     } else {
       // landscape wide
       canvasStyle = `height: ${window.innerHeight}px`;
