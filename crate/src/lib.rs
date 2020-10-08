@@ -5,6 +5,7 @@ extern crate web_sys;
 
 mod species;
 pub mod utils;
+use species::Rule;
 use utils::*;
 
 use species::Species;
@@ -53,6 +54,7 @@ pub struct Universe {
     cells: Vec<Cell>,
     undo_stack: VecDeque<Vec<Cell>>,
     generation: u8,
+    active_rule: species::Rule,
     time: u8,
 }
 
@@ -137,6 +139,13 @@ impl Universe {
         }
         // self.time = self.time.wrapping_add(1);
     }
+    pub fn rule(&self) -> Rule {
+        self.active_rule
+    }
+
+    pub fn set_rule(&mut self, rule: &Rule) {
+        self.active_rule = *rule;
+    }
 
     pub fn width(&self) -> i32 {
         self.width
@@ -220,6 +229,7 @@ impl Universe {
             time: 0,
             undo_stack: VecDeque::with_capacity(50),
             generation: 0,
+            active_rule: species::build_rule(),
         }
     }
 }

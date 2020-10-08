@@ -136,7 +136,11 @@ button.selected {
   box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
 }
 
-#ui {
+.bsvg {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 20px;
+  /* stroke-linejoin:; */
 }
 #HUD {
   position: absolute;

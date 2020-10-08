@@ -1,42 +1,93 @@
 import React from "react";
+// import { Rule } from "../../../crate/pkg/species";
+import {
+  Universe,
+  Species,
+  Rule,
+  SymmetryMode,
+  Selector,
+  Effector,
+  Slot,
+  OutSlot
+} from "../../crate/pkg";
+// console.log(Species);
+console.log(SymmetryMode);
+console.log(Slot);
+console.log(OutSlot);
 
-let types = ["empty", "anything", "same"];
+function keys(en) {
+  return Object.keys(en)
+    .filter(k => isNaN(parseFloat(k)))
+    .map(k => {
+      return { key: k, value: en[k] };
+    });
+  // .filter()
+}
 
+let SlotOptions = [
+  {
+    key: Slot.Anything,
+    symbol: "*"
+  },
+  {
+    key: Slot.Empty,
+    symbol: "∅"
+  }
+];
+
+let OutSlotOptions = [
+  {
+    key: OutSlot.Nop,
+    symbol: " "
+  },
+  {
+    key: OutSlot.Empty,
+    symbol: "∅"
+  },
+  {
+    key: OutSlot.Me,
+    symbol: "i"
+  }
+];
+
+function grid_index(x, y) {
+  return y * 3 + x;
+}
 class Matrix extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      data: [
-        [0, 0, 0],
-        [0, 1, 0],
-        [0, 0, 0]
-      ]
-    };
   }
-  gridSquare(x, y) {
-    let { data } = this.state;
 
-    let myCell = data[x][y];
+  gridSquare(x, y) {
+    let { grid } = this.props;
+
+    let myCell = grid[grid_index(x, y)];
     return (
-      <g key={`${x}-${y}`}>
+      <g
+        key={`${x}-${y}`}
+        transform={`translate(${x * 55 + 15},${y * 55 + 15})`}
+        onClick={() => {
+          grid[grid_index(x, y)] = (myCell + 1) % this.props.options.length;
+          let { setGrid } = this.props;
+          setGrid(grid);
+        }}
+      >
         <rect
-          onClick={() => {
-            data[x][y] = (data[x][y] + 1) % 10;
-            this.setState({ data });
-          }}
-          x={x * 55 + 15}
-          y={y * 55 + 15}
+          x={0}
+          y={0}
           width="50"
           height="50"
           className="mat-box"
           style={{
-            fill: `hsl(${myCell * 40},50%,50%)`,
+            // fill: `hsl(${myCell * 40},50%,50%)`,
 
             strokeWidth: 1,
             stroke: "rgb(0, 0, 0)"
           }}
         />
+        <text x={20} y={35} style={{ fontSize: "30px" }}>
+          {this.props.options[myCell].symbol}
+        </text>
         {/* <circle
           cx={x * 55 + 15 + 25}
           cy={y * 55 + 15 + 25}
@@ -51,7 +102,7 @@ class Matrix extends React.Component {
     );
   }
   render() {
-    let { data } = this.state;
+    // let { data } = this.state;
 
     return (
       <g>
@@ -78,51 +129,26 @@ class Editor extends React.Component {
     super(props);
 
     this.state = {
-      data: [
-        [0, 0, 0],
-        [0, 1, 0],
-        [0, 0, 0]
-      ]
+      rule: {
+        selector: [0, 0, 0, 0, 0, 0, 0, 1, 0],
+        effector: [0, 0, 0, 0, 1, 0, 0, 2, 0]
+      }
     };
   }
-  gridSquare(x, y) {
-    let { data } = this.state;
+  setRule() {
+    let { rule } = this.state;
+    let { selector: j_selector, effector: j_effector } = rule;
 
-    let myCell = data[x][y];
-    return (
-      <g>
-        <rect
-          onClick={() => {
-            data[x][y] = (data[x][y] + 1) % 10;
-            this.setState({ data });
-          }}
-          x={x * 55 + 15}
-          y={y * 55 + 15}
-          width="50"
-          height="50"
-          className="mat-box"
-          style={{
-            fill: `hsl(${myCell * 40},50%,50%)`,
+    let selector = new Selector(...j_selector.map(v => SlotOptions[v].key));
+    let effector = new Effector(...j_effector.map(v => OutSlotOptions[v].key));
 
-            strokeWidth: 1,
-            stroke: "rgb(0, 0, 0)"
-          }}
-        />
-        {/* <circle
-            cx={x * 55 + 15 + 25}
-            cy={y * 55 + 15 + 25}
-            r="20"
-            className="mat-circle"
-            style={{
-              strokeWidth: 1,
-              stroke: "rgb(0, 0, 0)"
-            }}
-          ></circle> */}
-      </g>
-    );
+    let r_rule = new Rule(SymmetryMode.j_effector, selector, effector);
+
+    window.u.set_rule(r_rule);
   }
   render() {
-    let { data } = this.state;
+    let { rule } = this.state;
+    let { selector, effector } = rule;
 
     return (
       <div className="MatrixMenu">
@@ -133,7 +159,15 @@ class Editor extends React.Component {
           //   height="200"
         >
           <g>
-            <Matrix />
+            <Matrix
+              options={SlotOptions}
+              grid={selector}
+              setGrid={newGrid => {
+                let { rule } = this.state;
+                rule.selector = newGrid;
+                this.setState({ rule }, this.setRule);
+              }}
+            />
           </g>
           <g transform="translate(185,80)">
             <polygon
@@ -143,7 +177,15 @@ class Editor extends React.Component {
             />
           </g>
           <g transform="translate(210,0)">
-            <Matrix />
+            <Matrix
+              options={OutSlotOptions}
+              grid={effector}
+              setGrid={newGrid => {
+                let { rule } = this.state;
+                rule.effector = newGrid;
+                this.setState({ rule }, this.setRule);
+              }}
+            />
           </g>
         </svg>
       </div>

@@ -2,7 +2,7 @@ use cfg_if::cfg_if;
 // use wasm_bindgen::prelude::*;
 // use web_sys::console;
 
-pub fn matrixIndex(n: usize) -> (i32, i32) {
+pub fn matrix_index(n: usize) -> (i32, i32) {
     match n {
         0 => (-1, -1),
         1 => (0, -1),

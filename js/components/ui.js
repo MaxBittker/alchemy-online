@@ -208,7 +208,7 @@ class Index extends React.Component {
   }
 
   render() {
-    let { ff, selectedElement, currentSubmission } = this.state;
+    let { ff, selectedElement, currentSubmission, paused } = this.state;
     let hash =
       currentSubmission && currentSubmission.id
         ? `#${currentSubmission.id}`
@@ -239,18 +239,51 @@ class Index extends React.Component {
         <div className="window-body hud-body">
           <div id="hud-buttons">
             <OrganicButton
+              onClick={() => this.togglePause()}
+              className={paused ? "selected" : ""}
+            >
+              {paused ? (
+                <svg
+                  className="bsvg"
+                  height="20"
+                  width="20"
+                  id="d"
+                  viewBox="-50 -50 400 400"
+                >
+                  <polygon id="play" points="0,0 , 300,150 0,300" />
+                </svg>
+              ) : (
+                <svg
+                  className="bsvg"
+                  height="20"
+                  width="20"
+                  id="d"
+                  viewBox="-50 -50 400 400"
+                >
+                  <polygon id="bar2" points="0,0 110,0 110,300 0,300" />
+                  <polygon id="bar1" points="190,0 300,0 300,300 190,300" />
+                </svg>
+              )}
+            </OrganicButton>
+            <OrganicButton
               onClick={() => this.toggleFF()}
               className={ff ? "selected" : ""}
               active={ff}
             >
-              <svg height="20" width="20" id="d" viewBox="0 0 300 300">
+              <svg
+                className="bsvg"
+                height="20"
+                width="20"
+                id="d"
+                viewBox="-25 0 350 300"
+              >
                 <polygon id="play" points="0,50 , 150,150 0,250" />
                 <polygon id="play" points="150,50, 300,150 150,250" />
               </svg>
             </OrganicButton>
 
             <OrganicButton onClick={() => this.reset()}>Reset</OrganicButton>
-            <Link
+            {/* <Link
               to={{
                 pathname: "/info/",
                 hash
@@ -259,7 +292,7 @@ class Index extends React.Component {
               <OrganicButton style={{ width: "calc(100% - 4px)" }}>
                 Info
               </OrganicButton>
-            </Link>
+            </Link> */}
 
             <OrganicButton
               onClick={() => {

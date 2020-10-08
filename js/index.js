@@ -40,20 +40,20 @@ let resize = () => {
   let HUDStyle = "";
 
   if (screen_width - 150 > screen_height) {
-    if (screen_width - window.innerHeight < 400) {
-      // landscape compressed
-      canvasStyle = `height: ${window.innerHeight}px; margin:3px`;
-      canvasSize = window.innerHeight;
-      let hudWidth = screen_width - window.innerHeight - 12;
+    // if (screen_width - window.innerHeight < 400) {
+    // landscape compressed
+    canvasStyle = `height: ${window.innerHeight}px; margin:3px`;
+    canvasSize = window.innerHeight;
+    let hudWidth = screen_width - window.innerHeight - 12;
 
-      HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
-    } else {
-      // landscape wide
-      canvasStyle = `height: ${window.innerHeight}px`;
-      canvasSize = window.innerHeight;
-      let hudWidth = (screen_width - window.innerHeight) / 2 - 7;
-      HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
-    }
+    HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
+    // } else {
+    //   // landscape wide
+    //   canvasStyle = `height: ${window.innerHeight}px`;
+    //   canvasSize = window.innerHeight;
+    //   let hudWidth = (screen_width - window.innerHeight) / 2 - 7;
+    //   HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
+    // }
   } else {
     //portrait (mobile)
     canvasSize = screen_width;

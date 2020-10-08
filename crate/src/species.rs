@@ -12,14 +12,12 @@ use wasm_bindgen::prelude::*;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Species {
     Empty = 0,
-
     Glass = 1,
     Sand = 2,
-    Stone = 12,
-    Wood = 13,
-    Rule1 = 6,
-
-    Water = 3,
+    Stone = 3,
+    Wood = 4,
+    Rule1 = 5,
+    Water = 6,
 }
 
 #[wasm_bindgen]
@@ -35,9 +33,21 @@ pub enum SymmetryMode {
 #[wasm_bindgen]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Rule {
-    symmetry: SymmetryMode,
-    selector: Selector,
-    effector: Effector,
+    pub symmetry: SymmetryMode,
+    pub selector: Selector,
+    pub effector: Effector,
+}
+
+#[wasm_bindgen]
+impl Rule {
+    #[wasm_bindgen(constructor)]
+    pub fn new(symmetry: SymmetryMode, selector: Selector, effector: Effector) -> Rule {
+        return Rule {
+            symmetry,
+            selector,
+            effector,
+        };
+    }
 }
 
 #[wasm_bindgen]
@@ -47,10 +57,9 @@ pub enum Slot {
     Empty = 0,
     Anything = 1,
     Full = 2,
-
-    Stone = 4,
-    Wood = 5,
-    Water = 6,
+    Stone = 3,
+    Wood = 4,
+    Water = 5,
 }
 
 #[wasm_bindgen]
@@ -69,9 +78,49 @@ pub struct Selector {
 }
 
 #[wasm_bindgen]
+impl Selector {
+    #[wasm_bindgen(constructor)]
+    pub fn new(
+        v1: Slot,
+        v2: Slot,
+        v3: Slot,
+        v4: Slot,
+        v5: Slot,
+        v6: Slot,
+        v7: Slot,
+        v8: Slot,
+        v9: Slot,
+    ) -> Selector {
+        return Selector {
+            grid: [v1, v2, v3, v4, v5, v6, v7, v8, v9],
+        };
+    }
+}
+
+#[wasm_bindgen]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Effector {
     grid: [OutSlot; 9],
+}
+
+#[wasm_bindgen]
+impl Effector {
+    #[wasm_bindgen(constructor)]
+    pub fn new(
+        v1: OutSlot,
+        v2: OutSlot,
+        v3: OutSlot,
+        v4: OutSlot,
+        v5: OutSlot,
+        v6: OutSlot,
+        v7: OutSlot,
+        v8: OutSlot,
+        v9: OutSlot,
+    ) -> Effector {
+        return Effector {
+            grid: [v1, v2, v3, v4, v5, v6, v7, v8, v9],
+        };
+    }
 }
 
 pub fn check_cell(slot: Slot, cell: Cell) -> bool {
@@ -86,14 +135,14 @@ pub fn check_cell(slot: Slot, cell: Cell) -> bool {
 pub fn execute_rule(cell: Cell, mut api: SandApi, rule: Rule) {
     // let mut passes = true;
     for x in 0..rule.selector.grid.len() {
-        let (dx, dy) = matrixIndex(x);
+        let (dx, dy) = matrix_index(x);
         if !check_cell(rule.selector.grid[x], api.get(dx, dy)) {
             // passes = false;
             return;
         }
     }
     for x in 0..rule.effector.grid.len() {
-        let (dx, dy) = matrixIndex(x);
+        let (dx, dy) = matrix_index(x);
         let outSlot = rule.effector.grid[x];
         match outSlot {
             OutSlot::Empty => api.set(dx, dy, EMPTY_CELL),
@@ -115,9 +164,9 @@ pub fn build_rule() -> Rule {
                 Slot::Anything,
                 Slot::Anything,
                 Slot::Anything,
-                Slot::Anything,
                 Slot::Empty,
-                Slot::Anything,
+                Slot::Empty,
+                Slot::Empty,
             ],
         },
         effector: Effector {
@@ -137,7 +186,7 @@ pub fn build_rule() -> Rule {
 }
 impl Species {
     pub fn update(&self, cell: Cell, api: SandApi) {
-        let rule = build_rule();
+        let rule = api.universe.active_rule;
         match self {
             Species::Empty => {}
             Species::Glass => {}
