@@ -149,7 +149,7 @@ const handleTouches = event => {
 let speciesSizes = {
   [Species.Water]: 13,
   [Species.Sand]: 8,
-  [Species.Air]: 7,
+  [Species.Empty]: 7,
 
   [Species.Algae]: 2,
   [Species.Fish]: 2,

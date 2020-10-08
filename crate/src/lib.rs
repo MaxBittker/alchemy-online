@@ -40,7 +40,7 @@ impl Cell {
 }
 
 static EMPTY_CELL: Cell = Cell {
-    species: Species::Air,
+    species: Species::Empty,
     energy: 0,
     age: 0,
     clock: 0,
@@ -71,7 +71,7 @@ impl<'a> SandApi<'a> {
         let ny = self.y + dy;
         if nx < 0 || nx > self.universe.width - 1 || ny < 0 || ny > self.universe.height - 1 {
             return Cell {
-                species: Species::Air,
+                species: Species::Empty,
                 energy: 0,
                 age: 0,
                 clock: self.universe.generation,
@@ -168,10 +168,10 @@ impl Universe {
                     continue;
                 }
                 if self.get_cell(px, py).species == Species::Water
-                    || self.get_cell(px, py).species == Species::Air
+                    || self.get_cell(px, py).species == Species::Empty
                     || ((species == Species::Stone || species == Species::Wood)
                         && self.get_cell(px, py).species == Species::Sand)
-                    || species == Species::Air
+                    || species == Species::Empty
                 {
                     self.cells[i] = Cell {
                         species: species,

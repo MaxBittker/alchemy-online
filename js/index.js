@@ -16,7 +16,7 @@ function drawBowl() {
   universe.paint(h, h, d + 2, Species.Glass);
   universe.paint(h - 30, d - 3, 20, Species.Wood);
   universe.paint(h + 30, d - 3, 20, Species.Wood);
-  universe.paint(h, h, d - 2, Species.Air);
+  universe.paint(h, h, d - 2, Species.Empty);
 }
 
 drawBowl();

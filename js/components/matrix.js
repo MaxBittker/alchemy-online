@@ -19,7 +19,7 @@ class Matrix extends React.Component {
 
     let myCell = data[x][y];
     return (
-      <g>
+      <g key={`${x}-${y}`}>
         <rect
           onClick={() => {
             data[x][y] = (data[x][y] + 1) % 10;

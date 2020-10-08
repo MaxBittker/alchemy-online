@@ -2,6 +2,24 @@ use cfg_if::cfg_if;
 // use wasm_bindgen::prelude::*;
 // use web_sys::console;
 
+pub fn matrixIndex(n: usize) -> (i32, i32) {
+    match n {
+        0 => (-1, -1),
+        1 => (0, -1),
+        2 => (1, -1),
+
+        3 => (-1, 0),
+        4 => (0, 0),
+        5 => (1, 0),
+
+        6 => (-1, 1),
+        7 => (0, 1),
+        8 => (1, 1),
+
+        _ => (0, 0),
+    }
+}
+
 pub fn rand_int(n: i32) -> i32 {
     (js_sys::Math::random() * n as f64) as i32
 }

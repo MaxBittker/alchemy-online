@@ -32,7 +32,7 @@ const ElementButton = (name, selectedElement, setElement) => {
   let background = "inherit";
 
   let text = name;
-  if (name == "Air") {
+  if (name == "Empty") {
     text = "Clear";
   }
   return (
@@ -167,8 +167,6 @@ class Index extends React.Component {
 
   load() {
     console.log("loading");
-
-    window.setInterval(() => this.findTchotchke(), 1000 * 60 * 5);
 
     var cellData = JSON.parse(localStorage.getItem("cell_data"));
 
