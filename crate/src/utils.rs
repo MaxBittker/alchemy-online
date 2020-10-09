@@ -19,6 +19,9 @@ pub fn matrix_index(n: usize) -> (i32, i32) {
         _ => (0, 0),
     }
 }
+pub fn rand_uint(n: usize) -> usize {
+    (js_sys::Math::random() * n as f64) as usize
+}
 
 pub fn rand_int(n: i32) -> i32 {
     (js_sys::Math::random() * n as f64) as i32
@@ -120,6 +123,18 @@ pub fn rand_vec_8() -> (i32, i32) {
         _ => (0, 1),
     }
 }
+
+pub fn rot_right(dir: (i32, i32), n: usize) -> (i32, i32) {
+    let (x, y) = dir;
+    match n {
+        0 => (x, y),
+        1 => (y * -1, x),
+        2 => (x * -1, y * -1),
+        3 => (y, x * -1),
+        _ => (x, y),
+    }
+}
+
 pub fn adjacency_right(dir: (i32, i32)) -> (i32, i32) {
     match dir {
         (0, 1) => (1, 1),

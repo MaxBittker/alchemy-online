@@ -93,6 +93,10 @@ impl<'a> SandApi<'a> {
         }
         let i = self.universe.get_index(nx, ny);
         // v.clock += 1;
+        // QUESTIONABLE:
+        if self.universe.cells[i].species == Species::Glass {
+            return;
+        }
         self.universe.cells[i] = v;
         self.universe.cells[i].clock = self.universe.generation;
     }
@@ -220,7 +224,6 @@ impl Universe {
     pub fn new(width: i32, height: i32) -> Universe {
         let cells = (0..width * height).map(|_| EMPTY_CELL).collect();
 
-        let total_gas = (width * height * 10) as u32;
         Universe {
             width,
             height,

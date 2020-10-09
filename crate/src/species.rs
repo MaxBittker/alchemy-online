@@ -128,24 +128,80 @@ pub fn check_cell(slot: Slot, cell: Cell) -> bool {
         _ => true, //TODO: OTHER RULES
     }
 }
-
-pub fn execute_rule(cell: Cell, mut api: SandApi, rule: Rule) {
-    // let mut passes = true;
+pub fn execute_rule_orientation(
+    cell: Cell,
+    mut api: SandApi,
+    rule: Rule,
+    rx: i32,
+    ry: i32,
+    r: usize,
+) -> (bool, SandApi) {
     for x in 0..rule.selector.grid.len() {
-        let (dx, dy) = matrix_index(x);
+        let (mut dx, mut dy) = rot_right(matrix_index(x), r);
+        dx *= rx;
+        dy *= ry;
         if (dx != 0 || dy != 0) && !check_cell(rule.selector.grid[x], api.get(dx, dy)) {
-            // passes = false;
-            return;
+            return (false, api);
         }
     }
     for x in 0..rule.effector.grid.len() {
-        let (dx, dy) = matrix_index(x);
-        let outSlot = rule.effector.grid[x];
-        match outSlot {
+        let (mut dx, mut dy) = rot_right(matrix_index(x), r);
+        dx *= rx;
+        dy *= ry;
+        let out_slot = rule.effector.grid[x];
+        match out_slot {
             OutSlot::Empty => api.set(dx, dy, EMPTY_CELL),
             OutSlot::Nop => (),
             OutSlot::Me => api.set(dx, dy, cell),
-            // _ => (), //TODO: OTHER RULES
+        }
+    }
+    return (true, api);
+}
+pub fn execute_rule(cell: Cell, api: SandApi, rule: Rule) {
+    // let mut passes = true;
+    match rule.symmetry {
+        SymmetryMode::None => {
+            execute_rule_orientation(cell, api, rule, 1, 1, 0);
+        }
+        SymmetryMode::Vertical => {
+            let dy = rand_dir_2();
+            let (success, api) = execute_rule_orientation(cell, api, rule, 1, dy, 0);
+            if success {
+                return;
+            }
+            execute_rule_orientation(cell, api, rule, 1, dy * -1, 0);
+        }
+        SymmetryMode::Horizontal => {
+            let dx = rand_dir_2();
+            let (success, api) = execute_rule_orientation(cell, api, rule, dx, 1, 0);
+            if success {
+                return;
+            }
+            execute_rule_orientation(cell, api, rule, dx * -1, 1, 0);
+        }
+        SymmetryMode::Quad => {
+            let mut r = rand_uint(4);
+            let (success, api) = execute_rule_orientation(cell, api, rule, 1, 1, r);
+            if success {
+                return;
+            }
+            r = (r + 1) % 4;
+            let (success, api) = execute_rule_orientation(cell, api, rule, 1, 1, r);
+
+            if success {
+                return;
+            }
+            r = (r + 1) % 4;
+
+            let (success, api) = execute_rule_orientation(cell, api, rule, 1, 1, r);
+
+            if success {
+                return;
+            }
+            r = (r + 1) % 4;
+
+            // tx = rx;
+            execute_rule_orientation(cell, api, rule, 1, 1, r);
         }
     }
 }
@@ -196,7 +252,7 @@ impl Species {
 }
 
 pub fn update_sand(cell: Cell, mut api: SandApi) {
-    let (dx, dy) = rand_vec_8();
+    let (dx, _) = rand_vec_8();
 
     let down = api.get(0, 1);
     let dnbr = api.get(dx, 1);

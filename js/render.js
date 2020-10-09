@@ -195,7 +195,7 @@ let exportGif = (universe, cb) => {
 let pallette = () => {
   let canvas = document.createElement("canvas");
 
-  let species = Object.values(Species);
+  let species = Object.values(Species).filter(k => !isNaN(parseFloat(k)));
   let range = Math.max(...species) + 1;
   let universe = Universe.new(range, 1);
   canvas.width = range;

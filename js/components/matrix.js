@@ -15,14 +15,14 @@ console.log(SymmetryMode);
 console.log(Slot);
 console.log(OutSlot);
 
-function keys(en) {
-  return Object.keys(en)
-    .filter(k => isNaN(parseFloat(k)))
-    .map(k => {
-      return { key: k, value: en[k] };
-    });
-  // .filter()
-}
+// function keys(en) {
+//   return Object.keys(en)
+//     .filter(k => isNaN(parseFloat(k)))
+//     .map(k => {
+//       return { key: k, value: en[k] };
+//     });
+//   // .filter()
+// }
 let SymmetryOptions = [
   {
     key: SymmetryMode.None,
@@ -160,7 +160,6 @@ class Editor extends React.Component {
     let effector = new Effector(...j_effector.map(v => OutSlotOptions[v].key));
 
     let r_rule = new Rule(SymmetryOptions[j_symmetry].key, selector, effector);
-
     window.u.set_rule(r_rule);
   }
   render() {
@@ -192,9 +191,12 @@ class Editor extends React.Component {
             onClick={() => {
               let { rule } = this.state;
               rule.symmetry = (symmetry + 1) % SymmetryOptions.length;
-              this.setState({
-                rule
-              });
+              this.setState(
+                {
+                  rule
+                },
+                this.setRule
+              );
             }}
           >
             {SymmetryOptions[symmetry].symbol}

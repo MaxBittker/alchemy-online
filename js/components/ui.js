@@ -10,6 +10,7 @@ import Menu from "./menu.js";
 import { Matrix, Editor } from "./matrix";
 
 window.species = Species;
+let pallette_data = pallette();
 
 const OrganicButton = ({ onClick, className, style, children }) => {
   return (
@@ -27,6 +28,8 @@ const OrganicButton = ({ onClick, className, style, children }) => {
 const ElementButton = (name, selectedElement, setElement) => {
   let elementID = Species[name];
 
+  let color = pallette_data[elementID];
+
   let selected = elementID == selectedElement;
 
   let background = "inherit";
@@ -34,6 +37,10 @@ const ElementButton = (name, selectedElement, setElement) => {
   let text = name;
   if (name == "Empty") {
     text = "Clear";
+  }
+
+  if (name == "Rule1") {
+    text = "☉";
   }
   return (
     <button
@@ -44,7 +51,8 @@ const ElementButton = (name, selectedElement, setElement) => {
       }}
       style={{
         background,
-
+        backgroundColor: color,
+        borderColor: color,
         filter: selected || `saturate(0.4) `
       }}
     >

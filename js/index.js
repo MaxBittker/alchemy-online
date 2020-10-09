@@ -6,21 +6,21 @@ import {} from "./paint";
 import {} from "./app";
 import {} from "./setup";
 
-let n = 200;
+let n = 150;
 let h = n / 2;
 let d = n - 6;
 
 const universe = Universe.new(n, n);
 function drawBowl() {
   universe.paint(h, h, d + 2, Species.Glass);
-  universe.paint(h - 30, d - 3, 20, Species.Glass);
-  universe.paint(h + 30, d - 3, 20, Species.Glass);
+  // universe.paint(h - 30, d - 3, 20, Species.Glass);
+  // universe.paint(h + 30, d - 3, 20, Species.Glass);
   universe.paint(h, h, d - 2, Species.Empty);
 }
 
 drawBowl();
 
-let ratio = 2;
+let ratio = 3;
 let width = n;
 let height = n;
 const canvas = document.getElementById("sand-canvas");
@@ -80,7 +80,7 @@ const renderLoop = () => {
       universe.tick();
     }
     let elapsed_time = performance.now() - now;
-    if (elapsed_time > 13) {
+    if (elapsed_time > 16) {
       break;
     }
   }
