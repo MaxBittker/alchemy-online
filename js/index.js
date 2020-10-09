@@ -20,7 +20,7 @@ function drawBowl() {
 
 drawBowl();
 
-let ratio = 3;
+let ratio = 2;
 let width = n;
 let height = n;
 const canvas = document.getElementById("sand-canvas");

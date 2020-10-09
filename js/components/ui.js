@@ -11,7 +11,7 @@ import { Matrix, Editor } from "./matrix";
 
 window.species = Species;
 let pallette_data = pallette();
-
+window.pallette = pallette_data;
 const OrganicButton = ({ onClick, className, style, children }) => {
   return (
     <button
