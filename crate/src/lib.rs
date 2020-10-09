@@ -178,8 +178,7 @@ impl Universe {
                 }
                 if self.get_cell(px, py).species == Species::Water
                     || self.get_cell(px, py).species == Species::Empty
-                    || ((species == Species::Stone || species == Species::Wood)
-                        && self.get_cell(px, py).species == Species::Sand)
+                    || self.get_cell(px, py).species == Species::Sand
                     || species == Species::Empty
                 {
                     self.cells[i] = Cell {

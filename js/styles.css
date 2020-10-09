@@ -11,24 +11,24 @@
     inset 2px 2px var(--button-shadow);
 }
 
-@font-face {
+/* @font-face {
   font-family: "pixelmixregular";
   src: url("assets/pixelmix-webfont.woff2") format("woff2"),
     url("assets/pixelmix-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: "times16";
   src: url("assets/times-16-regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 * {
   margin: 0;
-  /* font-family: "Bitter", serif; */
+  font-family: "Bitter", serif;
   /* font-family: "pixelmixregular", monospace; */
   /* font-family: "times16" !important; */
   font-smooth: never;
@@ -136,12 +136,6 @@ button.selected {
   box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
 }
 
-.bsvg {
-  fill: transparent;
-  stroke: black;
-  stroke-width: 20px;
-  /* stroke-linejoin:; */
-}
 #HUD {
   position: absolute;
   right: 0px;
@@ -260,5 +254,31 @@ button:not(:disabled):active {
 }
 
 .mat-box:hover {
-  stroke: lightblue !important;
+  fill: rgb(231, 243, 246) !important;
+}
+.disabled rect {
+  fill: #c0c0c0 !important;
+}
+.disabled rect:hover {
+  fill: #c0c0c0 !important;
+}
+
+svg {
+  user-select: none;
+}
+.bsvg {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 20px;
+  /* stroke-linejoin:; */
+}
+svg text {
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+.MatrixMenu svg {
+  stroke: #5a5a5a;
+}
+svg text {
+  stroke-width: 0 !important;
 }

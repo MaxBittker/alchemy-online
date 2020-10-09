@@ -69,7 +69,7 @@ class Index extends React.Component {
       size: 1,
       dataURL: null,
       currentSubmission: null,
-      selectedElement: Species.Sand
+      selectedElement: Species.Rule1
     };
     window.UI = this;
     // this.load();
@@ -265,7 +265,7 @@ class Index extends React.Component {
                 </svg>
               )}
             </OrganicButton>
-            <OrganicButton
+            {/* <OrganicButton
               onClick={() => this.toggleFF()}
               className={ff ? "selected" : ""}
               active={ff}
@@ -280,7 +280,7 @@ class Index extends React.Component {
                 <polygon id="play" points="0,50 , 150,150 0,250" />
                 <polygon id="play" points="150,50, 300,150 150,250" />
               </svg>
-            </OrganicButton>
+            </OrganicButton> */}
 
             <OrganicButton onClick={() => this.reset()}>Reset</OrganicButton>
             {/* <Link

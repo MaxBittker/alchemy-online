@@ -14,10 +14,8 @@ pub enum Species {
     Empty = 0,
     Glass = 1,
     Sand = 2,
-    Stone = 3,
-    Wood = 4,
-    Rule1 = 5,
-    Water = 6,
+    Rule1 = 3,
+    Water = 4,
 }
 
 #[wasm_bindgen]
@@ -57,9 +55,8 @@ pub enum Slot {
     Empty = 0,
     Anything = 1,
     Full = 2,
-    Stone = 3,
-    Wood = 4,
-    Water = 5,
+    Glass = 3,
+    Water = 4,
 }
 
 #[wasm_bindgen]
@@ -136,7 +133,7 @@ pub fn execute_rule(cell: Cell, mut api: SandApi, rule: Rule) {
     // let mut passes = true;
     for x in 0..rule.selector.grid.len() {
         let (dx, dy) = matrix_index(x);
-        if !check_cell(rule.selector.grid[x], api.get(dx, dy)) {
+        if (dx != 0 || dy != 0) && !check_cell(rule.selector.grid[x], api.get(dx, dy)) {
             // passes = false;
             return;
         }
@@ -194,18 +191,11 @@ impl Species {
             Species::Rule1 => execute_rule(cell, api, rule),
             Species::Water => update_water(cell, api),
             Species::Sand => update_sand(cell, api),
-            Species::Stone => update_stone(cell, api),
-            Species::Wood => {}
         }
     }
 }
 
 pub fn update_sand(cell: Cell, mut api: SandApi) {
-    let mut age = cell.age;
-    if cell.age == 0 {
-        age = rand_int(255) as u8;
-    }
-
     let (dx, dy) = rand_vec_8();
 
     let down = api.get(0, 1);
@@ -223,38 +213,6 @@ pub fn update_sand(cell: Cell, mut api: SandApi) {
         api.set(dx, 1, cell);
         return;
     }
-    let energy = cell.energy;
-
-    let nbr = api.get(dx, dy);
-
-    if rand_int(257 - cell.energy as i32) == 1 && nbr.species == Species::Sand {
-        //diffuse nutrients
-
-        let shared_energy = (energy / 2) + (nbr.energy / 2);
-
-        let new_energy = (energy / 2).saturating_add(shared_energy / 2) as u8;
-        let new_nbr_energy = (nbr.energy / 2).saturating_add(shared_energy / 2) as u8;
-
-        let conservation = (nbr.energy + energy) - (new_nbr_energy + new_energy);
-
-        api.set(
-            dx,
-            dy,
-            Cell {
-                energy: new_nbr_energy.saturating_add(conservation),
-                ..nbr
-            },
-        );
-        api.set(
-            0,
-            0,
-            Cell {
-                energy: new_energy,
-                age,
-                ..cell
-            },
-        );
-    }
 }
 pub fn update_water(cell: Cell, mut api: SandApi) {
     let dx = rand_dir_2();
@@ -271,13 +229,6 @@ pub fn update_water(cell: Cell, mut api: SandApi) {
         api.set(dx, 0, cell);
     } else if dx0r.species == Species::Empty {
         api.set(-dx, 0, cell);
-        // if api.get(dx * -2, 0).species == Species::Water
-        //     && dx0.species == Species::Water
-        //     && api.get(0, -1).species == Species::Empty
-        //     && rand_int(5) == 1
-        // {
-        //     api.set(0, 0, Cell::new(Species::Water));
-        // } else {
         api.set(0, 0, dx0r);
     // }
     } else if dx1.species == Species::Empty {
@@ -292,22 +243,5 @@ pub fn update_water(cell: Cell, mut api: SandApi) {
     } else if api.get(dx * -2, 0).species == Species::Empty {
         api.set(0, 0, EMPTY_CELL);
         api.set(dx * -2, 0, cell);
-    }
-}
-pub fn update_stone(cell: Cell, mut api: SandApi) {
-    if api.get(-1, -1).species == Species::Stone && api.get(1, -1).species == Species::Stone {
-        return;
-    }
-
-    let nbr = api.get(0, 1);
-    let nbr_species = nbr.species;
-    if nbr_species == Species::Empty {
-        api.set(0, 0, EMPTY_CELL);
-        api.set(0, 1, cell);
-    } else if nbr_species == Species::Water {
-        api.set(0, 0, nbr);
-        api.set(0, 1, cell);
-    } else {
-        api.set(0, 0, cell);
     }
 }

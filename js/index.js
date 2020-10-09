@@ -11,11 +11,10 @@ let h = n / 2;
 let d = n - 6;
 
 const universe = Universe.new(n, n);
-
 function drawBowl() {
   universe.paint(h, h, d + 2, Species.Glass);
-  universe.paint(h - 30, d - 3, 20, Species.Wood);
-  universe.paint(h + 30, d - 3, 20, Species.Wood);
+  universe.paint(h - 30, d - 3, 20, Species.Glass);
+  universe.paint(h + 30, d - 3, 20, Species.Glass);
   universe.paint(h, h, d - 2, Species.Empty);
 }
 
@@ -97,6 +96,8 @@ function reset() {
 }
 window.u = universe;
 window.universe = universe;
+window.Editor.setRule();
+
 renderLoop();
 
 window.UI.load();
