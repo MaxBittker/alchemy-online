@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/gif.worker.js"
   },
   {
-    "revision": "7d5c9eb996b1f5378a697990f27fb6a7",
+    "revision": "4a78601bb318292ad9a67d3b9e78f797",
     "url": "/tile-toy/index.html"
   },
   {
