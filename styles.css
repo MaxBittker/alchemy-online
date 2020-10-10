@@ -1,7 +1,7 @@
 :root {
   --main-dark-color: black;
-  --button-face: #dfdfdf;
-  --button-shadow: #808080;
+  --button-face: #808080;
+  --button-shadow: #404040;
   --window-frame: #0a0a0a;
   --button-highlight: #ffffff;
 
@@ -11,6 +11,16 @@
     inset 2px 2px var(--button-shadow);
 }
 
+.ultima {
+  border-image-source: url("assets/ultima.png");
+  border-image-slice: 32;
+  border-image-width: 28px;
+  border-width: 28px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 30px;
+  background: url("assets/ultima_tile.png");
+}
 /* @font-face {
   font-family: "pixelmixregular";
   src: url("assets/pixelmix-webfont.woff2") format("woff2"),
@@ -42,6 +52,8 @@ body {
   overscroll-behavior-y: none;
   overflow-x: hidden;
   overflow: hidden;
+  cursor: url("assets/default32x32.cur"), auto;
+  /* cursor: url("assets/White_sword.cur"), auto; */
 }
 
 body,
@@ -119,6 +131,7 @@ button {
   user-select: none; /* Standard */
 
   box-sizing: border-box;
+  border-color: white;
 }
 .active button {
   background-color: gainsboro;
@@ -250,7 +263,7 @@ button:not(:disabled):active {
   padding: 1px 5px !important;
 }
 .mat-box {
-  fill: white;
+  fill: rgba(255, 255, 255, 0.9);
 }
 
 .mat-box:hover {
@@ -258,6 +271,7 @@ button:not(:disabled):active {
 }
 .disabled rect {
   fill: #c0c0c0 !important;
+  /* opacity: 0.8; */
 }
 .disabled rect:hover {
   fill: #c0c0c0 !important;
@@ -270,6 +284,7 @@ svg {
   fill: transparent;
   stroke: black;
   stroke-width: 20px;
+  height: 100%;
   /* stroke-linejoin:; */
 }
 svg text {
@@ -278,6 +293,7 @@ svg text {
 }
 .MatrixMenu svg {
   stroke: #5a5a5a;
+  /* opacity: 0.8; */
 }
 svg text {
   stroke-width: 0 !important;

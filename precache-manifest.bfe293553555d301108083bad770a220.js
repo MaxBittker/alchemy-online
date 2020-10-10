@@ -4,16 +4,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/1.bf55fb997414f42da9c0.js"
   },
   {
-    "revision": "ef734e974e717d30ac10",
-    "url": "/tile-toy/2.85a816f379a33989e0a5.js"
+    "revision": "64d74a71529908d7dc1a",
+    "url": "/tile-toy/2.e10318e98367bb441477.js"
   },
   {
-    "revision": "ef734e974e717d30ac10",
+    "revision": "64d74a71529908d7dc1a",
     "url": "/tile-toy/81012581ba8f46e1814b.module.wasm"
+  },
+  {
+    "revision": "649e93009ab2d586712243cf1712ecce",
+    "url": "/tile-toy/assets/White_sword.cur"
   },
   {
     "revision": "a493ba0aa0b8ec8068d786d7248bb92c",
     "url": "/tile-toy/assets/browserconfig.xml"
+  },
+  {
+    "revision": "299e57e54f0d3d93a4cba00b10582b3b",
+    "url": "/tile-toy/assets/default32x32.cur"
   },
   {
     "revision": "283ce30c80e2d1eeb6de8436bbfd577c",
@@ -40,23 +48,35 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/assets/times-16-regular.woff"
   },
   {
+    "revision": "d11ecdfbca4c9f97679c57e6f180fd83",
+    "url": "/tile-toy/assets/ultima.jpg"
+  },
+  {
+    "revision": "b30fd83c9a908c3916ece0731d871e33",
+    "url": "/tile-toy/assets/ultima.png"
+  },
+  {
+    "revision": "ff6fdd4b4ff0cbee70137a39127e4c18",
+    "url": "/tile-toy/assets/ultima_tile.png"
+  },
+  {
     "revision": "283ce30c80e2d1eeb6de8436bbfd577c",
     "url": "/tile-toy/gif.worker.js"
   },
   {
-    "revision": "9610dea08ff4492a060abd7c89595744",
+    "revision": "a10dc8a63692847c48953b6a41f9e319",
     "url": "/tile-toy/index.html"
   },
   {
-    "revision": "be6172b735697b6e1959",
-    "url": "/tile-toy/main.8d946019d1fe87198728.js"
+    "revision": "41aeb6f5615540c27a5d",
+    "url": "/tile-toy/main.992673ed0a3f648a10c6.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
     "url": "/tile-toy/manifest.json"
   },
   {
-    "revision": "2d63864181d762e6d5e0b2195f2e42aa",
+    "revision": "a82d291f01a9e8cad2a3781682e3eb5b",
     "url": "/tile-toy/styles.css"
   }
 ]);
