@@ -6,15 +6,22 @@ import {} from "./paint";
 import {} from "./setup";
 import { startApp } from "./app";
 
-let n = 100;
+let ratio = 4;
+let width = window.innerWidth / ratio;
+let height = window.innerHeight / ratio;
+//todo scale ratio according to size;
+
+let n = Math.min(width, height);
 let h = n / 2;
 let d = n - 6;
-const universe = Universe.new(n, n);
+
+console.log(width, height);
+const universe = Universe.new(width, height);
 
 function drawBowl() {
   universe.paint(h, h, d + 2, Species.Rule1);
-  // universe.paint(h - 30, d - 3, 20, Species.Glass);
-  // universe.paint(h + 30, d - 3, 20, Species.Glass);
+  // universe.paint(h - 30, d - 3, 20, Species.Rule1);
+  // universe.paint(h + 30, d - 3, 20, Species.Rule1);
   universe.paint(h, h, d - 2, Species.Empty);
 }
 window.u = universe;
@@ -23,13 +30,10 @@ window.universe = universe;
 startApp();
 drawBowl();
 
-let ratio = 2;
-let width = n;
-let height = n;
 const canvas = document.getElementById("sand-canvas");
 
-canvas.height = n * ratio * Math.ceil(window.devicePixelRatio);
-canvas.width = n * ratio * Math.ceil(window.devicePixelRatio);
+canvas.width = width * ratio * Math.ceil(window.devicePixelRatio);
+canvas.height = height * ratio * Math.ceil(window.devicePixelRatio);
 
 const HUD = document.getElementById("HUD");
 let canvasSize;
@@ -38,14 +42,14 @@ let resize = () => {
   let HUDheight = 50;
   let screen_height = window.innerHeight - HUDheight;
 
-  let canvasStyle = "";
+  // let canvasStyle = "";
   let HUDStyle = "";
 
   if (screen_width - 150 > screen_height) {
     // if (screen_width - window.innerHeight < 400) {
     // landscape compressed
-    canvasStyle = `height: ${window.innerHeight}px; margin:10px`;
-    canvasSize = window.innerHeight;
+    // canvasStyle = `height: ${window.innerHeight}px; margin:10px`;
+    // canvasSize = window.innerHeight;
     let hudWidth = screen_width - window.innerHeight - 32;
 
     HUDStyle = `width: ${hudWidth}px; margin: 10px;`;
@@ -58,12 +62,11 @@ let resize = () => {
     // }
   } else {
     //portrait (mobile)
-    canvasSize = screen_width;
-
-    canvasStyle = `width: ${screen_width}px; `;
+    // canvasSize = screen_width;
+    // canvasStyle = `width: ${screen_width}px; `;
   }
   HUD.style = HUDStyle;
-  canvas.style = canvasStyle;
+  // canvas.style = canvasStyle;
 };
 
 resize();

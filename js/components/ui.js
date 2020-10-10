@@ -65,9 +65,6 @@ const ElementButton = (name, selectedElement, setElement) => {
 class Index extends React.Component {
   constructor(props) {
     super(props);
-    let tutorialProgress = localStorage.getItem("tutorialProgress") || 0;
-    // tutorialProgress = 0;
-    // console.log(tutorialDone);
     this.state = {
       submissionMenuOpen: false,
       paused: false,
@@ -79,13 +76,6 @@ class Index extends React.Component {
       selectedElement: Species.Rule1
     };
     window.UI = this;
-    // this.load();
-    // if (!tutorialDone) {
-    window.setTimeout(() => {
-      // localStorage.setItem("tutorialDone", true);
-      // this.setState({ tutorial: false });
-    }, 1000 * 10);
-    // }
   }
 
   componentDidUpdate(prevProps) {}
@@ -156,8 +146,8 @@ class Index extends React.Component {
     let cellData = canvas.toDataURL("image/png");
     let dataString = JSON.stringify(cellData);
     try {
-      localStorage.setItem("cell_data", dataString);
-      localStorage.setItem("time", window.t);
+      // localStorage.setItem("cell_data", dataString);
+      // localStorage.setItem("time", window.t);
     } catch {
       console.log("store failed");
     }
@@ -174,7 +164,7 @@ class Index extends React.Component {
 
   load() {
     console.log("loading");
-
+    return;
     var cellData = JSON.parse(localStorage.getItem("cell_data"));
 
     if (!cellData) {
