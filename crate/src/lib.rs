@@ -2,15 +2,13 @@ extern crate cfg_if;
 extern crate js_sys;
 extern crate wasm_bindgen;
 extern crate web_sys;
-
 mod species;
 pub mod utils;
 use species::Rule;
-use utils::*;
-
+// use utils::*;
 use species::Species;
 use std::collections::VecDeque;
-use std::f32;
+// use std::f32;
 // use std::float;
 use wasm_bindgen::prelude::*;
 // use web_sys::console;

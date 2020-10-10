@@ -2,6 +2,7 @@ import React from "react";
 import {
   Species,
   Rule,
+  Clause,
   SymmetryMode,
   Selector,
   Effector
@@ -27,6 +28,10 @@ let ruleSymbols = {
 };
 
 let SymmetryOptions = [
+  {
+    key: SymmetryMode.Disabled,
+    symbol: "X"
+  },
   {
     key: SymmetryMode.None,
     symbol: "ⵔ"
@@ -70,21 +75,6 @@ let SlotOptions = [
     symbol: ruleSymbols[Species.Rule4]
   }
 ];
-
-// let OutSlotOptions = [
-//   {
-//     key: OutSlot.Empty,
-//     symbol: "×"
-//   },
-//   {
-//     key: OutSlot.Nop,
-//     symbol: " "
-//   },
-//   {
-//     key: OutSlot.Me,
-//     symbol: "?"
-//   }
-// ];
 
 function grid_index(x, y) {
   return y * 3 + x;
@@ -177,14 +167,15 @@ class Editor extends React.Component {
   }
   static getRule(selectedElement) {
     let rule = window.u.rule(selectedElement);
-
+    let clause = rule.clause(0);
+    console.log(clause);
     const selector = Array.from(
-      new Uint8Array(memory.buffer, rule.selector.grid(), 9)
+      new Uint8Array(memory.buffer, clause.selector.grid(), 9)
     );
     const effector = Array.from(
-      new Uint8Array(memory.buffer, rule.effector.grid(), 9)
+      new Uint8Array(memory.buffer, clause.effector.grid(), 9)
     );
-    const symmetry = rule.symmetry();
+    const symmetry = clause.symmetry();
 
     return {
       selector,
@@ -216,6 +207,7 @@ class Editor extends React.Component {
     let effector = new Effector(...j_effector);
     // let effector = new Effector(...j_effector.map(v => OutSlotOptions[v].key));
     let r_rule = new Rule(SymmetryOptions[j_symmetry].key, selector, effector);
+    debugger;
     window.u.set_rule(r_rule, this.props.selectedElement);
   }
 
@@ -236,6 +228,7 @@ class Editor extends React.Component {
   render() {
     let { selectedElement } = this.props;
     let { rule } = this.state;
+    console.log(rule);
     let { selector, effector, symmetry } = rule;
 
     return (
