@@ -102,26 +102,29 @@ class Matrix extends React.Component {
     // console.log(options, myCell);
     let { symbol } = options.find(m => m.key == myCell);
     // console.log(symbol);
+    let incSlot = i => {
+      if (isCenter) return;
 
+      let { grid, options } = this.props;
+      let slotIndex = options.findIndex(e => e.key == myCell);
+      slotIndex = (slotIndex + options.length + i) % options.length;
+      let next = options[slotIndex];
+
+      grid[grid_index(x, y)] = next.key;
+      // (myCell + 1) % options.length;
+      let { setGrid } = this.props;
+      setGrid(grid);
+    };
     return (
       <g
         key={`${x}-${y}`}
         transform={`translate(${x * 55 + 15},${y * 55 + 15})`}
         className={isCenter ? "disabled" : ""}
-        onClick={() => {
-          if (isCenter) {
-            return;
-          }
-
-          let slotIndex = options.findIndex(e => e.key == myCell);
-          slotIndex = (slotIndex + 1) % options.length;
-          let next = options[slotIndex];
-
-          grid[grid_index(x, y)] = next.key;
-          // (myCell + 1) % options.length;
-          let { setGrid } = this.props;
-          setGrid(grid);
+        onContextMenu={e => {
+          e.preventDefault();
+          incSlot(-1, isCenter);
         }}
+        onClick={() => incSlot(1, isCenter)}
       >
         <rect
           x={0}
@@ -215,6 +218,21 @@ class Editor extends React.Component {
     let r_rule = new Rule(SymmetryOptions[j_symmetry].key, selector, effector);
     window.u.set_rule(r_rule, this.props.selectedElement);
   }
+
+  incSymmetry(i) {
+    let { rule } = this.state;
+    let { symmetry } = rule;
+
+    rule.symmetry =
+      (SymmetryOptions.length + symmetry + i) % SymmetryOptions.length;
+
+    this.setState(
+      {
+        rule
+      },
+      this.setRule
+    );
+  }
   render() {
     let { selectedElement } = this.props;
     let { rule } = this.state;
@@ -242,19 +260,11 @@ class Editor extends React.Component {
             x="12"
             y="98"
             style={{ fontSize: "30px" }}
-            onClick={() => {
-              let { rule } = this.state;
-              // console.log(symmetry, SymmetryOptions.length);
-              rule.symmetry = (symmetry + 1) % SymmetryOptions.length;
-              // console.log(rule.symmetry);
-
-              this.setState(
-                {
-                  rule
-                },
-                this.setRule
-              );
+            onContextMenu={e => {
+              e.preventDefault();
+              this.incSymmetry(-1);
             }}
+            onClick={() => this.incSymmetry(1)}
           >
             {SymmetryOptions[symmetry].symbol}
           </text>
