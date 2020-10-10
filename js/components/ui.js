@@ -36,12 +36,20 @@ const ElementButton = (name, selectedElement, setElement) => {
 
   let text = name;
   if (name == "Empty") {
-    text = "Clear";
+    text = "×";
   }
 
   if (name == "Rule1") {
     text = "☉";
   }
+
+  if (name == "Rule2") {
+    text = "☽";
+  }
+  if (name == "Rule3") {
+    text = "🝆";
+  }
+
   return (
     <button
       className={selected ? `selected ${name}` : name}
@@ -54,6 +62,7 @@ const ElementButton = (name, selectedElement, setElement) => {
         backgroundColor: color,
         borderColor: color,
         filter: selected || `saturate(0.4) `
+        // lineHeight: 0
       }}
     >
       {"  "}
@@ -290,7 +299,7 @@ class Index extends React.Component {
               </svg>
             </OrganicButton> */}
 
-            <OrganicButton onClick={() => this.reset()}>Reset</OrganicButton>
+            <OrganicButton onClick={() => this.reset()}>↻</OrganicButton>
             {/* <Link
               to={{
                 pathname: "/info/",
@@ -302,7 +311,7 @@ class Index extends React.Component {
               </OrganicButton>
             </Link> */}
 
-            <OrganicButton
+            {/* <OrganicButton
               onClick={() => {
                 // reset();
                 universe.pop_undo();
@@ -310,7 +319,7 @@ class Index extends React.Component {
               style={{ fontSize: 18, lineHeight: 0 }}
             >
               ↜
-            </OrganicButton>
+            </OrganicButton> */}
             {/* 
             <OrganicButton
               onClick={() => {
@@ -329,7 +338,11 @@ class Index extends React.Component {
                 this.setState({ selectedElement: id })
               )
             )}
-            <Editor></Editor>
+            <img
+              style={{ width: "100%" }}
+              src="http://community.fortunecity.ws/tinpan/motorhead/13/images/barb_wire.gif"
+            ></img>
+            <Editor selectedElement={selectedElement}></Editor>
 
             {this.state.dataURL && (
               <Menu close={() => this.closeMenu()}>
@@ -337,6 +350,26 @@ class Index extends React.Component {
                 <div style={{ display: "flex" }}></div>
               </Menu>
             )}
+            <img
+              style={{ width: "100%" }}
+              src="http://community.fortunecity.ws/tinpan/motorhead/13/images/barb_wire.gif"
+            ></img>
+            <img
+              style={{ width: "27%", objectFit: "contain" }}
+              src="https://web.archive.org/web/20091022135502im_/http://geocities.com/witchzcat/bookflip.gif"
+            ></img>
+            <img
+              style={{ width: "24%", objectFit: "contain" }}
+              src="https://web.archive.org/web/20091027090546/http://geocities.com/traditionalwitchcraft/pentagramanimation.gif"
+            ></img>
+            <img
+              style={{ width: "14%", objectFit: "contain" }}
+              src="https://web.archive.org/web/20090729083846/http://www.geocities.com/silver_alchemy/torch2.gif"
+            ></img>
+            <img
+              style={{ width: "34%", objectFit: "contain" }}
+              src="https://web.archive.org/web/20090902061527/http://geocities.com/sunsetstrip/hall/6613/talkskull.gig.gif"
+            ></img>
           </div>
         </div>
       </div>

@@ -3,21 +3,24 @@ import { Universe, Species } from "../crate/pkg";
 import { startWebGL } from "./render";
 import { fps } from "./fps";
 import {} from "./paint";
-import {} from "./app";
 import {} from "./setup";
+import { startApp } from "./app";
 
 let n = 150;
 let h = n / 2;
 let d = n - 6;
-
 const universe = Universe.new(n, n);
+
 function drawBowl() {
-  universe.paint(h, h, d + 2, Species.Glass);
+  universe.paint(h, h, d + 2, Species.Rule1);
   // universe.paint(h - 30, d - 3, 20, Species.Glass);
   // universe.paint(h + 30, d - 3, 20, Species.Glass);
   universe.paint(h, h, d - 2, Species.Empty);
 }
+window.u = universe;
+window.universe = universe;
 
+startApp();
 drawBowl();
 
 let ratio = 2;
@@ -94,9 +97,8 @@ function reset() {
   universe.reset();
   drawBowl();
 }
-window.u = universe;
-window.universe = universe;
-window.Editor.setRule();
+
+// window.Editor.setRule();
 
 renderLoop();
 

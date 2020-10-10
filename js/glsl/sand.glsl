@@ -45,7 +45,7 @@ void main() {
   float a = 1.0;
   float brightness = 0.0;
 
-  if (type == 0) { // Air
+  if (type == 10) { // Air
 
     hue = 0.0;
     saturation = 0.1;
@@ -57,7 +57,7 @@ void main() {
       a = 1.0;
     }
 
-  } else if (type == 1) { // Glass
+  } else if (type == 11) { // Glass
     hue = 0.1;
     saturation = 0.2;
     lightness = 1.0;
@@ -66,7 +66,7 @@ void main() {
     saturation = 0.4 + (age * 0.3);
     lightness = 1.0 - energy * 0.5;
 
-  } else if (type == 3) { // Water
+  } else if (type == 1) { // Water
     hue = 0.58;
     saturation = 0.6;
     lightness = 0.5 + energy * 0.25 + noise * 0.1;
@@ -74,22 +74,9 @@ void main() {
     if (isSnapshot) {
       a = 1.0;
     }
-  } else if (type == 4) { // Algae
-    hue = 0.4 - age * 0.3;
-    lightness += 0.1;
-    saturation = 0.5 - (energy * .1);
-    a = 0.8;
-  } else if (type == 5) { // Plant
+  } else if (type == 0) { // Plant
     hue = 0.4;
     saturation = 0.4;
-
-    if (energy > 45. / 255.) {
-      hue = 0.48;
-    }
-    if (age == 0.) {
-      // saturation = 0.9;
-    }
-    lightness = 0.2 + (1.0 - energy) * 0.4;
 
   } else if (type == 6) { // Zoop
     hue = 0.9;
@@ -108,7 +95,6 @@ void main() {
 
       a = 1.0;
     }
-
   } else if (type == 9) { // ???
     hue = 0.6;
     saturation = 0.4;
@@ -133,7 +119,6 @@ void main() {
     saturation = age / 3.;
     lightness = 1.0;
     a = 0.8;
-
   } else if (type == 15) { // Tail
     hue += fract(age * 1.9 * 255. / 8.) * 0.2;
     lightness += 0.4;

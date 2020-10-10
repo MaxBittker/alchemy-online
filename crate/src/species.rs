@@ -1,4 +1,5 @@
 use super::utils::*;
+use js_sys::Array;
 use Cell;
 use SandApi;
 use EMPTY_CELL;
@@ -11,11 +12,10 @@ use wasm_bindgen::prelude::*;
 #[repr(u8)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Species {
-    Empty = 0,
-    Glass = 1,
-    Sand = 2,
-    Rule1 = 3,
-    Water = 4,
+    Empty = 10,
+    Rule1 = 0,
+    Rule2 = 1,
+    Rule3 = 2,
 }
 
 #[wasm_bindgen]
@@ -23,8 +23,8 @@ pub enum Species {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SymmetryMode {
     None = 0,
-    Vertical = 1,
-    Horizontal = 2,
+    Horizontal = 1,
+    Vertical = 2,
     Quad = 3,
 }
 
@@ -46,6 +46,9 @@ impl Rule {
             effector,
         };
     }
+    pub fn symmetry(&self) -> SymmetryMode {
+        self.symmetry
+    }
 }
 
 #[wasm_bindgen]
@@ -55,8 +58,6 @@ pub enum Slot {
     Empty = 0,
     Anything = 1,
     Full = 2,
-    Glass = 3,
-    Water = 4,
 }
 
 #[wasm_bindgen]
@@ -92,6 +93,10 @@ impl Selector {
             grid: [v1, v2, v3, v4, v5, v6, v7, v8, v9],
         };
     }
+
+    pub fn grid(&self) -> *const Slot {
+        self.grid.as_ptr()
+    }
 }
 
 #[wasm_bindgen]
@@ -117,6 +122,9 @@ impl Effector {
         return Effector {
             grid: [v1, v2, v3, v4, v5, v6, v7, v8, v9],
         };
+    }
+    pub fn grid(&self) -> *const OutSlot {
+        self.grid.as_ptr()
     }
 }
 
@@ -206,98 +214,105 @@ pub fn execute_rule(cell: Cell, api: SandApi, rule: Rule) {
     }
 }
 
-pub fn build_rule() -> Rule {
-    return Rule {
-        symmetry: SymmetryMode::None,
-        selector: Selector {
-            grid: [
-                Slot::Anything,
-                Slot::Anything,
-                Slot::Anything,
-                Slot::Anything,
-                Slot::Anything,
-                Slot::Anything,
-                Slot::Empty,
-                Slot::Empty,
-                Slot::Empty,
-            ],
+pub fn build_rule() -> [Rule; 3] {
+    return [
+        Rule {
+            symmetry: SymmetryMode::None,
+            selector: Selector {
+                grid: [
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                ],
+            },
+            effector: Effector {
+                grid: [
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                ],
+            },
         },
-        effector: Effector {
-            grid: [
-                OutSlot::Nop,
-                OutSlot::Nop,
-                OutSlot::Nop,
-                OutSlot::Nop,
-                OutSlot::Empty,
-                OutSlot::Nop,
-                OutSlot::Nop,
-                OutSlot::Me,
-                OutSlot::Nop,
-            ],
+        Rule {
+            symmetry: SymmetryMode::None,
+            selector: Selector {
+                grid: [
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                ],
+            },
+            effector: Effector {
+                grid: [
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Empty,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Me,
+                    OutSlot::Nop,
+                ],
+            },
         },
-    };
+        Rule {
+            symmetry: SymmetryMode::None,
+            selector: Selector {
+                grid: [
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Empty,
+                    Slot::Empty,
+                    Slot::Empty,
+                ],
+            },
+            effector: Effector {
+                grid: [
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Empty,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Me,
+                    OutSlot::Nop,
+                ],
+            },
+        },
+    ];
 }
 impl Species {
     pub fn update(&self, cell: Cell, api: SandApi) {
-        let rule = api.universe.active_rule;
+        let rule_sets = api.universe.rule_sets;
         match self {
             Species::Empty => {}
-            Species::Glass => {}
-
-            Species::Rule1 => execute_rule(cell, api, rule),
-            Species::Water => update_water(cell, api),
-            Species::Sand => update_sand(cell, api),
+            Species::Rule1 => execute_rule(cell, api, rule_sets[0]),
+            Species::Rule2 => execute_rule(cell, api, rule_sets[1]),
+            Species::Rule3 => execute_rule(cell, api, rule_sets[2]),
         }
-    }
-}
-
-pub fn update_sand(cell: Cell, mut api: SandApi) {
-    let (dx, _) = rand_vec_8();
-
-    let down = api.get(0, 1);
-    let dnbr = api.get(dx, 1);
-    if down.species == Species::Empty {
-        api.set(0, 0, EMPTY_CELL);
-        api.set(0, 1, cell);
-        return;
-    } else if dnbr.species == Species::Water {
-        api.set(0, 0, dnbr);
-        api.set(dx, 1, cell);
-        return;
-    } else if dnbr.species == Species::Empty {
-        api.set(0, 0, EMPTY_CELL);
-        api.set(dx, 1, cell);
-        return;
-    }
-}
-pub fn update_water(cell: Cell, mut api: SandApi) {
-    let dx = rand_dir_2();
-    let below = api.get(0, 1);
-    let dx1 = api.get(dx, 1);
-    let dx1r = api.get(-dx, 1);
-    let dx0 = api.get(dx, 0);
-    let dx0r = api.get(-dx, 0);
-    if below.species == Species::Empty {
-        api.set(0, 0, below);
-        api.set(0, 1, cell);
-    } else if dx0.species == Species::Empty {
-        api.set(0, 0, dx0);
-        api.set(dx, 0, cell);
-    } else if dx0r.species == Species::Empty {
-        api.set(-dx, 0, cell);
-        api.set(0, 0, dx0r);
-    // }
-    } else if dx1.species == Species::Empty {
-        api.set(0, 0, dx1);
-        api.set(dx, 1, cell);
-    } else if dx1r.species == Species::Empty {
-        api.set(0, 0, dx1r);
-        api.set(-dx, 1, cell);
-    } else if api.get(dx * 2, 0).species == Species::Empty {
-        api.set(0, 0, EMPTY_CELL);
-        api.set(dx * 2, 0, cell);
-    } else if api.get(dx * -2, 0).species == Species::Empty {
-        api.set(0, 0, EMPTY_CELL);
-        api.set(dx * -2, 0, cell);
     }
 }

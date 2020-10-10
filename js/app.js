@@ -15,4 +15,7 @@ function AppRouter() {
   );
 }
 
-ReactDOM.render(<AppRouter />, document.getElementById("ui"));
+function startApp() {
+  ReactDOM.render(<AppRouter />, document.getElementById("ui"));
+}
+export { startApp };

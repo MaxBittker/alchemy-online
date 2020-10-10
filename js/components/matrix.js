@@ -43,23 +43,23 @@ let SymmetryOptions = [
 ];
 let SlotOptions = [
   {
-    key: Slot.Anything,
-    symbol: " "
-  },
-  {
     key: Slot.Empty,
     symbol: "×"
+  },
+  {
+    key: Slot.Anything,
+    symbol: " "
   }
 ];
 
 let OutSlotOptions = [
   {
-    key: OutSlot.Nop,
-    symbol: " "
-  },
-  {
     key: OutSlot.Empty,
     symbol: "×"
+  },
+  {
+    key: OutSlot.Nop,
+    symbol: " "
   },
   {
     key: OutSlot.Me,
@@ -138,15 +138,39 @@ class Matrix extends React.Component {
 class Editor extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      rule: {
-        selector: [0, 0, 0, 0, 0, 0, 0, 1, 0],
-        effector: [0, 0, 0, 0, 1, 0, 0, 2, 0],
-        symmetry: 0
-      }
+      selectedElement: props.selectedElement,
+      rule: Editor.getRule(props.selectedElement)
     };
     window.Editor = this;
+  }
+  static getRule(selectedElement) {
+    let rule = window.u.rule(selectedElement);
+
+    const selector = Array.from(
+      new Uint8Array(memory.buffer, rule.selector.grid(), 9)
+    );
+    const effector = Array.from(
+      new Uint8Array(memory.buffer, rule.effector.grid(), 9)
+    );
+    const symmetry = rule.symmetry();
+
+    return {
+      selector,
+      effector,
+      symmetry
+    };
+  }
+  static getDerivedStateFromProps(props, state) {
+    let { selectedElement } = props;
+    if (selectedElement != state.selectedElement && selectedElement < 3) {
+      return {
+        selectedElement,
+        rule: Editor.getRule(selectedElement)
+      };
+    }
+
+    return null;
   }
   setRule() {
     let { rule } = this.state;
@@ -158,9 +182,8 @@ class Editor extends React.Component {
 
     let selector = new Selector(...j_selector.map(v => SlotOptions[v].key));
     let effector = new Effector(...j_effector.map(v => OutSlotOptions[v].key));
-
     let r_rule = new Rule(SymmetryOptions[j_symmetry].key, selector, effector);
-    window.u.set_rule(r_rule);
+    window.u.set_rule(r_rule, this.props.selectedElement);
   }
   render() {
     let { rule } = this.state;
@@ -190,7 +213,10 @@ class Editor extends React.Component {
             style={{ fontSize: "30px" }}
             onClick={() => {
               let { rule } = this.state;
+              console.log(symmetry, SymmetryOptions.length);
               rule.symmetry = (symmetry + 1) % SymmetryOptions.length;
+              console.log(rule.symmetry);
+
               this.setState(
                 {
                   rule
@@ -202,16 +228,18 @@ class Editor extends React.Component {
             {SymmetryOptions[symmetry].symbol}
           </text>
           <g transform="translate(20,0)">
-            <Matrix
-              options={SlotOptions}
-              grid={selector}
-              isSelector
-              setGrid={newGrid => {
-                let { rule } = this.state;
-                rule.selector = newGrid;
-                this.setState({ rule }, this.setRule);
-              }}
-            />
+            {selector && (
+              <Matrix
+                options={SlotOptions}
+                grid={selector}
+                isSelector
+                setGrid={newGrid => {
+                  let { rule } = this.state;
+                  rule.selector = newGrid;
+                  this.setState({ rule }, this.setRule);
+                }}
+              />
+            )}
           </g>
           <g transform="translate(195,80)">
             <polygon
@@ -221,15 +249,17 @@ class Editor extends React.Component {
             />
           </g>
           <g transform="translate(210,0)">
-            <Matrix
-              options={OutSlotOptions}
-              grid={effector}
-              setGrid={newGrid => {
-                let { rule } = this.state;
-                rule.effector = newGrid;
-                this.setState({ rule }, this.setRule);
-              }}
-            />
+            {effector && (
+              <Matrix
+                options={OutSlotOptions}
+                grid={effector}
+                setGrid={newGrid => {
+                  let { rule } = this.state;
+                  rule.effector = newGrid;
+                  this.setState({ rule }, this.setRule);
+                }}
+              />
+            )}
           </g>
         </svg>
       </div>

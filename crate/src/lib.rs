@@ -54,7 +54,7 @@ pub struct Universe {
     cells: Vec<Cell>,
     undo_stack: VecDeque<Vec<Cell>>,
     generation: u8,
-    active_rule: species::Rule,
+    rule_sets: [species::Rule; 3],
     time: u8,
 }
 
@@ -93,10 +93,6 @@ impl<'a> SandApi<'a> {
         }
         let i = self.universe.get_index(nx, ny);
         // v.clock += 1;
-        // QUESTIONABLE:
-        if self.universe.cells[i].species == Species::Glass {
-            return;
-        }
         self.universe.cells[i] = v;
         self.universe.cells[i].clock = self.universe.generation;
     }
@@ -143,12 +139,12 @@ impl Universe {
         }
         // self.time = self.time.wrapping_add(1);
     }
-    pub fn rule(&self) -> Rule {
-        self.active_rule
+    pub fn rule(&self, i: usize) -> Rule {
+        self.rule_sets[i]
     }
 
-    pub fn set_rule(&mut self, rule: &Rule) {
-        self.active_rule = *rule;
+    pub fn set_rule(&mut self, rule: &Rule, i: usize) {
+        self.rule_sets[i] = *rule;
     }
 
     pub fn width(&self) -> i32 {
@@ -180,11 +176,7 @@ impl Universe {
                 if px < 0 || px > self.width - 1 || py < 0 || py > self.height - 1 {
                     continue;
                 }
-                if self.get_cell(px, py).species == Species::Water
-                    || self.get_cell(px, py).species == Species::Empty
-                    || self.get_cell(px, py).species == Species::Sand
-                    || species == Species::Empty
-                {
+                if self.get_cell(px, py).species == Species::Empty || species == Species::Empty {
                     self.cells[i] = Cell {
                         species: species,
                         energy: 80
@@ -231,7 +223,7 @@ impl Universe {
             time: 0,
             undo_stack: VecDeque::with_capacity(50),
             generation: 0,
-            active_rule: species::build_rule(),
+            rule_sets: species::build_rule(),
         }
     }
 }
