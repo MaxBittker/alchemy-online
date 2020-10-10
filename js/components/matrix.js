@@ -1,20 +1,14 @@
 import React from "react";
-import { ruleSymbols } from "./ui";
-// import { Rule } from "../../../crate/pkg/species";
 import {
-  Universe,
   Species,
   Rule,
   SymmetryMode,
   Selector,
-  Effector,
-  Slot,
-  OutSlot
+  Effector
 } from "../../crate/pkg";
-// console.log(Species);
+
 console.log(SymmetryMode);
-console.log(Slot);
-console.log(OutSlot);
+console.log(Species);
 
 // function keys(en) {
 //   return Object.keys(en)
@@ -24,6 +18,14 @@ console.log(OutSlot);
 //     });
 //   // .filter()
 // }
+let ruleSymbols = {
+  [Species.Empty]: "×",
+  [Species.Rule1]: "🜊",
+  [Species.Rule2]: "☉",
+  [Species.Rule3]: "☽",
+  [Species.Rule4]: "🝆"
+};
+
 let SymmetryOptions = [
   {
     key: SymmetryMode.None,
@@ -44,29 +46,45 @@ let SymmetryOptions = [
 ];
 let SlotOptions = [
   {
-    key: Slot.Empty,
+    key: Species.Empty,
     symbol: "×"
   },
   {
-    key: Slot.Anything,
+    key: Species.Wild,
     symbol: " "
+  },
+  {
+    key: Species.Rule1,
+    symbol: ruleSymbols[Species.Rule1]
+  },
+  {
+    key: Species.Rule2,
+    symbol: ruleSymbols[Species.Rule2]
+  },
+  {
+    key: Species.Rule3,
+    symbol: ruleSymbols[Species.Rule3]
+  },
+  {
+    key: Species.Rule4,
+    symbol: ruleSymbols[Species.Rule4]
   }
 ];
 
-let OutSlotOptions = [
-  {
-    key: OutSlot.Empty,
-    symbol: "×"
-  },
-  {
-    key: OutSlot.Nop,
-    symbol: " "
-  },
-  {
-    key: OutSlot.Me,
-    symbol: "?"
-  }
-];
+// let OutSlotOptions = [
+//   {
+//     key: OutSlot.Empty,
+//     symbol: "×"
+//   },
+//   {
+//     key: OutSlot.Nop,
+//     symbol: " "
+//   },
+//   {
+//     key: OutSlot.Me,
+//     symbol: "?"
+//   }
+// ];
 
 function grid_index(x, y) {
   return y * 3 + x;
@@ -80,7 +98,11 @@ class Matrix extends React.Component {
     let { grid, options, selectedElement } = this.props;
 
     let myCell = grid[grid_index(x, y)];
-    let { symbol } = options[myCell];
+
+    // console.log(options, myCell);
+    let { symbol } = options.find(m => m.key == myCell);
+    // console.log(symbol);
+
     return (
       <g
         key={`${x}-${y}`}
@@ -90,7 +112,13 @@ class Matrix extends React.Component {
           if (isCenter) {
             return;
           }
-          grid[grid_index(x, y)] = (myCell + 1) % options.length;
+
+          let slotIndex = options.findIndex(e => e.key == myCell);
+          slotIndex = (slotIndex + 1) % options.length;
+          let next = options[slotIndex];
+
+          grid[grid_index(x, y)] = next.key;
+          // (myCell + 1) % options.length;
           let { setGrid } = this.props;
           setGrid(grid);
         }}
@@ -102,7 +130,7 @@ class Matrix extends React.Component {
           height="50"
           className="mat-box"
           style={{
-            fill: symbol == " " ? "#c0c0c0" : "",
+            fill: symbol == " " ? "#c0c0c0" : window.pallette[myCell],
             strokeWidth: 1
           }}
         />
@@ -179,9 +207,11 @@ class Editor extends React.Component {
       effector: j_effector,
       symmetry: j_symmetry
     } = rule;
-
-    let selector = new Selector(...j_selector.map(v => SlotOptions[v].key));
-    let effector = new Effector(...j_effector.map(v => OutSlotOptions[v].key));
+    // console.log(j_selector);
+    let selector = new Selector(...j_selector);
+    // let selector = new Selector(...j_selector.map(v => SlotOptions[v].key));
+    let effector = new Effector(...j_effector);
+    // let effector = new Effector(...j_effector.map(v => OutSlotOptions[v].key));
     let r_rule = new Rule(SymmetryOptions[j_symmetry].key, selector, effector);
     window.u.set_rule(r_rule, this.props.selectedElement);
   }
@@ -214,9 +244,9 @@ class Editor extends React.Component {
             style={{ fontSize: "30px" }}
             onClick={() => {
               let { rule } = this.state;
-              console.log(symmetry, SymmetryOptions.length);
+              // console.log(symmetry, SymmetryOptions.length);
               rule.symmetry = (symmetry + 1) % SymmetryOptions.length;
-              console.log(rule.symmetry);
+              // console.log(rule.symmetry);
 
               this.setState(
                 {
@@ -254,7 +284,7 @@ class Editor extends React.Component {
             {effector && (
               <Matrix
                 selectedElement={selectedElement}
-                options={OutSlotOptions}
+                options={SlotOptions}
                 grid={effector}
                 setGrid={newGrid => {
                   let { rule } = this.state;
@@ -270,4 +300,4 @@ class Editor extends React.Component {
   }
 }
 
-export { Editor };
+export { Editor, ruleSymbols };

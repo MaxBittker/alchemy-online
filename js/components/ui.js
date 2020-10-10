@@ -7,7 +7,7 @@ import { Species } from "../../crate/pkg/sandtable";
 import { height, universe, width, reset } from "../index.js";
 import { exportGif, pallette } from "../render.js";
 import Menu from "./menu.js";
-import { Matrix, Editor } from "./matrix";
+import { Editor, ruleSymbols } from "./matrix";
 
 window.species = Species;
 let pallette_data = pallette();
@@ -25,13 +25,7 @@ const OrganicButton = ({ onClick, className, style, children }) => {
     </button>
   );
 };
-let ruleSymbols = {
-  [Species.Empty]: "×",
-  [Species.Rule1]: "🜊",
-  [Species.Rule2]: "☉",
-  [Species.Rule3]: "☽",
-  [Species.Rule4]: "🝆"
-};
+
 const ElementButton = (name, selectedElement, setElement) => {
   let elementID = Species[name];
 
@@ -227,7 +221,9 @@ class Index extends React.Component {
         ? `#${currentSubmission.id}`
         : "";
 
-    let activeSpecies = Object.keys(Species).filter(name => name.length > 2);
+    let activeSpecies = Object.keys(Species).filter(
+      name => name.length > 2 && name != "Wild"
+    );
 
     return (
       <div className="window fade ultima" id="HUD">
@@ -338,7 +334,9 @@ class Index extends React.Component {
               style={{ width: "100%" }}
               src="http://community.fortunecity.ws/tinpan/motorhead/13/images/barb_wire.gif"
             ></img>
-            <Editor selectedElement={selectedElement}></Editor>
+            {selectedElement != Species.Empty && (
+              <Editor selectedElement={selectedElement}></Editor>
+            )}
 
             {this.state.dataURL && (
               <Menu close={() => this.closeMenu()}>

@@ -277,7 +277,8 @@ button:not(:disabled):active {
 }
 
 .mat-box:hover {
-  fill: rgb(231, 243, 246) !important;
+  stroke: rgb(231, 243, 246) !important;
+  stroke-width: 4px;
 }
 .disabled rect {
   fill: #c0c0c0 !important;

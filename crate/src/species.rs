@@ -13,6 +13,7 @@ use wasm_bindgen::prelude::*;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Species {
     Empty = 10,
+    Wild = 11,
     Rule1 = 0,
     Rule2 = 1,
     Rule3 = 2,
@@ -52,50 +53,50 @@ impl Rule {
     }
 }
 
-#[wasm_bindgen]
-#[repr(u8)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum Slot {
-    Empty = 0,
-    Anything = 1,
-    Full = 2,
-}
+// #[wasm_bindgen]
+// #[repr(u8)]
+// #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+// pub enum Slot {
+//     Empty = 0,
+//     Anything = 1,
+//     Full = 2,
+// }
 
-#[wasm_bindgen]
-#[repr(u8)]
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum OutSlot {
-    Empty = 0,
-    Nop = 1,
-    Me = 2,
-}
+// #[wasm_bindgen]
+// #[repr(u8)]
+// #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+// pub enum OutSlot {
+//     Empty = 0,
+//     Nop = 1,
+//     Me = 2,
+// }
 
 #[wasm_bindgen]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Selector {
-    grid: [Slot; 9],
+    grid: [Species; 9],
 }
 
 #[wasm_bindgen]
 impl Selector {
     #[wasm_bindgen(constructor)]
     pub fn new(
-        v1: Slot,
-        v2: Slot,
-        v3: Slot,
-        v4: Slot,
-        v5: Slot,
-        v6: Slot,
-        v7: Slot,
-        v8: Slot,
-        v9: Slot,
+        v1: Species,
+        v2: Species,
+        v3: Species,
+        v4: Species,
+        v5: Species,
+        v6: Species,
+        v7: Species,
+        v8: Species,
+        v9: Species,
     ) -> Selector {
         return Selector {
             grid: [v1, v2, v3, v4, v5, v6, v7, v8, v9],
         };
     }
 
-    pub fn grid(&self) -> *const Slot {
+    pub fn grid(&self) -> *const Species {
         self.grid.as_ptr()
     }
 }
@@ -103,37 +104,36 @@ impl Selector {
 #[wasm_bindgen]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Effector {
-    grid: [OutSlot; 9],
+    grid: [Species; 9],
 }
 
 #[wasm_bindgen]
 impl Effector {
     #[wasm_bindgen(constructor)]
     pub fn new(
-        v1: OutSlot,
-        v2: OutSlot,
-        v3: OutSlot,
-        v4: OutSlot,
-        v5: OutSlot,
-        v6: OutSlot,
-        v7: OutSlot,
-        v8: OutSlot,
-        v9: OutSlot,
+        v1: Species,
+        v2: Species,
+        v3: Species,
+        v4: Species,
+        v5: Species,
+        v6: Species,
+        v7: Species,
+        v8: Species,
+        v9: Species,
     ) -> Effector {
         return Effector {
             grid: [v1, v2, v3, v4, v5, v6, v7, v8, v9],
         };
     }
-    pub fn grid(&self) -> *const OutSlot {
+    pub fn grid(&self) -> *const Species {
         self.grid.as_ptr()
     }
 }
 
-pub fn check_cell(slot: Slot, cell: Cell) -> bool {
+pub fn check_cell(slot: Species, cell: Cell) -> bool {
     match slot {
-        Slot::Empty => cell.species == Species::Empty,
-        Slot::Anything => true,
-        Slot::Full => cell.species != Species::Empty,
+        Species::Wild => true,
+        _ => cell.species == slot,
     }
 }
 pub fn execute_rule_orientation(
@@ -158,9 +158,16 @@ pub fn execute_rule_orientation(
         dy *= ry;
         let out_slot = rule.effector.grid[x];
         match out_slot {
-            OutSlot::Empty => api.set(dx, dy, EMPTY_CELL),
-            OutSlot::Nop => (),
-            OutSlot::Me => api.set(dx, dy, cell),
+            Species::Empty => api.set(dx, dy, EMPTY_CELL),
+            Species::Wild => (),
+            _ => api.set(
+                dx,
+                dy,
+                Cell {
+                    species: out_slot,
+                    ..cell
+                },
+            ),
         }
     }
     return (true, api);
@@ -220,28 +227,28 @@ pub fn build_rule() -> [Rule; 4] {
             symmetry: SymmetryMode::None,
             selector: Selector {
                 grid: [
-                    Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
                 ],
             },
             effector: Effector {
                 grid: [
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
                 ],
             },
         },
@@ -249,28 +256,28 @@ pub fn build_rule() -> [Rule; 4] {
             symmetry: SymmetryMode::Horizontal,
             selector: Selector {
                 grid: [
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Empty,
-                    Slot::Anything,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Empty,
+                    Species::Wild,
                 ],
             },
             effector: Effector {
                 grid: [
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Empty,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Me,
-                    OutSlot::Nop,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Empty,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Rule2,
+                    Species::Wild,
                 ],
             },
         },
@@ -278,28 +285,28 @@ pub fn build_rule() -> [Rule; 4] {
             symmetry: SymmetryMode::None,
             selector: Selector {
                 grid: [
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
                 ],
             },
             effector: Effector {
                 grid: [
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Empty,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Me,
-                    OutSlot::Nop,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Empty,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Rule3,
+                    Species::Wild,
                 ],
             },
         },
@@ -307,28 +314,28 @@ pub fn build_rule() -> [Rule; 4] {
             symmetry: SymmetryMode::Quad,
             selector: Selector {
                 grid: [
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Anything,
-                    Slot::Empty,
-                    Slot::Anything,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Empty,
+                    Species::Wild,
                 ],
             },
             effector: Effector {
                 grid: [
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Empty,
-                    OutSlot::Nop,
-                    OutSlot::Nop,
-                    OutSlot::Me,
-                    OutSlot::Nop,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Empty,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Rule4,
+                    Species::Wild,
                 ],
             },
         },
@@ -339,6 +346,7 @@ impl Species {
         let rule_sets = api.universe.rule_sets;
         match self {
             Species::Empty => {}
+            Species::Wild => {}
             Species::Rule1 => execute_rule(cell, api, rule_sets[0]),
             Species::Rule2 => execute_rule(cell, api, rule_sets[1]),
             Species::Rule3 => execute_rule(cell, api, rule_sets[2]),
