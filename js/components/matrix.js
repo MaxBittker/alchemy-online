@@ -180,7 +180,7 @@ class Editor extends React.Component {
             className="mat-circle"
             style={{
               strokeWidth: 1,
-              fill: "white"
+              fill: "rgba(255,255,255,0.9)"
             }}
           ></circle>
 

@@ -114,12 +114,12 @@ class Index extends React.Component {
     });
   }
   reset() {
-    if (window.confirm("Reset your ecosystem?")) {
-      this.play();
-      this.setState({ currentSubmission: null });
+    // if (window.confirm("Reset your ecosystem?")) {
+    this.play();
+    this.setState({ currentSubmission: null });
 
-      reset();
-    }
+    reset();
+    // }
   }
 
   closeMenu() {
@@ -225,10 +225,10 @@ class Index extends React.Component {
     let activeSpecies = Object.keys(Species).filter(name => name.length > 2);
 
     return (
-      <div className="window fade" id="HUD">
-        <div className="title-bar">
-          <div className="title-bar-text">Tile Toy</div>
-          <div className="title-bar-controls">
+      <div className="window fade ultima" id="HUD">
+        {/* <div className="title-bar"> */}
+        {/* <div className="title-bar-text">Tile Toy</div> */}
+        {/* <div className="title-bar-controls">
             <button
               aria-label="Minimize"
               onClick={() => {
@@ -243,7 +243,7 @@ class Index extends React.Component {
               }}
             ></button>
           </div>
-        </div>
+        </div> */}
         <div className="window-body hud-body">
           <div id="hud-buttons">
             <OrganicButton
@@ -307,7 +307,7 @@ class Index extends React.Component {
                 // reset();
                 universe.pop_undo();
               }}
-              style={{ fontSize: 18 }}
+              style={{ fontSize: 18, lineHeight: 0 }}
             >
               ↜
             </OrganicButton>
