@@ -251,7 +251,7 @@ class Index extends React.Component {
         </div> */}
         <div className="window-body hud-body">
           <div id="hud-buttons">
-            <OrganicButton
+            {/* <OrganicButton
               onClick={() => this.togglePause()}
               className={paused ? "selected" : ""}
             >
@@ -277,7 +277,7 @@ class Index extends React.Component {
                   <polygon id="bar1" points="190,0 300,0 300,300 190,300" />
                 </svg>
               )}
-            </OrganicButton>
+            </OrganicButton> */}
             {/* <OrganicButton
               onClick={() => this.toggleFF()}
               className={ff ? "selected" : ""}
