@@ -122,16 +122,17 @@ button {
   z-index: 3;
   zoom: 1.25;
   position: relative;
-  min-width: 30px;
-  padding: 1px 5px;
-  flex-grow: 1;
-  max-width: 90px;
+  /* padding: 5px 5px; */
+  /* flex-grow: 1; */
+  /* max-width: 90px; */
   fill: var(--main-dark-color);
   cursor: pointer;
   user-select: none; /* Standard */
 
   box-sizing: border-box;
   border-color: white;
+  dominant-baseline: middle;
+  text-anchor: middle;
 }
 .active button {
   background-color: gainsboro;
@@ -146,7 +147,8 @@ button:focus {
 }
 
 button.selected {
-  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  /* box-shadow: var(--border-sunken-outer), var(--border-sunken-inner); */
+  border-style: inset;
 }
 
 #HUD {
@@ -176,10 +178,14 @@ button.selected {
 }
 #hud-buttons button {
   margin: 2px;
-  height: 21px;
+  height: 25px;
+  width: 30px;
+  font-size: 15px;
+  line-height: 20px;
+  padding: 0;
 }
 #HUD a {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   height: 100%;
   /* line-height: 0; */
 }
