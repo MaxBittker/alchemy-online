@@ -16,6 +16,7 @@ pub enum Species {
     Rule1 = 0,
     Rule2 = 1,
     Rule3 = 2,
+    Rule4 = 3,
 }
 
 #[wasm_bindgen]
@@ -133,7 +134,6 @@ pub fn check_cell(slot: Slot, cell: Cell) -> bool {
         Slot::Empty => cell.species == Species::Empty,
         Slot::Anything => true,
         Slot::Full => cell.species != Species::Empty,
-        _ => true, //TODO: OTHER RULES
     }
 }
 pub fn execute_rule_orientation(
@@ -214,7 +214,7 @@ pub fn execute_rule(cell: Cell, api: SandApi, rule: Rule) {
     }
 }
 
-pub fn build_rule() -> [Rule; 3] {
+pub fn build_rule() -> [Rule; 4] {
     return [
         Rule {
             symmetry: SymmetryMode::None,
@@ -246,7 +246,7 @@ pub fn build_rule() -> [Rule; 3] {
             },
         },
         Rule {
-            symmetry: SymmetryMode::None,
+            symmetry: SymmetryMode::Horizontal,
             selector: Selector {
                 grid: [
                     Slot::Anything,
@@ -255,9 +255,9 @@ pub fn build_rule() -> [Rule; 3] {
                     Slot::Anything,
                     Slot::Anything,
                     Slot::Anything,
+                    Slot::Anything,
                     Slot::Empty,
-                    Slot::Empty,
-                    Slot::Empty,
+                    Slot::Anything,
                 ],
             },
             effector: Effector {
@@ -303,6 +303,35 @@ pub fn build_rule() -> [Rule; 3] {
                 ],
             },
         },
+        Rule {
+            symmetry: SymmetryMode::Quad,
+            selector: Selector {
+                grid: [
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Anything,
+                    Slot::Empty,
+                    Slot::Anything,
+                ],
+            },
+            effector: Effector {
+                grid: [
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Empty,
+                    OutSlot::Nop,
+                    OutSlot::Nop,
+                    OutSlot::Me,
+                    OutSlot::Nop,
+                ],
+            },
+        },
     ];
 }
 impl Species {
@@ -313,6 +342,7 @@ impl Species {
             Species::Rule1 => execute_rule(cell, api, rule_sets[0]),
             Species::Rule2 => execute_rule(cell, api, rule_sets[1]),
             Species::Rule3 => execute_rule(cell, api, rule_sets[2]),
+            Species::Rule4 => execute_rule(cell, api, rule_sets[3]),
         }
     }
 }

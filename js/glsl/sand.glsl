@@ -57,11 +57,11 @@ void main() {
       a = 1.0;
     }
 
-  } else if (type == 11) { // Glass
+  } else if (type == 0) { // Glass
     hue = 0.1;
-    saturation = 0.2;
-    lightness = 1.0;
-  } else if (type == 2) { // Sand
+    saturation = 0.1;
+    lightness = 0.7;
+  } else if (type == 1) { // Sand
     hue = 0.1;
     saturation = 0.4 + (age * 0.3);
     lightness = 1.0 - energy * 0.5;
@@ -74,7 +74,7 @@ void main() {
     if (isSnapshot) {
       a = 1.0;
     }
-  } else if (type == 0) { // Plant
+  } else if (type == 2) { // Plant
     hue = 0.4;
     saturation = 0.4;
 
@@ -95,7 +95,7 @@ void main() {
 
       a = 1.0;
     }
-  } else if (type == 9) { // ???
+  } else if (type == 3) { // ???
     hue = 0.6;
     saturation = 0.4;
     lightness = 0.7 + data.g * 0.5;
@@ -114,52 +114,7 @@ void main() {
     hue = (data.g * 0.1);
     saturation = 0.3;
     lightness = 0.3 + data.g * 0.3;
-  } else if (type == 14) { // Egg
-    hue = 0.9;
-    saturation = age / 3.;
-    lightness = 1.0;
-    a = 0.8;
-  } else if (type == 15) { // Tail
-    hue += fract(age * 1.9 * 255. / 8.) * 0.2;
-    lightness += 0.4;
-    saturation -= (fract(age * 1.9 * 255. / 8.) - 0.1) * 0.7;
-
-    // saturation += fract(age * 255.*6.);
-  } else if (type == 16) { // bubble
-
-    hue = 0.0;
-    saturation = 0.1;
-    lightness = 0.1;
-    a = 0.0;
-    if (isSnapshot) {
-      saturation = 0.05;
-      lightness = 1.01;
-      a = 1.0;
-    }
-  } else if (type == 17) { // biofilm
-    hue = 0.48;
-    saturation = 0.6;
-    lightness = 0.5 + energy * 0.25 + noise * 0.1;
-    a = 0.4;
-    if (isSnapshot) {
-      a = 1.0;
-    }
-  } else if (type == 18) { // goldfish
-    hue = 0.1;
-    lightness += 0.3;
-    saturation = 0.9;
-  } else if (type == 19) { // goldfishtail
-    hue = 0.1;
-    hue += fract(age * 1.9 * 255. / 9.) * 0.1;
-    lightness += 0.6;
-    saturation = 0.9;
-    saturation -= (fract(age * 1.9 * 255. / 7.) - 0.1) * 0.6;
-  } else if (type == 20) { // plastic
-    hue = 0.1;
-    lightness += 0.5;
-    saturation = 0.1;
   }
-  lightness *= 0.85 + cos(skyTime * PI2) * 0.2;
 
   if (isSnapshot == false) {
     lightness *= (0.975 + snoise2(floor(guv * resolution / dpi)) * 0.025);

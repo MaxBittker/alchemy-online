@@ -112,7 +112,7 @@ function smoothPaint(event) {
   if (!painting) {
     return;
   }
-  let size = speciesSizes[window.UI.state.selectedElement] || 2;
+  let size = 2;
 
   let i = 0;
   paint(startEvent);
@@ -146,19 +146,6 @@ const handleTouches = event => {
   }
 };
 
-let speciesSizes = {
-  [Species.Water]: 13,
-  [Species.Sand]: 8,
-  [Species.Empty]: 7,
-
-  [Species.Algae]: 2,
-  [Species.Fish]: 2,
-  [Species.GoldFish]: 2,
-  [Species.Daphnia]: 2,
-  [Species.Zoop]: 2,
-  [Species.Grass]: 2,
-  [Species.Bacteria]: 2
-};
 function convertEventCoordinates(event) {
   const boundingRect = canvas.getBoundingClientRect();
 
@@ -183,17 +170,9 @@ const paint = event => {
     return;
   }
 
-  if (
-    window.UI.state.selectedElement == Species.Fish ||
-    window.UI.state.selectedElement == Species.GoldFish
-  ) {
-    if (!canPlaceFish()) {
-      return;
-    }
-  }
   const [x, y] = convertEventCoordinates(event);
   if (window.UI.state.selectedElement < 0) return;
 
-  let size = speciesSizes[window.UI.state.selectedElement] || 3;
+  let size = 2;
   universe.paint(x, y, size, window.UI.state.selectedElement);
 };

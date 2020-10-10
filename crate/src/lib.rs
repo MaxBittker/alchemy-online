@@ -54,7 +54,7 @@ pub struct Universe {
     cells: Vec<Cell>,
     undo_stack: VecDeque<Vec<Cell>>,
     generation: u8,
-    rule_sets: [species::Rule; 3],
+    rule_sets: [species::Rule; 4],
     time: u8,
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { ruleSymbols } from "./ui";
 // import { Rule } from "../../../crate/pkg/species";
 import {
   Universe,
@@ -63,7 +64,7 @@ let OutSlotOptions = [
   },
   {
     key: OutSlot.Me,
-    symbol: "☉"
+    symbol: "?"
   }
 ];
 
@@ -76,10 +77,9 @@ class Matrix extends React.Component {
   }
 
   gridSquare(x, y, isCenter) {
-    let { grid, options } = this.props;
+    let { grid, options, selectedElement } = this.props;
 
     let myCell = grid[grid_index(x, y)];
-
     let { symbol } = options[myCell];
     return (
       <g
@@ -90,7 +90,7 @@ class Matrix extends React.Component {
           if (isCenter) {
             return;
           }
-          grid[grid_index(x, y)] = (myCell + 1) % this.props.options.length;
+          grid[grid_index(x, y)] = (myCell + 1) % options.length;
           let { setGrid } = this.props;
           setGrid(grid);
         }}
@@ -107,7 +107,7 @@ class Matrix extends React.Component {
           }}
         />
         <text x={25} y={30} style={{ fontSize: "30px" }}>
-          {isCenter ? "☉" : symbol}
+          {isCenter || symbol == "?" ? ruleSymbols[selectedElement] : symbol}
         </text>
       </g>
     );
@@ -163,7 +163,7 @@ class Editor extends React.Component {
   }
   static getDerivedStateFromProps(props, state) {
     let { selectedElement } = props;
-    if (selectedElement != state.selectedElement && selectedElement < 3) {
+    if (selectedElement != state.selectedElement && selectedElement < 4) {
       return {
         selectedElement,
         rule: Editor.getRule(selectedElement)
@@ -186,6 +186,7 @@ class Editor extends React.Component {
     window.u.set_rule(r_rule, this.props.selectedElement);
   }
   render() {
+    let { selectedElement } = this.props;
     let { rule } = this.state;
     let { selector, effector, symmetry } = rule;
 
@@ -230,6 +231,7 @@ class Editor extends React.Component {
           <g transform="translate(20,0)">
             {selector && (
               <Matrix
+                selectedElement={selectedElement}
                 options={SlotOptions}
                 grid={selector}
                 isSelector
@@ -251,6 +253,7 @@ class Editor extends React.Component {
           <g transform="translate(210,0)">
             {effector && (
               <Matrix
+                selectedElement={selectedElement}
                 options={OutSlotOptions}
                 grid={effector}
                 setGrid={newGrid => {

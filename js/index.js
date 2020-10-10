@@ -6,7 +6,7 @@ import {} from "./paint";
 import {} from "./setup";
 import { startApp } from "./app";
 
-let n = 150;
+let n = 100;
 let h = n / 2;
 let d = n - 6;
 const universe = Universe.new(n, n);
@@ -44,11 +44,11 @@ let resize = () => {
   if (screen_width - 150 > screen_height) {
     // if (screen_width - window.innerHeight < 400) {
     // landscape compressed
-    canvasStyle = `height: ${window.innerHeight}px; margin:3px`;
+    canvasStyle = `height: ${window.innerHeight}px; margin:10px`;
     canvasSize = window.innerHeight;
-    let hudWidth = screen_width - window.innerHeight - 12;
+    let hudWidth = screen_width - window.innerHeight - 32;
 
-    HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
+    HUDStyle = `width: ${hudWidth}px; margin: 10px;`;
     // } else {
     //   // landscape wide
     //   canvasStyle = `height: ${window.innerHeight}px`;

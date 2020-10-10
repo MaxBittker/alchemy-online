@@ -25,6 +25,13 @@ const OrganicButton = ({ onClick, className, style, children }) => {
     </button>
   );
 };
+let ruleSymbols = {
+  [Species.Empty]: "×",
+  [Species.Rule1]: "🜊",
+  [Species.Rule2]: "☉",
+  [Species.Rule3]: "☽",
+  [Species.Rule4]: "🝆"
+};
 const ElementButton = (name, selectedElement, setElement) => {
   let elementID = Species[name];
 
@@ -35,19 +42,8 @@ const ElementButton = (name, selectedElement, setElement) => {
   let background = "inherit";
 
   let text = name;
-  if (name == "Empty") {
-    text = "×";
-  }
-
-  if (name == "Rule1") {
-    text = "☉";
-  }
-
-  if (name == "Rule2") {
-    text = "☽";
-  }
-  if (name == "Rule3") {
-    text = "🝆";
+  if (ruleSymbols[elementID]) {
+    text = ruleSymbols[elementID];
   }
 
   return (
@@ -377,4 +373,4 @@ class Index extends React.Component {
   }
 }
 
-export { Index };
+export { Index, ruleSymbols };
