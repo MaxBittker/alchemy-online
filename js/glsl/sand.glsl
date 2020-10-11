@@ -73,9 +73,10 @@ void main() {
       a = 1.0;
     }
   } else if (type == 4) { // Zoop
-    hue = 0.0;
-    saturation = 0.8;
-    lightness += 0.5 * (noise + 0.5);
+    hue = 0.01 + (noise * 0.2);
+    saturation = 0.7;
+    lightness += 0.6;
+    // * (noise + 0.5);
   } else if (type == 5) { // Fish
     hue = 0.8;
     lightness += 0.4;

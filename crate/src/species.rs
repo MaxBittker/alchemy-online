@@ -59,6 +59,7 @@ impl Rule {
 #[wasm_bindgen]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Clause {
+    pub probability: u8,
     pub symmetry: SymmetryMode,
     pub selector: Selector,
     pub effector: Effector,
@@ -69,6 +70,7 @@ impl Clause {
     #[wasm_bindgen(constructor)]
     pub fn new(symmetry: SymmetryMode, selector: Selector, effector: Effector) -> Clause {
         return Clause {
+            probability: 255,
             symmetry,
             selector,
             effector,
@@ -76,6 +78,7 @@ impl Clause {
     }
     pub fn new_null() -> Clause {
         Clause {
+            probability: 255,
             symmetry: SymmetryMode::Disabled,
             selector: Selector {
                 grid: [
@@ -172,43 +175,12 @@ impl Effector {
 pub fn build_rule() -> [Rule; 6] {
     return [
         Rule {
-            clauses: [
-                Clause {
-                    symmetry: SymmetryMode::None,
-                    selector: Selector {
-                        grid: [
-                            Species::Empty,
-                            Species::Empty,
-                            Species::Empty,
-                            Species::Empty,
-                            Species::Empty,
-                            Species::Empty,
-                            Species::Empty,
-                            Species::Empty,
-                            Species::Empty,
-                        ],
-                    },
-                    effector: Effector {
-                        grid: [
-                            Species::Wild,
-                            Species::Wild,
-                            Species::Wild,
-                            Species::Wild,
-                            Species::Wild,
-                            Species::Wild,
-                            Species::Wild,
-                            Species::Wild,
-                            Species::Wild,
-                        ],
-                    },
-                },
-                Clause::new_null(),
-                Clause::new_null(),
-            ],
+            clauses: [Clause::new_null(), Clause::new_null(), Clause::new_null()],
         },
         Rule {
             clauses: [
                 Clause {
+                    probability: 255,
                     symmetry: SymmetryMode::Horizontal,
                     selector: Selector {
                         grid: [
@@ -238,6 +210,8 @@ pub fn build_rule() -> [Rule; 6] {
                     },
                 },
                 Clause {
+                    probability: 255,
+
                     symmetry: SymmetryMode::Horizontal,
                     selector: Selector {
                         grid: [
@@ -272,6 +246,7 @@ pub fn build_rule() -> [Rule; 6] {
         Rule {
             clauses: [
                 Clause {
+                    probability: 255,
                     symmetry: SymmetryMode::None,
                     selector: Selector {
                         grid: [
@@ -301,6 +276,7 @@ pub fn build_rule() -> [Rule; 6] {
                     },
                 },
                 Clause {
+                    probability: 255,
                     symmetry: SymmetryMode::Horizontal,
                     selector: Selector {
                         grid: [
@@ -335,6 +311,7 @@ pub fn build_rule() -> [Rule; 6] {
         Rule {
             clauses: [
                 Clause {
+                    probability: 255,
                     symmetry: SymmetryMode::Horizontal,
                     selector: Selector {
                         grid: [
@@ -364,6 +341,7 @@ pub fn build_rule() -> [Rule; 6] {
                     },
                 },
                 Clause {
+                    probability: 255,
                     symmetry: SymmetryMode::Horizontal,
                     selector: Selector {
                         grid: [
@@ -398,6 +376,7 @@ pub fn build_rule() -> [Rule; 6] {
         Rule {
             clauses: [
                 Clause {
+                    probability: 255,
                     symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [
@@ -427,6 +406,7 @@ pub fn build_rule() -> [Rule; 6] {
                     },
                 },
                 Clause {
+                    probability: 255,
                     symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [
@@ -461,6 +441,7 @@ pub fn build_rule() -> [Rule; 6] {
         Rule {
             clauses: [
                 Clause {
+                    probability: 255,
                     symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [

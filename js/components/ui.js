@@ -74,7 +74,7 @@ class Index extends React.Component {
       size: 1,
       dataURL: null,
       currentSubmission: null,
-      selectedElement: Species.Rule1
+      selectedElement: Species.Rule2
     };
     window.UI = this;
   }
