@@ -321,10 +321,7 @@ class Index extends React.Component {
                 this.setState({ selectedElement: id })
               )
             )}
-            <img
-              style={{ width: "100%" }}
-              src="http://community.fortunecity.ws/tinpan/motorhead/13/images/barb_wire.gif"
-            ></img>
+            <img style={{ width: "100%" }} src="assets/barb_wire.gif"></img>
             {selectedElement != Species.Empty && (
               <>
                 <Editor
