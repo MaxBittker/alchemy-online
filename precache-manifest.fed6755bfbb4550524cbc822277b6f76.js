@@ -1,15 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cd0ba28768980de1e8a9",
+    "revision": "41abc58e08b237ee1048",
     "url": "/tile-toy/02cb8546d2af0280d120.module.wasm"
   },
   {
-    "revision": "0951c0df0634f0fc65af",
-    "url": "/tile-toy/1.7c30698b379636b4cd3a.js"
+    "revision": "a5a92006db4d5d705abd",
+    "url": "/tile-toy/1.8ca4bb71be56e26267fd.js"
   },
   {
-    "revision": "cd0ba28768980de1e8a9",
-    "url": "/tile-toy/2.e003a2c15fa4629a6802.js"
+    "revision": "41abc58e08b237ee1048",
+    "url": "/tile-toy/2.52975b84a68537e4979c.js"
   },
   {
     "revision": "bab5fb76ce68c6d64ba19e8c8dec6359",
@@ -36,6 +36,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/assets/gif.worker.js"
   },
   {
+    "revision": "f3e98858b8f2ed42f50d614a2ce1e9a0",
+    "url": "/tile-toy/assets/gold_arrow.png"
+  },
+  {
     "revision": "3ed59c98ec041d25145e97a30e3e3a0c",
     "url": "/tile-toy/assets/html_code.html"
   },
@@ -60,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/assets/ultima.jpg"
   },
   {
-    "revision": "b30fd83c9a908c3916ece0731d871e33",
+    "revision": "37f91d929a75e36ee01b6e4e8503e7d8",
     "url": "/tile-toy/assets/ultima.png"
   },
   {
@@ -72,19 +76,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/gif.worker.js"
   },
   {
-    "revision": "09951ca4f8976f2dc33134d102adbb23",
+    "revision": "156c761ca1b1cf107f7958ecd9e5ee76",
     "url": "/tile-toy/index.html"
   },
   {
-    "revision": "974ebbde43fb731c681d",
-    "url": "/tile-toy/main.752119e5c4473ad2e673.js"
+    "revision": "870e2de746c1d5871e03",
+    "url": "/tile-toy/main.5c5e5a8cc0da7c6425ee.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
     "url": "/tile-toy/manifest.json"
   },
   {
-    "revision": "07d8b79f63fc55b4105a2ac7c6f52fb1",
+    "revision": "ce0d21955eef59fdf150af485de0895d",
     "url": "/tile-toy/styles.css"
   }
 ]);
