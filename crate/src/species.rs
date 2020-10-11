@@ -18,6 +18,8 @@ pub enum Species {
     Rule2 = 1,
     Rule3 = 2,
     Rule4 = 3,
+    Rule5 = 4,
+    Rule6 = 5,
 }
 
 #[wasm_bindgen]
@@ -167,7 +169,7 @@ impl Effector {
     }
 }
 
-pub fn build_rule() -> [Rule; 4] {
+pub fn build_rule() -> [Rule; 6] {
     return [
         Rule {
             clauses: [
@@ -235,7 +237,35 @@ pub fn build_rule() -> [Rule; 4] {
                         ],
                     },
                 },
-                Clause::new_null(),
+                Clause {
+                    symmetry: SymmetryMode::Horizontal,
+                    selector: Selector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                        ],
+                    },
+                    effector: Effector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule2,
+                        ],
+                    },
+                },
                 Clause::new_null(),
             ],
         },
@@ -277,6 +307,98 @@ pub fn build_rule() -> [Rule; 4] {
         Rule {
             clauses: [
                 Clause {
+                    symmetry: SymmetryMode::Horizontal,
+                    selector: Selector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                        ],
+                    },
+                    effector: Effector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule4,
+                        ],
+                    },
+                },
+                Clause {
+                    symmetry: SymmetryMode::Horizontal,
+                    selector: Selector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                        ],
+                    },
+                    effector: Effector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                            Species::Rule4,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                        ],
+                    },
+                },
+                Clause::new_null(),
+            ],
+        },
+        Rule {
+            clauses: [
+                Clause {
+                    symmetry: SymmetryMode::Quad,
+                    selector: Selector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule3,
+                            Species::Wild,
+                        ],
+                    },
+                    effector: Effector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule5,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule5,
+                            Species::Wild,
+                        ],
+                    },
+                },
+                Clause {
                     symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [
@@ -300,7 +422,41 @@ pub fn build_rule() -> [Rule; 4] {
                             Species::Empty,
                             Species::Wild,
                             Species::Wild,
-                            Species::Rule4,
+                            Species::Rule5,
+                            Species::Wild,
+                        ],
+                    },
+                },
+                Clause::new_null(),
+            ],
+        },
+        Rule {
+            clauses: [
+                Clause {
+                    symmetry: SymmetryMode::Quad,
+                    selector: Selector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                            Species::Wild,
+                        ],
+                    },
+                    effector: Effector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule6,
                             Species::Wild,
                         ],
                     },
@@ -322,6 +478,8 @@ impl Species {
             Species::Rule2 => execute_rule(cell, api, rule_sets[1]),
             Species::Rule3 => execute_rule(cell, api, rule_sets[2]),
             Species::Rule4 => execute_rule(cell, api, rule_sets[3]),
+            Species::Rule5 => execute_rule(cell, api, rule_sets[4]),
+            Species::Rule6 => execute_rule(cell, api, rule_sets[5]),
         }
     }
 }

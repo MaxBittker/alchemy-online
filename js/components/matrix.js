@@ -17,7 +17,9 @@ let ruleSymbols = {
   [Species.Rule1]: "🜊",
   [Species.Rule2]: "☉",
   [Species.Rule3]: "☽",
-  [Species.Rule4]: "🝆"
+  [Species.Rule4]: "🝆",
+  [Species.Rule5]: "🜁",
+  [Species.Rule6]: "🜏"
 };
 
 let SymmetryOptions = [
@@ -66,6 +68,14 @@ let SlotOptions = [
   {
     key: Species.Rule4,
     symbol: ruleSymbols[Species.Rule4]
+  },
+  {
+    key: Species.Rule5,
+    symbol: ruleSymbols[Species.Rule5]
+  },
+  {
+    key: Species.Rule6,
+    symbol: ruleSymbols[Species.Rule6]
   }
 ];
 

@@ -335,10 +335,10 @@ class Index extends React.Component {
                   selectedElement={selectedElement}
                   clause_index={1}
                 ></Editor>
-                {/* <Editor
+                <Editor
                   selectedElement={selectedElement}
                   clause_index={2}
-                ></Editor> */}
+                ></Editor>
               </>
             )}
 
@@ -351,22 +351,6 @@ class Index extends React.Component {
             <img
               style={{ width: "100%" }}
               src="http://community.fortunecity.ws/tinpan/motorhead/13/images/barb_wire.gif"
-            ></img>
-            <img
-              style={{ width: "27%", objectFit: "contain" }}
-              src="https://web.archive.org/web/20091022135502im_/http://geocities.com/witchzcat/bookflip.gif"
-            ></img>
-            <img
-              style={{ width: "24%", objectFit: "contain" }}
-              src="https://web.archive.org/web/20091027090546/http://geocities.com/traditionalwitchcraft/pentagramanimation.gif"
-            ></img>
-            <img
-              style={{ width: "14%", objectFit: "contain" }}
-              src="https://web.archive.org/web/20090729083846/http://www.geocities.com/silver_alchemy/torch2.gif"
-            ></img>
-            <img
-              style={{ width: "34%", objectFit: "contain" }}
-              src="https://web.archive.org/web/20090902061527/http://geocities.com/sunsetstrip/hall/6613/talkskull.gig.gif"
             ></img>
           </div>
         </div>

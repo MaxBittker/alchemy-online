@@ -46,17 +46,13 @@ void main() {
   float brightness = 0.0;
 
   if (type == 10) { // Air
-
     hue = 0.0;
     saturation = 0.1;
-    lightness = 0.1;
+    lightness = 1.0;
     a = 0.0;
     if (isSnapshot) {
-      saturation = 0.05;
-      lightness = 1.01;
       a = 1.0;
     }
-
   } else if (type == 0) { // Glass
     hue = 0.1;
     saturation = 0.1;
@@ -65,36 +61,30 @@ void main() {
     hue = 0.1;
     saturation = 0.4 + (age * 0.3);
     lightness = 1.0 - energy * 0.5;
-
-  } else if (type == 1) { // Water
+  } else if (type == 2) { // plant
+    hue = 0.4;
+    saturation = 0.4;
+  } else if (type == 3) { // water
     hue = 0.58;
     saturation = 0.6;
-    lightness = 0.5 + energy * 0.25 + noise * 0.1;
+    lightness = 0.8 + energy * 0.25 + noise * 0.1;
     a = 0.4;
     if (isSnapshot) {
       a = 1.0;
     }
-  } else if (type == 2) { // Plant
-    hue = 0.4;
-    saturation = 0.4;
-
-  } else if (type == 6) { // Zoop
-    hue = 0.9;
-    lightness += 0.7;
-  } else if (type == 7) { // Fish
+  } else if (type == 4) { // Zoop
     hue = 0.0;
+    saturation = 0.8;
+    lightness += 0.5 * (noise + 0.5);
+  } else if (type == 5) { // Fish
+    hue = 0.8;
     lightness += 0.4;
   } else if (type == 8) { // Bacteria
     hue = 0.66;
     saturation += 0.2;
     lightness += 0.2;
     a = 0.4;
-    if (isSnapshot) {
-      // lightness += 0.8;
-      saturation -= 0.2;
 
-      a = 1.0;
-    }
   } else if (type == 3) { // ???
     hue = 0.6;
     saturation = 0.4;
@@ -124,5 +114,4 @@ void main() {
   color = hsv2rgb(vec3(hue, saturation, lightness));
 
   gl_FragColor = vec4(color, a);
-  // gl_FragColor = getColor(uv);
 }
