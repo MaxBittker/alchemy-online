@@ -48,6 +48,10 @@ impl Rule {
     pub fn clause(&self, i: usize) -> Clause {
         self.clauses[i]
     }
+
+    pub fn set_clause(&mut self, c: &Clause, i: usize) {
+        self.clauses[i] = *c;
+    }
 }
 
 #[wasm_bindgen]
@@ -73,15 +77,15 @@ impl Clause {
             symmetry: SymmetryMode::Disabled,
             selector: Selector {
                 grid: [
-                    Species::Empty,
-                    Species::Empty,
-                    Species::Empty,
-                    Species::Empty,
-                    Species::Empty,
-                    Species::Empty,
-                    Species::Empty,
-                    Species::Empty,
-                    Species::Empty,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
                 ],
             },
             effector: Effector {
@@ -160,114 +164,6 @@ impl Effector {
     }
     pub fn grid(&self) -> *const Species {
         self.grid.as_ptr()
-    }
-}
-
-pub fn check_cell(slot: Species, cell: Cell) -> bool {
-    match slot {
-        Species::Wild => true,
-        _ => cell.species == slot,
-    }
-}
-pub fn execute_clause_orientation(
-    cell: Cell,
-    mut api: SandApi,
-    clause: Clause,
-    rx: i32,
-    ry: i32,
-    r: usize,
-) -> (bool, SandApi) {
-    for x in 0..clause.selector.grid.len() {
-        let (mut dx, mut dy) = rot_right(matrix_index(x), r);
-        dx *= rx;
-        dy *= ry;
-        if (dx != 0 || dy != 0) && !check_cell(clause.selector.grid[x], api.get(dx, dy)) {
-            return (false, api);
-        }
-    }
-    for x in 0..clause.effector.grid.len() {
-        let (mut dx, mut dy) = rot_right(matrix_index(x), r);
-        dx *= rx;
-        dy *= ry;
-        let out_slot = clause.effector.grid[x];
-        match out_slot {
-            Species::Empty => api.set(dx, dy, EMPTY_CELL),
-            Species::Wild => (),
-            _ => api.set(
-                dx,
-                dy,
-                Cell {
-                    species: out_slot,
-                    ..cell
-                },
-            ),
-        }
-    }
-
-    return (true, api);
-}
-
-pub fn execute_clause(cell: Cell, api: SandApi, clause: Clause) -> (bool, SandApi) {
-    match clause.symmetry {
-        SymmetryMode::Disabled => return (false, api),
-        SymmetryMode::None => {
-            return execute_clause_orientation(cell, api, clause, 1, 1, 0);
-        }
-        SymmetryMode::Vertical => {
-            let dy = rand_dir_2();
-            let (success, api) = execute_clause_orientation(cell, api, clause, 1, dy, 0);
-
-            if success {
-                return (true, api);
-            }
-            return execute_clause_orientation(cell, api, clause, 1, dy * -1, 0);
-        }
-        SymmetryMode::Horizontal => {
-            let dx = rand_dir_2();
-            let (success, api) = execute_clause_orientation(cell, api, clause, dx, 1, 0);
-
-            if success {
-                return (true, api);
-            }
-            return execute_clause_orientation(cell, api, clause, dx * -1, 1, 0);
-        }
-        SymmetryMode::Quad => {
-            let mut r = rand_uint(4);
-            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
-
-            if success {
-                return (success, api);
-            }
-            r = (r + 1) % 4;
-            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
-
-            if success {
-                return (success, api);
-            }
-            r = (r + 1) % 4;
-
-            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
-
-            if success {
-                return (success, api);
-            }
-            r = (r + 1) % 4;
-
-            return execute_clause_orientation(cell, api, clause, 1, 1, r);
-        }
-    }
-}
-
-pub fn execute_rule(cell: Cell, i_api: SandApi, rule: Rule) {
-    let mut api = i_api;
-    for c in 0..rule.clauses.len() {
-        let clause = rule.clauses[c];
-
-        let (success, o_api) = execute_clause(cell, api, clause);
-        if success {
-            break;
-        };
-        api = o_api;
     }
 }
 
@@ -415,6 +311,7 @@ pub fn build_rule() -> [Rule; 4] {
         },
     ];
 }
+
 impl Species {
     pub fn update(&self, cell: Cell, api: SandApi) {
         let rule_sets = api.universe.rule_sets;
@@ -426,5 +323,113 @@ impl Species {
             Species::Rule3 => execute_rule(cell, api, rule_sets[2]),
             Species::Rule4 => execute_rule(cell, api, rule_sets[3]),
         }
+    }
+}
+
+pub fn check_cell(slot: Species, cell: Cell) -> bool {
+    match slot {
+        Species::Wild => true,
+        _ => cell.species == slot,
+    }
+}
+pub fn execute_clause_orientation(
+    cell: Cell,
+    mut api: SandApi,
+    clause: Clause,
+    rx: i32,
+    ry: i32,
+    r: usize,
+) -> (bool, SandApi) {
+    for x in 0..clause.selector.grid.len() {
+        let (mut dx, mut dy) = rot_right(matrix_index(x), r);
+        dx *= rx;
+        dy *= ry;
+        if (dx != 0 || dy != 0) && !check_cell(clause.selector.grid[x], api.get(dx, dy)) {
+            return (false, api);
+        }
+    }
+    for x in 0..clause.effector.grid.len() {
+        let (mut dx, mut dy) = rot_right(matrix_index(x), r);
+        dx *= rx;
+        dy *= ry;
+        let out_slot = clause.effector.grid[x];
+        match out_slot {
+            Species::Empty => api.set(dx, dy, EMPTY_CELL),
+            Species::Wild => (),
+            _ => api.set(
+                dx,
+                dy,
+                Cell {
+                    species: out_slot,
+                    ..cell
+                },
+            ),
+        }
+    }
+
+    return (true, api);
+}
+
+pub fn execute_clause(cell: Cell, api: SandApi, clause: Clause) -> (bool, SandApi) {
+    match clause.symmetry {
+        SymmetryMode::Disabled => return (false, api),
+        SymmetryMode::None => {
+            return execute_clause_orientation(cell, api, clause, 1, 1, 0);
+        }
+        SymmetryMode::Vertical => {
+            let dy = rand_dir_2();
+            let (success, api) = execute_clause_orientation(cell, api, clause, 1, dy, 0);
+
+            if success {
+                return (true, api);
+            }
+            return execute_clause_orientation(cell, api, clause, 1, dy * -1, 0);
+        }
+        SymmetryMode::Horizontal => {
+            let dx = rand_dir_2();
+            let (success, api) = execute_clause_orientation(cell, api, clause, dx, 1, 0);
+
+            if success {
+                return (true, api);
+            }
+            return execute_clause_orientation(cell, api, clause, dx * -1, 1, 0);
+        }
+        SymmetryMode::Quad => {
+            let mut r = rand_uint(4);
+            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
+
+            if success {
+                return (success, api);
+            }
+            r = (r + 1) % 4;
+            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
+
+            if success {
+                return (success, api);
+            }
+            r = (r + 1) % 4;
+
+            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
+
+            if success {
+                return (success, api);
+            }
+            r = (r + 1) % 4;
+
+            return execute_clause_orientation(cell, api, clause, 1, 1, r);
+        }
+    }
+}
+
+pub fn execute_rule(cell: Cell, i_api: SandApi, rule: Rule) {
+    let mut api = i_api;
+    for c in 0..rule.clauses.len() {
+        let clause = rule.clauses[c];
+
+        let (success, o_api) = execute_clause(cell, api, clause);
+        if success {
+            break;
+        };
+        api = o_api;
     }
 }

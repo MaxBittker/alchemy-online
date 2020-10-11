@@ -325,7 +325,20 @@ class Index extends React.Component {
               src="http://community.fortunecity.ws/tinpan/motorhead/13/images/barb_wire.gif"
             ></img>
             {selectedElement != Species.Empty && (
-              <Editor selectedElement={selectedElement}></Editor>
+              <>
+                <Editor
+                  selectedElement={selectedElement}
+                  clause_index={0}
+                ></Editor>
+                <Editor
+                  selectedElement={selectedElement}
+                  clause_index={1}
+                ></Editor>
+                {/* <Editor
+                  selectedElement={selectedElement}
+                  clause_index={2}
+                ></Editor> */}
+              </>
             )}
 
             {this.state.dataURL && (

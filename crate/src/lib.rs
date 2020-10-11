@@ -4,6 +4,7 @@ extern crate wasm_bindgen;
 extern crate web_sys;
 mod species;
 pub mod utils;
+use species::Clause;
 use species::Rule;
 // use utils::*;
 use species::Species;
@@ -140,9 +141,15 @@ impl Universe {
     pub fn rule(&self, i: usize) -> Rule {
         self.rule_sets[i]
     }
-
+    pub fn clause(&mut self, ri: usize, ci: usize) -> Clause {
+        self.rule_sets[ri].clause(ci)
+    }
     pub fn set_rule(&mut self, rule: &Rule, i: usize) {
         self.rule_sets[i] = *rule;
+    }
+
+    pub fn set_clause(&mut self, clause: &Clause, ri: usize, ci: usize) {
+        self.rule_sets[ri].set_clause(clause, ci);
     }
 
     pub fn width(&self) -> i32 {

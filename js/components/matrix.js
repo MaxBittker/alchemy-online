@@ -30,7 +30,7 @@ let ruleSymbols = {
 let SymmetryOptions = [
   {
     key: SymmetryMode.Disabled,
-    symbol: "X"
+    symbol: "×"
   },
   {
     key: SymmetryMode.None,
@@ -161,14 +161,15 @@ class Editor extends React.Component {
     super(props);
     this.state = {
       selectedElement: props.selectedElement,
-      rule: Editor.getRule(props.selectedElement)
+      clause_index: props.clause_index,
+      clause: Editor.getRule(props.selectedElement, props.clause_index)
     };
     window.Editor = this;
   }
-  static getRule(selectedElement) {
-    let rule = window.u.rule(selectedElement);
-    let clause = rule.clause(0);
-    console.log(clause);
+  static getRule(selectedElement, clause_index) {
+    console.log(selectedElement, clause_index);
+    let clause = window.u.clause(selectedElement, clause_index);
+    // let clause = rule.clause(clause_index);
     const selector = Array.from(
       new Uint8Array(memory.buffer, clause.selector.grid(), 9)
     );
@@ -184,52 +185,57 @@ class Editor extends React.Component {
     };
   }
   static getDerivedStateFromProps(props, state) {
-    let { selectedElement } = props;
+    let { selectedElement, clause_index } = props;
     if (selectedElement != state.selectedElement && selectedElement < 4) {
       return {
         selectedElement,
-        rule: Editor.getRule(selectedElement)
+        clause: Editor.getRule(selectedElement, clause_index)
       };
     }
 
     return null;
   }
   setRule() {
-    let { rule } = this.state;
+    let { clause } = this.state;
     let {
       selector: j_selector,
       effector: j_effector,
       symmetry: j_symmetry
-    } = rule;
-    // console.log(j_selector);
+    } = clause;
+
     let selector = new Selector(...j_selector);
-    // let selector = new Selector(...j_selector.map(v => SlotOptions[v].key));
     let effector = new Effector(...j_effector);
-    // let effector = new Effector(...j_effector.map(v => OutSlotOptions[v].key));
-    let r_rule = new Rule(SymmetryOptions[j_symmetry].key, selector, effector);
-    debugger;
-    window.u.set_rule(r_rule, this.props.selectedElement);
+    let r_clause = new Clause(
+      SymmetryOptions[j_symmetry].key,
+      selector,
+      effector
+    );
+    window.u.set_clause(
+      r_clause,
+      this.props.selectedElement,
+      this.props.clause_index
+    );
   }
 
   incSymmetry(i) {
-    let { rule } = this.state;
-    let { symmetry } = rule;
+    let { clause } = this.state;
+    let { symmetry } = clause;
 
-    rule.symmetry =
+    clause.symmetry =
       (SymmetryOptions.length + symmetry + i) % SymmetryOptions.length;
 
     this.setState(
       {
-        rule
+        clause
       },
       this.setRule
     );
   }
   render() {
     let { selectedElement } = this.props;
-    let { rule } = this.state;
-    console.log(rule);
-    let { selector, effector, symmetry } = rule;
+    let { clause } = this.state;
+    // console.log(clause);
+    let { selector, effector, symmetry } = clause;
 
     return (
       <div className="MatrixMenu">
@@ -245,7 +251,7 @@ class Editor extends React.Component {
             className="mat-circle"
             style={{
               strokeWidth: 1,
-              fill: "rgba(255,255,255,0.9)"
+              fill: "rgba(255,255,255,0.5)"
             }}
           ></circle>
 
@@ -269,9 +275,9 @@ class Editor extends React.Component {
                 grid={selector}
                 isSelector
                 setGrid={newGrid => {
-                  let { rule } = this.state;
-                  rule.selector = newGrid;
-                  this.setState({ rule }, this.setRule);
+                  let { clause } = this.state;
+                  clause.selector = newGrid;
+                  this.setState({ clause }, this.setRule);
                 }}
               />
             )}
@@ -290,9 +296,9 @@ class Editor extends React.Component {
                 options={SlotOptions}
                 grid={effector}
                 setGrid={newGrid => {
-                  let { rule } = this.state;
-                  rule.effector = newGrid;
-                  this.setState({ rule }, this.setRule);
+                  let { clause } = this.state;
+                  clause.effector = newGrid;
+                  this.setState({ clause }, this.setRule);
                 }}
               />
             )}

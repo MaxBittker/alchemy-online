@@ -6,7 +6,7 @@ import {} from "./paint";
 import {} from "./setup";
 import { startApp } from "./app";
 
-let ratio = 4;
+let ratio = 8;
 let width = window.innerWidth / ratio;
 let height = window.innerHeight / ratio;
 //todo scale ratio according to size;
