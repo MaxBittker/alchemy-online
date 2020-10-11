@@ -214,7 +214,7 @@ let pallette = () => {
     let index = id * 4;
     let color = `rgba(${data[index]},${data[index + 1]}, ${
       data[index + 2]
-    }, 1.0)`;
+    }, 0.85)`;
     colors[id] = color;
   });
   return colors;

@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "classnames": "^2.2.6",
     "file-loader": "^4.2.0",
     "gh-pages": "^2.1.1",
     "gif.js": "^0.2.0",

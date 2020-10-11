@@ -108,6 +108,7 @@ class Matrix extends React.Component {
     };
     return (
       <g
+        filter="url(#filter1)"
         key={`${x}-${y}`}
         transform={`translate(${x * 55 + 15},${y * 55 + 15})`}
         className={isCenter ? "disabled" : ""}
@@ -124,7 +125,7 @@ class Matrix extends React.Component {
           height="50"
           className="mat-box"
           style={{
-            fill: symbol == " " ? "#c0c0c0" : window.pallette[myCell],
+            fill: symbol == " " ? "#b0b0b055" : window.pallette[myCell],
             strokeWidth: 1
           }}
         />
@@ -139,6 +140,42 @@ class Matrix extends React.Component {
     let { isSelector } = this.props;
     return (
       <g>
+        <filter id="filter1">
+          <feFlood floodColor="#444" result="COLOR-red" />
+
+          <feMorphology
+            operator="dilate"
+            radius="2"
+            in="SourceAlpha"
+            result="STROKE_10"
+          />
+
+          <feConvolveMatrix
+            order="8,8"
+            divisor="1"
+            kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1"
+            in="STROKE_10"
+            result="BEVEL_20"
+          />
+
+          <feOffset dx="0.5" dy="0.5" in="BEVEL_0" result="BEVEL_25" />
+          <feComposite
+            operator="out"
+            in="BEVEL_25"
+            in2="STROKE_10"
+            result="BEVEL_30"
+          />
+          <feComposite
+            in="COLOR-red"
+            in2="BEVEL_30"
+            operator="in"
+            result="BEVEL_40"
+          />
+          <feMerge result="BEVEL_50">
+            <feMergeNode in="BEVEL_40" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
         {[
           this.gridSquare(0, 0),
           this.gridSquare(0, 1),

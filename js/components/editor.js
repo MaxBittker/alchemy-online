@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import { Clause, Selector, Effector } from "../../crate/pkg";
 import { Matrix, SymmetryOptions, SlotOptions } from "./matrix";
 
@@ -114,46 +115,51 @@ class Editor extends React.Component {
             {SymmetryOptions[symmetry].symbol}
           </text>
 
-          {symmetry > 0 && (
-            <>
-              <g transform="translate(20,0)">
-                {selector && (
-                  <Matrix
-                    selectedElement={selectedElement}
-                    options={SlotOptions}
-                    grid={selector}
-                    isSelector
-                    setGrid={newGrid => {
-                      let { clause } = this.state;
-                      clause.selector = newGrid;
-                      this.setState({ clause }, this.setRule);
-                    }}
-                  />
-                )}
-              </g>
-              <g transform="translate(195,80)">
-                <polygon
-                  fill="white"
-                  stroke="black"
-                  points="15,0, 25,15 15,30, 15,20, 8,20, 8,10, 15,10 "
+          <g className={classNames({ disabled: symmetry == 0 })}>
+            <g transform="translate(20,0)">
+              {selector && (
+                <Matrix
+                  selectedElement={selectedElement}
+                  options={SlotOptions}
+                  grid={selector}
+                  isSelector
+                  setGrid={newGrid => {
+                    if (symmetry == 0) {
+                      return;
+                    }
+                    let { clause } = this.state;
+                    clause.selector = newGrid;
+                    this.setState({ clause }, this.setRule);
+                  }}
                 />
-              </g>
-              <g transform="translate(210,0)">
-                {effector && (
-                  <Matrix
-                    selectedElement={selectedElement}
-                    options={SlotOptions}
-                    grid={effector}
-                    setGrid={newGrid => {
-                      let { clause } = this.state;
-                      clause.effector = newGrid;
-                      this.setState({ clause }, this.setRule);
-                    }}
-                  />
-                )}
-              </g>
-            </>
-          )}
+              )}
+            </g>
+            <g transform="translate(204,80)">
+              {/* <polygon
+                fill="white"
+                stroke="black"
+                points="15,0, 25,15 15,30, 15,20, 8,20, 8,10, 15,10 "
+              /> */}
+              <image href="assets/gold_arrow.png" height="25" width="20" />
+            </g>
+            <g transform="translate(215,0)">
+              {effector && (
+                <Matrix
+                  selectedElement={selectedElement}
+                  options={SlotOptions}
+                  grid={effector}
+                  setGrid={newGrid => {
+                    if (symmetry == 0) {
+                      return;
+                    }
+                    let { clause } = this.state;
+                    clause.effector = newGrid;
+                    this.setState({ clause }, this.setRule);
+                  }}
+                />
+              )}
+            </g>
+          </g>
         </svg>
       </div>
     );

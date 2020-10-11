@@ -348,10 +348,10 @@ class Index extends React.Component {
                 <div style={{ display: "flex" }}></div>
               </Menu>
             )}
-            <img
+            {/* <img
               style={{ width: "100%" }}
               src="http://community.fortunecity.ws/tinpan/motorhead/13/images/barb_wire.gif"
-            ></img>
+            ></img> */}
           </div>
         </div>
       </div>
