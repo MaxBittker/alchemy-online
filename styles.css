@@ -312,3 +312,8 @@ svg text {
 svg text {
   stroke-width: 0 !important;
 }
+.tch {
+  position: absolute;
+  z-index: 15;
+  filter: drop-shadow(1px 1px 2px #500);
+}
