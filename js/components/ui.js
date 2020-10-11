@@ -7,7 +7,8 @@ import { Species } from "../../crate/pkg/sandtable";
 import { height, universe, width, reset } from "../index.js";
 import { exportGif, pallette } from "../render.js";
 import Menu from "./menu.js";
-import { Editor, ruleSymbols } from "./matrix";
+import { Editor } from "./editor";
+import { ruleSymbols } from "./matrix";
 
 window.species = Species;
 let pallette_data = pallette();
