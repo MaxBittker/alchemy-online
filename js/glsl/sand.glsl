@@ -73,13 +73,21 @@ void main() {
       a = 1.0;
     }
   } else if (type == 4) { // Zoop
-    hue = 0.01 + (noise * 0.2);
+    hue = 0.8 + (noise * -0.2);
+    hue += data.g * 0.4;
+
     saturation = 0.7;
     lightness += 0.6;
     // * (noise + 0.5);
+    if (isSnapshot) {
+      hue += -0.1;
+    }
+
   } else if (type == 5) { // Fish
-    hue = 0.8;
+    hue = 0.2;
     lightness += 0.4;
+    hue += data.g * 0.9;
+
   } else if (type == 8) { // Bacteria
     hue = 0.66;
     saturation += 0.2;
