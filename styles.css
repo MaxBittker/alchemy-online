@@ -58,6 +58,7 @@ body {
 }
 * {
   cursor: url("assets/default32x32.cur"), auto !important;
+  /* cursor: url("assets/SKELETON_04.gif"), auto !important; */
 }
 
 body,

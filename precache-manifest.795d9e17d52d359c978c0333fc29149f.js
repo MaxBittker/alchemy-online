@@ -4,12 +4,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/1.149aa0ccb0f6e30a7acd.js"
   },
   {
-    "revision": "c5a868c4c0189225ce70",
-    "url": "/tile-toy/2.aafe3281277ea33f837e.js"
+    "revision": "7a13782744b09ee5f782",
+    "url": "/tile-toy/2.d640676a05bbfb9d0c94.js"
   },
   {
-    "revision": "c5a868c4c0189225ce70",
-    "url": "/tile-toy/4343f8738c826e1f2bc0.module.wasm"
+    "revision": "7a13782744b09ee5f782",
+    "url": "/tile-toy/98ccb36dc83cec27132b.module.wasm"
+  },
+  {
+    "revision": "bab5fb76ce68c6d64ba19e8c8dec6359",
+    "url": "/tile-toy/assets/SKELETON_03.gif"
+  },
+  {
+    "revision": "cf8fe38a270dd25036d95426a1b088fd",
+    "url": "/tile-toy/assets/SKELETON_04.gif"
   },
   {
     "revision": "649e93009ab2d586712243cf1712ecce",
@@ -64,19 +72,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/gif.worker.js"
   },
   {
-    "revision": "ab8c25e5146a49de7ccaa5c0cec2672f",
+    "revision": "5d4856f734f79851f682f208eb1681f6",
     "url": "/tile-toy/index.html"
   },
   {
-    "revision": "c6f2cfab2a8ba90d3ec7",
-    "url": "/tile-toy/main.e358054d24ab8fba51bd.js"
+    "revision": "38f1b7d927566bdcc087",
+    "url": "/tile-toy/main.31e8ea9eb69f68bef44c.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
     "url": "/tile-toy/manifest.json"
   },
   {
-    "revision": "60e979af4e9b5f7d5e49fe3b98c4cd6e",
+    "revision": "654a25135782cd87c7c38f4b0443428d",
     "url": "/tile-toy/styles.css"
   }
 ]);
