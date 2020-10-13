@@ -292,6 +292,7 @@ button:not(:disabled):active {
 }
 .mat-box {
   fill: rgba(255, 255, 255, 0.9);
+  transition: fill 0.25s;
 }
 
 .mat-box:hover {
@@ -299,11 +300,11 @@ button:not(:disabled):active {
   stroke-width: 4px;
 }
 .disabled rect {
-  fill: #c0c0c0 !important;
+  /* fill: #c0c0c0 !important; */
   /* opacity: 0.8; */
 }
 .disabled rect:hover {
-  fill: #c0c0c0 !important;
+  /* fill: #c0c0c0 !important; */
 }
 
 svg {
@@ -338,7 +339,7 @@ img {
   filter: drop-shadow(1px 1px 1px #500);
 }
 
-g.disabled {
+g.clause.disabled {
   opacity: 0.5;
   filter: brightness(0.7);
 }

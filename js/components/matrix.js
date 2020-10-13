@@ -91,7 +91,9 @@ class Matrix extends React.Component {
     let { grid, options, selectedElement } = this.props;
 
     let myCell = grid[grid_index(x, y)];
-
+    if (isCenter) {
+      myCell = selectedElement;
+    }
     let { symbol } = options.find(m => m.key == myCell);
     let incSlot = i => {
       if (isCenter) return;
@@ -106,6 +108,8 @@ class Matrix extends React.Component {
       let { setGrid } = this.props;
       setGrid(grid);
     };
+    let size = isCenter ? "42" : 46;
+    let inset = isCenter ? 4 : 2;
     return (
       <g
         filter="url(#filter1)"
@@ -119,10 +123,10 @@ class Matrix extends React.Component {
         onClick={() => incSlot(1, isCenter)}
       >
         <rect
-          x={0}
-          y={0}
-          width="50"
-          height="50"
+          x={inset}
+          y={inset}
+          width={size}
+          height={size}
           className="mat-box"
           style={{
             fill: symbol == " " ? "#b0b0b055" : window.pallette[myCell],

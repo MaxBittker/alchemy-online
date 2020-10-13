@@ -88,24 +88,24 @@ class Editor extends React.Component {
       <div className="MatrixMenu">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="-10 0 410 200"
+          viewBox="-10 10 410 180"
           width="100%"
         >
           <circle
-            cx={12}
-            cy={94}
-            r="16"
+            cx={9}
+            cy={95}
+            r="20"
             className="mat-circle"
             style={{
               strokeWidth: 1,
-              fill: "rgba(255,255,255,0.5)"
+              fill: "rgba(255,255,255,0.2)"
             }}
           ></circle>
 
           <text
-            x="12"
-            y="98"
-            style={{ fontSize: "30px" }}
+            x="9"
+            y="99"
+            style={{ fontSize: "35px" }}
             onContextMenu={e => {
               e.preventDefault();
               this.incSymmetry(-1);
@@ -115,7 +115,7 @@ class Editor extends React.Component {
             {SymmetryOptions[symmetry].symbol}
           </text>
 
-          <g className={classNames({ disabled: symmetry == 0 })}>
+          <g className={classNames({ disabled: symmetry == 0 }, "clause")}>
             <g transform="translate(20,0)">
               {selector && (
                 <Matrix
