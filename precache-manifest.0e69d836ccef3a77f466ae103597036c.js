@@ -4,12 +4,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/1.8ca4bb71be56e26267fd.js"
   },
   {
-    "revision": "8d24f479e15132780500",
-    "url": "/tile-toy/2.a44711ee9104a93c2049.js"
+    "revision": "9afe8c71a00050db4b92",
+    "url": "/tile-toy/2.f05611eea97a0518aec5.js"
   },
   {
-    "revision": "8d24f479e15132780500",
-    "url": "/tile-toy/873e87ffcd55e60c45a1.module.wasm"
+    "revision": "9afe8c71a00050db4b92",
+    "url": "/tile-toy/31e301d068a4fdb45598.module.wasm"
   },
   {
     "revision": "1564826234a9ade36f502c02b181c0ed",
@@ -112,12 +112,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/gif.worker.js"
   },
   {
-    "revision": "3e8e342261415e87fb536a391cdef260",
+    "revision": "1a5f7668c8aed18ad1cf2f9f6b41d106",
     "url": "/tile-toy/index.html"
   },
   {
-    "revision": "392304b30aaef364030c",
-    "url": "/tile-toy/main.692cb5f5176db2ce5b73.js"
+    "revision": "20eb2ddd040500253e53",
+    "url": "/tile-toy/main.3dc8e7cd3030cb974eff.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
