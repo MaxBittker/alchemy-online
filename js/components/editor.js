@@ -3,6 +3,14 @@ import classNames from "classnames";
 import { Clause, Selector, Effector } from "../../crate/pkg";
 import { Matrix, SymmetryOptions, SlotOptions } from "./matrix";
 
+let probabilityMap = [
+  { p: 1, symbol: "⚀" },
+  { p: 2, symbol: "⚁" },
+  { p: 3, symbol: "⚂" },
+  { p: 4, symbol: "⚃" },
+  { p: 5, symbol: "⚄" },
+  { p: 6, symbol: "⚅" }
+];
 class Editor extends React.Component {
   constructor(props) {
     super(props);
@@ -24,11 +32,12 @@ class Editor extends React.Component {
       new Uint8Array(memory.buffer, clause.effector.grid(), 9)
     );
     const symmetry = clause.symmetry();
-
+    const probability = clause.probability();
     return {
       selector,
       effector,
-      symmetry
+      symmetry,
+      probability: probabilityMap.find(v => v.p == probability)
     };
   }
   static getDerivedStateFromProps(props, state) {
@@ -47,12 +56,14 @@ class Editor extends React.Component {
     let {
       selector: j_selector,
       effector: j_effector,
-      symmetry: j_symmetry
+      symmetry: j_symmetry,
+      probability
     } = clause;
 
     let selector = new Selector(...j_selector);
     let effector = new Effector(...j_effector);
     let r_clause = new Clause(
+      probability.p,
       SymmetryOptions[j_symmetry].key,
       selector,
       effector
@@ -78,22 +89,40 @@ class Editor extends React.Component {
       this.setRule
     );
   }
+
+  incProbability(i) {
+    let { clause } = this.state;
+    let { probability } = clause;
+
+    let pIndex = probabilityMap.indexOf(probability);
+    pIndex = (probabilityMap.length + pIndex + i) % probabilityMap.length;
+    console.log(probabilityMap[pIndex]);
+    clause.probability = probabilityMap[pIndex];
+
+    this.setState(
+      {
+        clause
+      },
+      this.setRule
+    );
+  }
+
   render() {
     let { selectedElement } = this.props;
     let { clause } = this.state;
     // console.log(clause);
-    let { selector, effector, symmetry } = clause;
-
+    let { selector, effector, symmetry, probability } = clause;
+    console.log(symmetry);
     return (
       <div className="MatrixMenu">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="-10 10 410 180"
+          viewBox="-12 10 410 180"
           width="100%"
         >
           <circle
-            cx={9}
-            cy={95}
+            cx={8}
+            cy={68}
             r="20"
             className="mat-circle"
             style={{
@@ -103,8 +132,8 @@ class Editor extends React.Component {
           ></circle>
 
           <text
-            x="9"
-            y="99"
+            x="8"
+            y="72"
             style={{ fontSize: "35px" }}
             onContextMenu={e => {
               e.preventDefault();
@@ -113,6 +142,30 @@ class Editor extends React.Component {
             onClick={() => this.incSymmetry(1)}
           >
             {SymmetryOptions[symmetry].symbol}
+          </text>
+
+          <circle
+            cx={8}
+            cy={125}
+            r="20"
+            className="mat-circle"
+            style={{
+              strokeWidth: 1,
+              fill: "rgba(255,255,255,0.2)"
+            }}
+          ></circle>
+
+          <text
+            x="8"
+            y="129"
+            style={{ fontSize: "35px" }}
+            onContextMenu={e => {
+              e.preventDefault();
+              this.incProbability(-1);
+            }}
+            onClick={() => this.incProbability(1)}
+          >
+            {probability.symbol}
           </text>
 
           <g className={classNames({ disabled: symmetry == 0 }, "clause")}>
@@ -135,11 +188,6 @@ class Editor extends React.Component {
               )}
             </g>
             <g transform="translate(204,80)">
-              {/* <polygon
-                fill="white"
-                stroke="black"
-                points="15,0, 25,15 15,30, 15,20, 8,20, 8,10, 15,10 "
-              /> */}
               <image href="assets/gold_arrow.png" height="25" width="20" />
             </g>
             <g transform="translate(215,0)">
