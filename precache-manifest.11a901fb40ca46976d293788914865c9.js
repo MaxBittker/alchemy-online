@@ -24,6 +24,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/assets/DejaVuSans.ttf"
   },
   {
+    "revision": "81988ae76409f14399fb907257c011f6",
+    "url": "/tile-toy/assets/NotoSansSymbols.subset.ttf"
+  },
+  {
     "revision": "bab5fb76ce68c6d64ba19e8c8dec6359",
     "url": "/tile-toy/assets/SKELETON_03.gif"
   },
@@ -120,7 +124,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/manifest.json"
   },
   {
-    "revision": "00a108fa09d305df6d3956ca67e7f6f3",
+    "revision": "48c374cd152e3fa99825b6dfb667bd0b",
     "url": "/tile-toy/styles.css"
   }
 ]);
