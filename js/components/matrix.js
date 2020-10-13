@@ -24,10 +24,6 @@ let ruleSymbols = {
 
 let SymmetryOptions = [
   {
-    key: SymmetryMode.Disabled,
-    symbol: "×"
-  },
-  {
     key: SymmetryMode.None,
     symbol: "ⵔ"
   },

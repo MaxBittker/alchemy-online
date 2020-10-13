@@ -4,6 +4,7 @@ import { Clause, Selector, Effector } from "../../crate/pkg";
 import { Matrix, SymmetryOptions, SlotOptions } from "./matrix";
 
 let probabilityMap = [
+  { p: 0, symbol: "×" },
   { p: 1, symbol: "⚀" },
   { p: 2, symbol: "⚁" },
   { p: 3, symbol: "⚂" },
@@ -168,7 +169,7 @@ class Editor extends React.Component {
             {probability.symbol}
           </text>
 
-          <g className={classNames({ disabled: symmetry == 0 }, "clause")}>
+          <g className={classNames({ disabled: probability.p == 0 }, "clause")}>
             <g transform="translate(20,0)">
               {selector && (
                 <Matrix
@@ -177,7 +178,7 @@ class Editor extends React.Component {
                   grid={selector}
                   isSelector
                   setGrid={newGrid => {
-                    if (symmetry == 0) {
+                    if (probability.p == 0) {
                       return;
                     }
                     let { clause } = this.state;
@@ -197,7 +198,7 @@ class Editor extends React.Component {
                   options={SlotOptions}
                   grid={effector}
                   setGrid={newGrid => {
-                    if (symmetry == 0) {
+                    if (probability.p == 0) {
                       return;
                     }
                     let { clause } = this.state;

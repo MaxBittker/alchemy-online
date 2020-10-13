@@ -26,11 +26,10 @@ pub enum Species {
 #[repr(u8)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SymmetryMode {
-    Disabled = 0,
-    None = 1,
-    Horizontal = 2,
-    Vertical = 3,
-    Quad = 4,
+    None = 0,
+    Horizontal = 1,
+    Vertical = 2,
+    Quad = 3,
 }
 
 #[wasm_bindgen]
@@ -83,8 +82,8 @@ impl Clause {
     }
     pub fn new_null() -> Clause {
         Clause {
-            probability: 1,
-            symmetry: SymmetryMode::Disabled,
+            probability: 0,
+            symmetry: SymmetryMode::None,
             selector: Selector {
                 grid: [
                     Species::Wild,
@@ -604,11 +603,10 @@ pub fn execute_clause_orientation(
 }
 
 pub fn execute_clause(cell: Cell, api: SandApi, clause: Clause) -> (bool, SandApi) {
-    if rand_int(2i32.pow((clause.probability) as u32)) > 1 {
+    if clause.probability == 0 || rand_int(2i32.pow((clause.probability) as u32)) > 1 {
         return (false, api);
     }
     match clause.symmetry {
-        SymmetryMode::Disabled => return (false, api),
         SymmetryMode::None => {
             return execute_clause_orientation(cell, api, clause, 1, 1, 0);
         }
