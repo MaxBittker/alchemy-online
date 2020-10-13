@@ -22,6 +22,16 @@
   border-radius: 30px;
   background: url("assets/ultima_tile.png");
 }
+
+@font-face {
+  font-family: "DejaVuSans";
+  src: url("assets/DejaVuSans.ttf") format("embedded-opentype"),
+    /* Internet Explorer */ url("assets/DejaVuSans.ttf") format("woff2"),
+    /* Super Modern Browsers */ url("assets/DejaVuSans.ttf") format("woff"),
+    /* Pretty Modern Browsers */ url("assets/DejaVuSans.ttf") format("truetype"),
+    /* Safari, Android, iOS */ url("assets/DejaVuSans.ttf") format("svg"); /* Legacy iOS */
+}
+
 /* @font-face {
   font-family: "pixelmixregular";
   src: url("assets/pixelmix-webfont.woff2") format("woff2"),
@@ -39,7 +49,8 @@
 
 * {
   margin: 0;
-  font-family: "Bitter", serif;
+  font-family: "Bitter", DejaVuSans, serif;
+
   /* font-family: "pixelmixregular", monospace; */
   /* font-family: "times16" !important; */
   font-smooth: never;
@@ -328,5 +339,5 @@ g.disabled {
   filter: brightness(0.7);
 }
 text {
-  filter: drop-shadow(1px 1px 3px red);
+  /* filter: drop-shadow(1px 1px 3px red); */
 }

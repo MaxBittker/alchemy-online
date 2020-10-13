@@ -20,6 +20,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/assets/Classic_client_options_menu.jpg"
   },
   {
+    "revision": "be189a7e2711cdf2a7f6275c60cbc7e2",
+    "url": "/tile-toy/assets/DejaVuSans.ttf"
+  },
+  {
     "revision": "bab5fb76ce68c6d64ba19e8c8dec6359",
     "url": "/tile-toy/assets/SKELETON_03.gif"
   },
@@ -116,7 +120,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/manifest.json"
   },
   {
-    "revision": "ce0d21955eef59fdf150af485de0895d",
+    "revision": "00a108fa09d305df6d3956ca67e7f6f3",
     "url": "/tile-toy/styles.css"
   }
 ]);
