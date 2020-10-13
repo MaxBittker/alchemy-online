@@ -24,12 +24,16 @@
 }
 
 @font-face {
-  font-family: "DejaVuSans";
-  src: url("assets/DejaVuSans.ttf") format("embedded-opentype"),
-    /* Internet Explorer */ url("assets/DejaVuSans.ttf") format("woff2"),
-    /* Super Modern Browsers */ url("assets/DejaVuSans.ttf") format("woff"),
-    /* Pretty Modern Browsers */ url("assets/DejaVuSans.ttf") format("truetype"),
-    /* Safari, Android, iOS */ url("assets/DejaVuSans.ttf") format("svg"); /* Legacy iOS */
+  font-family: "NotoSansSymbols";
+  src: url("assets/NotoSansSymbols.subset.ttf") format("embedded-opentype"),
+    /* Internet Explorer */ url("assets/NotoSansSymbols.subset.ttf")
+      format("woff2"),
+    /* Super Modern Browsers */ url("assets/NotoSansSymbols.subset.ttf")
+      format("woff"),
+    /* Pretty Modern Browsers */ url("assets/NotoSansSymbols.subset.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("assets/NotoSansSymbols.subset.ttf")
+      format("svg"); /* Legacy iOS */
 }
 
 /* @font-face {
@@ -49,7 +53,7 @@
 
 * {
   margin: 0;
-  font-family: "Bitter", DejaVuSans, serif;
+  font-family: "Bitter", NotoSansSymbols, serif;
 
   /* font-family: "pixelmixregular", monospace; */
   /* font-family: "times16" !important; */
