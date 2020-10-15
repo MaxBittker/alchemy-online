@@ -203,7 +203,7 @@ let pallette = () => {
   universe.reset();
 
   species.forEach(id => universe.paint(id, 0, 2, id));
-  universe.paint(species.Empty, 0, 2, species.Empty);
+  universe.paint(Species.Empty, 0, 2, Species.Empty);
   let render = startWebGL({ universe, canvas, isSnapshot: true }).draw;
   render();
   let ctx = canvas.getContext("webgl");
