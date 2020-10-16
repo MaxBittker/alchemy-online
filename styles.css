@@ -320,12 +320,12 @@ button.selected {
 .title-bar {
   background-color: #803f41 !important;
   background: none;
-  zoom: 2;
+  zoom: 1.8;
   padding: 1px;
 }
 .title-bar .title-bar-text {
   line-height: 0;
-  /* font-size: 18px !important; */
+  font-size: 14px !important;
   margin-right: 10px;
 }
 
