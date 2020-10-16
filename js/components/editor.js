@@ -121,30 +121,33 @@ class Editor extends React.Component {
           viewBox="-12 10 410 180"
           width="100%"
         >
-          <circle
-            cx={8}
-            cy={68}
-            r="20"
-            className="mat-circle"
-            style={{
-              strokeWidth: 1,
-              fill: "rgba(255,255,255,0.2)"
-            }}
-          ></circle>
-
-          <text
-            x="8"
-            y="72"
-            style={{ fontSize: "35px" }}
-            onContextMenu={e => {
-              e.preventDefault();
-              this.incSymmetry(-1);
-            }}
-            onClick={() => this.incSymmetry(1)}
+          <g
+            className={classNames({ disabled: probability.p == 0 }, "symmetry")}
           >
-            {SymmetryOptions[symmetry].symbol}
-          </text>
+            <circle
+              cx={8}
+              cy={68}
+              r="20"
+              className="mat-circle"
+              style={{
+                strokeWidth: 1,
+                fill: "rgba(255,255,255,0.2)"
+              }}
+            ></circle>
 
+            <text
+              x="8"
+              y="72"
+              style={{ fontSize: "35px" }}
+              onContextMenu={e => {
+                e.preventDefault();
+                this.incSymmetry(-1);
+              }}
+              onClick={() => this.incSymmetry(1)}
+            >
+              {SymmetryOptions[symmetry].symbol}
+            </text>
+          </g>
           <circle
             cx={8}
             cy={125}

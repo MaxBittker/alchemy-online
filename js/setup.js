@@ -5,7 +5,7 @@
 //   };
 // }
 
-let background = document.getElementById("background");
+// let background = document.getElementById("background");
 let fadeTimout = 1000 * 30;
 let timeout = window.setTimeout(() => {
   if (window.UI.state.tutorialProgress > 3) {
@@ -25,13 +25,13 @@ let handleActivity = e => {
 document.body.addEventListener("mousemove", handleActivity);
 document.body.addEventListener("touchstart", handleActivity);
 
-background.addEventListener("touchmove", e => {
-  if (!window.paused) {
-    if (e.cancelable) {
-      e.preventDefault();
-    }
-  }
-});
+// background.addEventListener("touchmove", e => {
+//   if (!window.paused) {
+//     if (e.cancelable) {
+//       e.preventDefault();
+//     }
+//   }
+// });
 
 // if ("serviceWorker" in navigator) {
 //   window.addEventListener("load", () => {

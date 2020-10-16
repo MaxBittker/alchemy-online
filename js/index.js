@@ -7,8 +7,10 @@ import {} from "./setup";
 import { startApp } from "./app";
 
 let ratio = 8;
-let width = window.innerWidth / ratio;
-let height = window.innerHeight / ratio;
+let width = 120;
+// window.innerWidth / ratio;
+let height = 120;
+// window.innerHeight / ratio;
 //todo scale ratio according to size;
 
 let n = Math.min(width, height);
@@ -42,31 +44,31 @@ let resize = () => {
   let HUDheight = 50;
   let screen_height = window.innerHeight - HUDheight;
 
-  // let canvasStyle = "";
+  let canvasStyle = "";
   let HUDStyle = "";
 
   if (screen_width - 150 > screen_height) {
     // if (screen_width - window.innerHeight < 400) {
     // landscape compressed
-    // canvasStyle = `height: ${window.innerHeight}px; margin:10px`;
-    // canvasSize = window.innerHeight;
+    let border = 40 * 2;
+    canvasStyle = `height: ${window.innerHeight - border}px; margin:10px`;
+    canvasSize = window.innerHeight - border;
     let hudWidth = screen_width - window.innerHeight - 32;
 
     HUDStyle = `width: ${hudWidth}px; margin: 10px;`;
-    // } else {
-    //   // landscape wide
-    //   canvasStyle = `height: ${window.innerHeight}px`;
-    //   canvasSize = window.innerHeight;
-    //   let hudWidth = (screen_width - window.innerHeight) / 2 - 7;
-    //   HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
-    // }
   } else {
-    //portrait (mobile)
-    // canvasSize = screen_width;
-    // canvasStyle = `width: ${screen_width}px; `;
+    // landscape wide
+    canvasStyle = `height: ${window.innerHeight}px`;
+    canvasSize = window.innerHeight - border;
+    let hudWidth = (screen_width - window.innerHeight) / 2 - 7;
+    HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
   }
+  //  else {
+  //portrait (mobile)
+  // canvasSize = screen_width;
+  // canvasStyle = `width: ${screen_width}px; `;
   HUD.style = HUDStyle;
-  // canvas.style = canvasStyle;
+  canvas.style = canvasStyle;
 };
 
 resize();

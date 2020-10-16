@@ -117,6 +117,15 @@ class Matrix extends React.Component {
           incSlot(-1, isCenter);
         }}
         onClick={() => incSlot(1, isCenter)}
+        onDrop={e => {
+          if (isCenter) return;
+
+          var element = e.dataTransfer.getData("text");
+          grid[grid_index(x, y)] = parseInt(element, 10);
+          let { setGrid } = this.props;
+          setGrid(grid);
+        }}
+        onDragOver={e => e.preventDefault()}
       >
         <rect
           x={inset}

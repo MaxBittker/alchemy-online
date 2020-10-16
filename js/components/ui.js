@@ -45,6 +45,11 @@ const ElementButton = (name, selectedElement, setElement) => {
     <button
       className={selected ? `selected ${name}` : name}
       key={name}
+      draggable
+      onDragStart={e => {
+        // e.currentTarget.style.boxShadow = "none";
+        e.dataTransfer.setData("text/plain", elementID);
+      }}
       onClick={() => {
         setElement(elementID);
       }}
@@ -217,10 +222,11 @@ class Index extends React.Component {
     );
 
     return (
-      <div className="window fade ultima" id="HUD">
-        {/* <div className="title-bar"> */}
-        {/* <div className="title-bar-text">Tile Toy</div> */}
-        {/* <div className="title-bar-controls">
+      <div className="window fade " id="HUD">
+        <div className="title-bar">
+          {" "}
+          <div className="title-bar-text">Alchemi Online</div>
+          <div className="title-bar-controls">
             <button
               aria-label="Minimize"
               onClick={() => {
@@ -235,7 +241,7 @@ class Index extends React.Component {
               }}
             ></button>
           </div>
-        </div> */}
+        </div>
         <div className="window-body hud-body">
           <div id="hud-buttons">
             {/* <OrganicButton
