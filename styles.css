@@ -22,18 +22,31 @@
   border-radius: 30px;
   background: url("assets/ultima_tile.png");
 }
+/* 
+@font-face {
+  font-family: "Alkhemikal";
+  src: url("assets/Alkhemikal.ttf") format("embedded-opentype"),
+    url("assets/Alkhemikal.ttf") format("woff2"),
+    url("assets/Alkhemikal.ttf") format("woff"),
+    url("assets/Alkhemikal.ttf") format("truetype"),
+    url("assets/Alkhemikal.ttf") format("svg");
+} */
+@font-face {
+  font-family: "OfenbacherSchwabCAT";
+  src: url("assets/OfenbacherSchwabCAT.ttf") format("embedded-opentype"),
+    url("assets/OfenbacherSchwabCAT.ttf") format("woff2"),
+    url("assets/OfenbacherSchwabCAT.ttf") format("woff"),
+    url("assets/OfenbacherSchwabCAT.ttf") format("truetype"),
+    url("assets/OfenbacherSchwabCAT.ttf") format("svg");
+}
 
 @font-face {
   font-family: "NotoSansSymbols";
   src: url("assets/NotoSansSymbols.subset.ttf") format("embedded-opentype"),
-    /* Internet Explorer */ url("assets/NotoSansSymbols.subset.ttf")
-      format("woff2"),
-    /* Super Modern Browsers */ url("assets/NotoSansSymbols.subset.ttf")
-      format("woff"),
-    /* Pretty Modern Browsers */ url("assets/NotoSansSymbols.subset.ttf")
-      format("truetype"),
-    /* Safari, Android, iOS */ url("assets/NotoSansSymbols.subset.ttf")
-      format("svg"); /* Legacy iOS */
+    url("assets/NotoSansSymbols.subset.ttf") format("woff2"),
+    url("assets/NotoSansSymbols.subset.ttf") format("woff"),
+    url("assets/NotoSansSymbols.subset.ttf") format("truetype"),
+    url("assets/NotoSansSymbols.subset.ttf") format("svg");
 }
 
 /* @font-face {
@@ -53,7 +66,7 @@
 
 * {
   margin: 0;
-  font-family: "Bitter", NotoSansSymbols, serif;
+  font-family: "OfenbacherSchwabCAT", NotoSansSymbols, serif;
 
   /* font-family: "pixelmixregular", monospace; */
   /* font-family: "times16" !important; */
@@ -61,7 +74,9 @@
   -webkit-font-smoothing: none;
   color: var(--main-dark-color);
 }
-
+svg {
+  font-family: NotoSansSymbols, serif;
+}
 html,
 body {
   overscroll-behavior-x: none;
@@ -76,24 +91,36 @@ body {
   /* cursor: url("assets/SKELETON_04.gif"), auto !important; */
 }
 
-body,
-#background {
+body {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
   width: 100%;
-  /* font-size: 30px; */
+  font-size: 30px;
   height: 100%;
-  /* background-color: rgba(00, 00, 00, 0.2); */
-  /* background-color: cornsilk; */
-  background-color: black;
-  background-image: linear-gradient(45deg, #333 25%, transparent 25%),
-    linear-gradient(-45deg, #333 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #333 75%),
-    linear-gradient(-45deg, transparent 75%, #333 75%);
+
   background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-  background: url("assets/ultima_tile.png");
+  /* background: url("http://1-background.com/images/vellum/vellum-old-vellum-background1.jpg"); */
+  /* background: url("assets/ultima_tile.png"); */
+  /* 
+  border-image-source: url("https://www.webomator.com/grafx2/blog/IEEE_forge.jpg");
+  border-image-slice: 32;
+  border-image-width: 28px;
+  border-image-repeat: repeat;
+  border-width: 28px;
+  border-style: solid;
+  box-sizing: border-box;
+  border-color: transparent;
+  border-radius: 30px; */
+  /* background: url("assets/ultima_tile.png"); */
+  background: url("https://www.webomator.com/grafx2/blog/IEEE_forge.jpg");
+  background: url("https://orderinchoas.files.wordpress.com/2013/05/366728330_8f15645d0d_m.jpg");
+  background-repeat: repeat;
+  background-size: 150px;
+  backdrop-filter: sepia(100%) contrast(0.9) hue-rotate(-20deg) brightness(0.15);
 }
 
 #scene {
@@ -110,7 +137,8 @@ canvas {
   bottom: 0;
   right: 0px;
   left: 0px;
-  width: 100%;
+  margin: 20px;
+  /* width: 100%; */
   height: 100vh;
   z-index: 1;
   /* max-width: calc(100%); */
@@ -143,7 +171,7 @@ img {
 
 button {
   z-index: 3;
-  zoom: 1.25;
+  /* zoom: 1.25; */
   position: relative;
   /* padding: 5px 5px; */
   /* flex-grow: 1; */
@@ -156,6 +184,8 @@ button {
   border-color: white;
   dominant-baseline: middle;
   text-anchor: middle;
+  background-color: #af8e82;
+  border: none;
 }
 .active button {
   background-color: gainsboro;
@@ -170,8 +200,8 @@ button:focus {
 }
 
 button.selected {
-  /* box-shadow: var(--border-sunken-outer), var(--border-sunken-inner); */
-  border-style: inset;
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  /* border-style: inset; */
 }
 
 #HUD {
@@ -191,7 +221,7 @@ button.selected {
 }
 @media only screen and (max-width: 600px) {
   .hud-body {
-    zoom: 1;
+    /* zoom: 1; */
   }
 }
 #hud-buttons {
@@ -202,6 +232,7 @@ button.selected {
   margin: 2px;
   height: 30px;
   width: 30px;
+  min-width: 30px;
   font-size: 18px;
   line-height: 25px;
   padding: 0;
@@ -238,7 +269,7 @@ button.selected {
   text-align: right;
   display: inline-block;
   white-space: pre;
-  /* font-family: monospace; */
+  font-family: monospace;
   user-select: none;
 }
 
@@ -282,9 +313,20 @@ button.selected {
   top: 5px;
   line-height: 0px;
 }
-
+.window {
+  background-color: #af8e82;
+  /* background: url("assets/ultima_tile.png"); */
+}
+.title-bar {
+  background-color: #803f41 !important;
+  background: none;
+  zoom: 2;
+  padding: 1px;
+}
 .title-bar .title-bar-text {
-  font-size: 12px !important;
+  line-height: 0;
+  /* font-size: 18px !important; */
+  margin-right: 10px;
 }
 
 button:not(:disabled):active {
@@ -293,6 +335,7 @@ button:not(:disabled):active {
 .mat-box {
   fill: rgba(255, 255, 255, 0.9);
   transition: fill 0.25s;
+  background: url("assets/ultima_tile.png");
 }
 
 .mat-box:hover {
@@ -320,13 +363,11 @@ svg {
 svg text {
   dominant-baseline: middle;
   text-anchor: middle;
+  stroke-width: 0 !important;
 }
 .MatrixMenu svg {
   stroke: #5a5a5a;
   /* opacity: 0.8; */
-}
-svg text {
-  stroke-width: 0 !important;
 }
 .tch {
   position: absolute;
@@ -342,6 +383,9 @@ img {
 g.clause.disabled {
   opacity: 0.5;
   filter: brightness(0.7);
+}
+.symmetry.disabled > text {
+  opacity: 0.2;
 }
 text {
   /* filter: drop-shadow(1px 1px 3px red); */

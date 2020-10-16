@@ -4,12 +4,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/1.8ca4bb71be56e26267fd.js"
   },
   {
-    "revision": "b932d58de942aa8b2e54",
-    "url": "/tile-toy/2.8ce9359d09d5ee94f1b9.js"
+    "revision": "6e34c0bcd7fcf5527f90",
+    "url": "/tile-toy/2.e3f5c5f4b7fe67afc98e.js"
   },
   {
     "revision": "1564826234a9ade36f502c02b181c0ed",
     "url": "/tile-toy/assets/3fK3Qsd.png"
+  },
+  {
+    "revision": "75a88f715cc1b20833a22af060fff0ac",
+    "url": "/tile-toy/assets/Alkhemikal.ttf"
   },
   {
     "revision": "965c5c6b30fcf9ff93cebcfa778d9bb2",
@@ -22,6 +26,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "81988ae76409f14399fb907257c011f6",
     "url": "/tile-toy/assets/NotoSansSymbols.subset.ttf"
+  },
+  {
+    "revision": "027e26690961948e333f36b23b2fde9f",
+    "url": "/tile-toy/assets/OfenbacherSchwabCAT.ttf"
   },
   {
     "revision": "bab5fb76ce68c6d64ba19e8c8dec6359",
@@ -104,7 +112,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/assets/ultima_tile.png"
   },
   {
-    "revision": "b932d58de942aa8b2e54",
+    "revision": "6e34c0bcd7fcf5527f90",
     "url": "/tile-toy/b4a32eaba0683d79e324.module.wasm"
   },
   {
@@ -112,19 +120,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/gif.worker.js"
   },
   {
-    "revision": "77a21b72ce17a21a0508cf8ef054d2fd",
+    "revision": "e5e26aa45ea9cdf80c98a96916909ebd",
     "url": "/tile-toy/index.html"
   },
   {
-    "revision": "c0a4b13049863b7418cd",
-    "url": "/tile-toy/main.a49852ab6ef07f075ca0.js"
+    "revision": "82228667fa4ca93d3976",
+    "url": "/tile-toy/main.ba7c4346a000399fe289.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
     "url": "/tile-toy/manifest.json"
   },
   {
-    "revision": "7ba687d2f6b19f3d6b9fbdf9b5ef0aa3",
+    "revision": "62f571f9b647376a3602b631a40b70dd",
     "url": "/tile-toy/styles.css"
   }
 ]);
