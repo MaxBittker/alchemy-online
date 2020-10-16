@@ -247,7 +247,37 @@ pub fn build_rule() -> [Rule; 6] {
                         ],
                     },
                 },
-                Clause::new_null(),
+                Clause {
+                    probability: 2,
+
+                    symmetry: SymmetryMode::Horizontal,
+                    selector: Selector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule4,
+                        ],
+                    },
+                    effector: Effector {
+                        grid: [
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule4,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Rule2,
+                        ],
+                    },
+                },
             ],
         },
         Rule {
@@ -507,15 +537,45 @@ pub fn build_rule() -> [Rule; 6] {
             clauses: [
                 Clause {
                     probability: 1,
-                    symmetry: SymmetryMode::Horizontal,
+                    symmetry: SymmetryMode::Quad,
+                    selector: Selector {
+                        grid: [
+                            Species::Empty,
+                            Species::Empty,
+                            Species::Empty,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                            Species::Empty,
+                            Species::Wild,
+                            Species::Empty,
+                        ],
+                    },
+                    effector: Effector {
+                        grid: [
+                            Species::Rule6,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
+                            Species::Wild,
+                            Species::Rule6,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Wild,
+                        ],
+                    },
+                },
+                Clause {
+                    probability: 5,
+                    symmetry: SymmetryMode::None,
                     selector: Selector {
                         grid: [
                             Species::Wild,
                             Species::Wild,
-                            Species::Empty,
                             Species::Wild,
                             Species::Wild,
-                            Species::Empty,
+                            Species::Wild,
+                            Species::Wild,
                             Species::Wild,
                             Species::Wild,
                             Species::Wild,
@@ -524,10 +584,10 @@ pub fn build_rule() -> [Rule; 6] {
                     effector: Effector {
                         grid: [
                             Species::Wild,
-                            Species::Rule6,
-                            Species::Rule6,
                             Species::Wild,
-                            Species::Rule6,
+                            Species::Wild,
+                            Species::Wild,
+                            Species::Empty,
                             Species::Wild,
                             Species::Wild,
                             Species::Wild,
@@ -535,7 +595,6 @@ pub fn build_rule() -> [Rule; 6] {
                         ],
                     },
                 },
-                Clause::new_null(),
                 Clause::new_null(),
             ],
         },
