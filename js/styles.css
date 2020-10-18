@@ -186,6 +186,7 @@ button {
   text-anchor: middle;
   background-color: #af8e82;
   border: none;
+  font-family: NotoSansSymbols, serif;
 }
 .active button {
   background-color: gainsboro;
