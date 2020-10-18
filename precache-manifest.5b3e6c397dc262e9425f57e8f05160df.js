@@ -1,138 +1,138 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a5a92006db4d5d705abd",
-    "url": "/tile-toy/1.8ca4bb71be56e26267fd.js"
+    "url": "/alchemy-online/1.8ca4bb71be56e26267fd.js"
   },
   {
     "revision": "d0aefa7ea57391fb9b7d",
-    "url": "/tile-toy/2.eb0ad57081adb2ee2295.js"
+    "url": "/alchemy-online/2.eb0ad57081adb2ee2295.js"
   },
   {
     "revision": "1564826234a9ade36f502c02b181c0ed",
-    "url": "/tile-toy/assets/3fK3Qsd.png"
+    "url": "/alchemy-online/assets/3fK3Qsd.png"
   },
   {
     "revision": "75a88f715cc1b20833a22af060fff0ac",
-    "url": "/tile-toy/assets/Alkhemikal.ttf"
+    "url": "/alchemy-online/assets/Alkhemikal.ttf"
   },
   {
     "revision": "965c5c6b30fcf9ff93cebcfa778d9bb2",
-    "url": "/tile-toy/assets/Classic_client_options_menu.jpg"
+    "url": "/alchemy-online/assets/Classic_client_options_menu.jpg"
   },
   {
     "revision": "be189a7e2711cdf2a7f6275c60cbc7e2",
-    "url": "/tile-toy/assets/DejaVuSans.ttf"
+    "url": "/alchemy-online/assets/DejaVuSans.ttf"
   },
   {
     "revision": "81988ae76409f14399fb907257c011f6",
-    "url": "/tile-toy/assets/NotoSansSymbols.subset.ttf"
+    "url": "/alchemy-online/assets/NotoSansSymbols.subset.ttf"
   },
   {
     "revision": "027e26690961948e333f36b23b2fde9f",
-    "url": "/tile-toy/assets/OfenbacherSchwabCAT.ttf"
+    "url": "/alchemy-online/assets/OfenbacherSchwabCAT.ttf"
   },
   {
     "revision": "bab5fb76ce68c6d64ba19e8c8dec6359",
-    "url": "/tile-toy/assets/SKELETON_03.gif"
+    "url": "/alchemy-online/assets/SKELETON_03.gif"
   },
   {
     "revision": "cf8fe38a270dd25036d95426a1b088fd",
-    "url": "/tile-toy/assets/SKELETON_04.gif"
+    "url": "/alchemy-online/assets/SKELETON_04.gif"
   },
   {
     "revision": "649e93009ab2d586712243cf1712ecce",
-    "url": "/tile-toy/assets/White_sword.cur"
+    "url": "/alchemy-online/assets/White_sword.cur"
   },
   {
     "revision": "f918910876feb69f502586121a5bbaf7",
-    "url": "/tile-toy/assets/barb_wire.gif"
+    "url": "/alchemy-online/assets/barb_wire.gif"
   },
   {
     "revision": "c86dfa6597cc76b40dc845228f274abe",
-    "url": "/tile-toy/assets/bookflip.gif"
+    "url": "/alchemy-online/assets/bookflip.gif"
   },
   {
     "revision": "a493ba0aa0b8ec8068d786d7248bb92c",
-    "url": "/tile-toy/assets/browserconfig.xml"
+    "url": "/alchemy-online/assets/browserconfig.xml"
   },
   {
     "revision": "299e57e54f0d3d93a4cba00b10582b3b",
-    "url": "/tile-toy/assets/default32x32.cur"
+    "url": "/alchemy-online/assets/default32x32.cur"
   },
   {
     "revision": "283ce30c80e2d1eeb6de8436bbfd577c",
-    "url": "/tile-toy/assets/gif.worker.js"
+    "url": "/alchemy-online/assets/gif.worker.js"
   },
   {
     "revision": "f3e98858b8f2ed42f50d614a2ce1e9a0",
-    "url": "/tile-toy/assets/gold_arrow.png"
+    "url": "/alchemy-online/assets/gold_arrow.png"
   },
   {
     "revision": "3ed59c98ec041d25145e97a30e3e3a0c",
-    "url": "/tile-toy/assets/html_code.html"
+    "url": "/alchemy-online/assets/html_code.html"
   },
   {
     "revision": "7c756fce1f89f24b100bd4f08b36383d",
-    "url": "/tile-toy/assets/noise.png"
+    "url": "/alchemy-online/assets/noise.png"
   },
   {
     "revision": "0e83f22e433bd981751482a22fc11040",
-    "url": "/tile-toy/assets/pentagramanimation.gif"
+    "url": "/alchemy-online/assets/pentagramanimation.gif"
   },
   {
     "revision": "da628cd7d4ae0120330cb9e37238829a",
-    "url": "/tile-toy/assets/site.webmanifest"
+    "url": "/alchemy-online/assets/site.webmanifest"
   },
   {
     "revision": "09fe2f906e1206b95bcfb81a9d7dfed3",
-    "url": "/tile-toy/assets/talkskull.gig.gif"
+    "url": "/alchemy-online/assets/talkskull.gig.gif"
   },
   {
     "revision": "4e285e802b7b5cf957dcce67494ef7b9",
-    "url": "/tile-toy/assets/thumbnail.png"
+    "url": "/alchemy-online/assets/thumbnail.png"
   },
   {
     "revision": "c3a696af3063364bbcc9f160e144560a",
-    "url": "/tile-toy/assets/times-16-regular.woff"
+    "url": "/alchemy-online/assets/times-16-regular.woff"
   },
   {
     "revision": "a5157df11667d5466f6ef020a0f997c6",
-    "url": "/tile-toy/assets/torch2.gif"
+    "url": "/alchemy-online/assets/torch2.gif"
   },
   {
     "revision": "d11ecdfbca4c9f97679c57e6f180fd83",
-    "url": "/tile-toy/assets/ultima.jpg"
+    "url": "/alchemy-online/assets/ultima.jpg"
   },
   {
     "revision": "37f91d929a75e36ee01b6e4e8503e7d8",
-    "url": "/tile-toy/assets/ultima.png"
+    "url": "/alchemy-online/assets/ultima.png"
   },
   {
     "revision": "ff6fdd4b4ff0cbee70137a39127e4c18",
-    "url": "/tile-toy/assets/ultima_tile.png"
+    "url": "/alchemy-online/assets/ultima_tile.png"
   },
   {
     "revision": "d0aefa7ea57391fb9b7d",
-    "url": "/tile-toy/c771acc57c98e7b9ab53.module.wasm"
+    "url": "/alchemy-online/c771acc57c98e7b9ab53.module.wasm"
   },
   {
     "revision": "283ce30c80e2d1eeb6de8436bbfd577c",
-    "url": "/tile-toy/gif.worker.js"
+    "url": "/alchemy-online/gif.worker.js"
   },
   {
-    "revision": "e7c27a75959aaaf8e7d1ac94cf4e6a0f",
-    "url": "/tile-toy/index.html"
+    "revision": "7baab5ae421bfe9e1c32938481620a54",
+    "url": "/alchemy-online/index.html"
   },
   {
-    "revision": "da7071ee03180da89b44",
-    "url": "/tile-toy/main.a5ffdee199bbfcb8aba8.js"
+    "revision": "9b13a53dee6c7505cdfb",
+    "url": "/alchemy-online/main.48102d97e555f4efbe87.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
-    "url": "/tile-toy/manifest.json"
+    "url": "/alchemy-online/manifest.json"
   },
   {
     "revision": "9d9f88766f9ae2790a2bd7c81d735485",
-    "url": "/tile-toy/styles.css"
+    "url": "/alchemy-online/styles.css"
   }
 ]);
