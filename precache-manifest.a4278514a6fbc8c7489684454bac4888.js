@@ -132,7 +132,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tile-toy/manifest.json"
   },
   {
-    "revision": "1af76328ad937e00cb8236fab2efeee4",
+    "revision": "9d9f88766f9ae2790a2bd7c81d735485",
     "url": "/tile-toy/styles.css"
   }
 ]);
