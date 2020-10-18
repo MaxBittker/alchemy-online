@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode=production --output-public-path /tile-toy/",
+    "build": "webpack --mode=production --output-public-path /alchemy-online/",
     "start": "webpack-dev-server -d",
     "deploy": "webpack --mode=production && gh-pages -d dist"
   },
