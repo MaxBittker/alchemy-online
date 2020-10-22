@@ -173,6 +173,8 @@ img {
 }
 
 button {
+  text-shadow: 0px 1px 1px rgb(153, 147, 147);
+
   z-index: 3;
   /* zoom: 1.25; */
   position: relative;
@@ -316,6 +318,7 @@ button.selected {
   background: none;
   zoom: 1.8;
   padding: 1px;
+  text-shadow: 1px 1px 1px var(--window-frame);
 }
 .title-bar .title-bar-text {
   line-height: 0;
@@ -355,6 +358,8 @@ svg {
   /* stroke-linejoin:; */
 }
 svg text {
+  text-shadow: 0px 1px 1px rgb(153, 147, 147);
+
   dominant-baseline: middle;
   text-anchor: middle;
   stroke-width: 0 !important;
@@ -425,6 +430,7 @@ text {
   /* line-height: 0; */
   text-align: center;
   border: 3px outset var(--menu);
+  text-shadow: 1px 1px 1px gainsboro;
 }
 #fps {
   position: absolute;

@@ -136,7 +136,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/manifest.json"
   },
   {
-    "revision": "79b5421f285dfd988cd39a02d421fdb9",
+    "revision": "6ae29eff2b90ad8118c9bb4a9f0d291e",
     "url": "/alchemy-online/styles.css"
   }
 ]);
