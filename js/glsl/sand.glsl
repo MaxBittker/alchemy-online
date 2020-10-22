@@ -41,7 +41,7 @@ void main() {
 
   float hue = 0.0;
   float saturation = 0.6;
-  float lightness = 0.35 + energy * 0.4;
+  float lightness = 0.4 + energy * 0.3;
   float a = 1.0;
   float brightness = 0.0;
 
@@ -63,7 +63,7 @@ void main() {
     lightness = 1.0 - energy * 0.2;
   } else if (type == 2) { // plant
     hue = 0.4;
-    saturation = 0.4;
+    saturation = 0.8;
   } else if (type == 3) { // water
     hue = 0.78;
     saturation = 0.6;
@@ -89,7 +89,7 @@ void main() {
     hue += data.g * 0.2;
   }
   if (isSnapshot == false) {
-    lightness *= (0.975 + snoise2(floor(guv * resolution / dpi)) * 0.025);
+    lightness *= (0.975 + snoise2(floor(guv * resolution / dpi)) * 0.15);
   }
   saturation = min(saturation, 1.0);
   lightness = min(lightness, 1.0);
