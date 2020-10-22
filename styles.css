@@ -124,7 +124,7 @@ body {
 
   /* /* background-size: 1000px 1000px; */
   background-repeat: repeat;
-  background-color: rgb(72, 88, 72);
+  background-color: rgb(77, 88, 79);
   background-size: 120px 120px;
   /* backdrop-filter: sepia(100%) contrast(0.9) hue-rotate(-20deg) brightness(0.15); */
 }
@@ -134,9 +134,6 @@ body {
   width: 100%;
 }
 
-#jar {
-  line-height: 0px;
-}
 canvas {
   position: absolute;
   top: 0px;
@@ -435,12 +432,13 @@ text {
   z-index: 1;
 
   right: 0;
-  width: 100px;
+  width: 90px;
   background-color: var(--menu);
   height: 27px;
   margin: 2px;
   box-sizing: border-box;
-  /* text-align: right; */
-
+  text-align: right;
+  font-family: monospace;
+  color: var(--window-frame);
   border: 3px inset var(--menu);
 }
