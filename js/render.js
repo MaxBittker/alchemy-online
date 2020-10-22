@@ -23,7 +23,7 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
       attributes: { preserveDrawingBuffer: isSnapshot }
     });
   }
-  // const lastFrame = regl.texture();
+  const lastFrame = regl.texture();
   const width = universe.width();
   const height = universe.height();
   let cell_pointer = universe.cells();
@@ -61,8 +61,8 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
         viewportHeight
       ],
       dpi: 4,
-      isSnapshot
-      // backBuffer: lastFrame
+      isSnapshot,
+      backBuffer: lastFrame
     },
 
     vert: vsh,
@@ -83,6 +83,9 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
     draw: () => {
       regl.poll();
       drawSand();
+      // lastFrame({
+      //   copy: true
+      // });
     }
   };
 };

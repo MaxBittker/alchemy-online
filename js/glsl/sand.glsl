@@ -34,6 +34,7 @@ void main() {
   vec2 sampleCoord = textCoord + (noise_2d / (resolution / 2.));
 
   vec4 data = texture2D(dataTexture, textCoord);
+  vec4 last = texture2D(backBuffer, vec2(textCoord.x, 1.0 - textCoord.y));
 
   int type = int((data.r * 255.) + 0.1);
   float energy = data.g;
@@ -67,16 +68,17 @@ void main() {
   } else if (type == 3) { // water
     hue = 0.78;
     saturation = 0.6;
-    lightness = 0.8 + energy * 0.25 + noise * 0.1;
-    a = 0.7;
+    lightness = 0.5 + energy * 0.25 + noise * 0.1;
+    a = 0.9;
     if (isSnapshot) {
       a = 1.0;
     }
   } else if (type == 4) { // Zoop
-    hue = 0.1 + (noise * -0.1);
+    hue = 0.05 + (noise * -0.1);
 
-    saturation = 0.7;
-    lightness += 0.2;
+    saturation = 0.6;
+    lightness *= 0.6;
+    lightness += 0.5;
     //  * (noise + 0.5);
     if (isSnapshot) {
       hue += -0.1;
@@ -93,6 +95,12 @@ void main() {
   saturation = min(saturation, 1.0);
   lightness = min(lightness, 1.0);
   color = hsv2rgb(vec3(hue, saturation, lightness));
+  // a = 1.0;
+  // if (last.a > 0.7) {
+  //   color.rgb = last.rgb;
+  //   a = last.a * 0.95;
+  // }
+  // color.rgb = max(color.rgb, last.rgb * 0.97);
 
   gl_FragColor = vec4(color, a);
 }

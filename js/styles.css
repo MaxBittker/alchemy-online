@@ -12,7 +12,7 @@
     inset 2px 2px var(--button-shadow);
 }
 div {
-  background: url("assets/paper.png");
+  background: url("assets/paper.png") !important;
   background-size: 100px 100px;
 }
 .ultima {
@@ -231,11 +231,7 @@ button.selected {
   /* flex-wrap: wrap; */
   zoom: 1.5;
 }
-@media only screen and (max-width: 600px) {
-  .hud-body {
-    /* zoom: 1; */
-  }
-}
+
 #hud-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -244,7 +240,7 @@ button.selected {
   margin: 2px;
   height: 30px;
   width: 30px;
-  min-width: 30px;
+  min-width: 0px;
   font-size: 18px;
   line-height: 25px;
   padding: 0;
@@ -269,11 +265,6 @@ button.selected {
   opacity: 0;
 }
 
-@media only screen and (max-width: 600px) {
-  #welcome {
-    zoom: 1.25;
-  }
-}
 #controls {
   display: flex;
 }
@@ -310,7 +301,7 @@ button.selected {
   line-height: 0px;
 }
 .window {
-  background-color: var(--menu);
+  background-color: var(--menu) !important;
   /* background: url("assets/ultima_tile.png"); */
 }
 .title-bar {
@@ -395,7 +386,7 @@ text {
   left: 0;
   right: 0;
   height: 30px;
-  background-color: var(--active-menu);
+  background-color: var(--active-menu) !important;
   border: 2px outset var(--active-menu);
 
   font-size: 20px;
@@ -423,7 +414,7 @@ text {
   left: 0;
   z-index: 1;
   width: 80px;
-  background-color: var(--menu);
+  background-color: var(--menu) !important;
   height: 27px;
   margin: 1px;
   box-sizing: border-box;
@@ -447,4 +438,17 @@ text {
   font-family: monospace;
   color: var(--window-frame);
   border: 3px inset var(--menu);
+}
+#quote {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  left: 30px;
+  top: 30px;
+  width: 400px;
+  /* background: url("assets/paper.png"); */
+  /* background-size: 100px 100px; */
+}
+#quote p {
+  font-size: 40px;
 }

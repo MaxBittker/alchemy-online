@@ -502,7 +502,7 @@ pub fn build_rule() -> [Rule; 6] {
                     },
                 },
                 Clause {
-                    probability: 1,
+                    probability: 2,
                     symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [
