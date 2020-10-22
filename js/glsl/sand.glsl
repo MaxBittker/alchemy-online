@@ -41,7 +41,7 @@ void main() {
 
   float hue = 0.0;
   float saturation = 0.6;
-  float lightness = 0.3 + energy * 0.5;
+  float lightness = 0.35 + energy * 0.4;
   float a = 1.0;
   float brightness = 0.0;
 
@@ -59,16 +59,16 @@ void main() {
     lightness = 0.7;
   } else if (type == 1) { // Sand
     hue = 0.1;
-    saturation = 0.4 + (age * 0.3);
-    lightness = 1.0 - energy * 0.5;
+    saturation = 0.6 + (age * 0.3);
+    lightness = 1.0 - energy * 0.2;
   } else if (type == 2) { // plant
     hue = 0.4;
     saturation = 0.4;
   } else if (type == 3) { // water
-    hue = 0.58;
+    hue = 0.78;
     saturation = 0.6;
     lightness = 0.8 + energy * 0.25 + noise * 0.1;
-    a = 0.4;
+    a = 0.8;
     if (isSnapshot) {
       a = 1.0;
     }
@@ -84,37 +84,10 @@ void main() {
     }
 
   } else if (type == 5) { // Fish
-    hue = 0.2;
-    lightness += 0.4;
-    hue += data.g * 0.9;
-
-  } else if (type == 8) { // Bacteria
-    hue = 0.66;
-    saturation += 0.2;
-    lightness += 0.2;
-    a = 0.4;
-
-  } else if (type == 3) { // ???
-    hue = 0.6;
-    saturation = 0.4;
-    lightness = 0.7 + data.g * 0.5;
-  } else if (type == 10) { // Waste
-    hue = 0.9;
-    lightness -= 0.2;
-    saturation = 0.4;
-    a = 0.8;
-  } else if (type == 11) { // Grass
     hue = 0.4;
-    saturation = 0.4;
-  } else if (type == 12) { // Stone
-    hue = -0.4 + (data.g * 0.5);
-    saturation = 0.1;
-  } else if (type == 13) { // Wood
-    hue = (data.g * 0.1);
-    saturation = 0.3;
-    lightness = 0.3 + data.g * 0.3;
+    lightness += 0.2;
+    hue += data.g * 0.2;
   }
-
   if (isSnapshot == false) {
     lightness *= (0.975 + snoise2(floor(guv * resolution / dpi)) * 0.025);
   }

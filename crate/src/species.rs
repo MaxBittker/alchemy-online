@@ -540,23 +540,23 @@ pub fn build_rule() -> [Rule; 6] {
                     symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [
-                            Species::Empty,
-                            Species::Empty,
+                            Species::Wild,
                             Species::Empty,
                             Species::Wild,
                             Species::Wild,
-                            Species::Empty,
+                            Species::Wild,
                             Species::Empty,
                             Species::Wild,
                             Species::Empty,
+                            Species::Wild,
                         ],
                     },
                     effector: Effector {
                         grid: [
-                            Species::Rule6,
                             Species::Wild,
                             Species::Wild,
-                            Species::Empty,
+                            Species::Wild,
+                            Species::Wild,
                             Species::Wild,
                             Species::Rule6,
                             Species::Wild,
@@ -566,7 +566,7 @@ pub fn build_rule() -> [Rule; 6] {
                     },
                 },
                 Clause {
-                    probability: 5,
+                    probability: 4,
                     symmetry: SymmetryMode::None,
                     selector: Selector {
                         grid: [
@@ -652,6 +652,7 @@ pub fn execute_clause_orientation(
                 dy,
                 Cell {
                     species: out_slot,
+                    energy: (cell.energy as i32 + rand_dir_2()) as u8,
                     ..cell
                 },
             ),

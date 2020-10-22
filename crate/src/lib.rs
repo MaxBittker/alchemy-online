@@ -28,7 +28,7 @@ impl Cell {
     pub fn new(species: Species) -> Cell {
         Cell {
             species: species,
-            energy: 100 + (js_sys::Math::random() * 50.) as u8,
+            energy: 10 + (js_sys::Math::random() * 230.) as u8,
             age: 0,
             clock: 0,
         }
@@ -184,8 +184,8 @@ impl Universe {
                 if self.get_cell(px, py).species == Species::Empty || species == Species::Empty {
                     self.cells[i] = Cell {
                         species: species,
-                        energy: 80
-                            + (js_sys::Math::random() * 30.) as u8
+                        energy: 20
+                            + (js_sys::Math::random() * 150.) as u8
                             + ((self.generation % 127) as i8 - 60).abs() as u8,
                         age: 0,
                         clock: self.generation,

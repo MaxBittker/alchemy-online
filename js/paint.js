@@ -173,6 +173,6 @@ const paint = event => {
   const [x, y] = convertEventCoordinates(event);
   if (window.UI.state.selectedElement < 0) return;
 
-  let size = 2;
+  let size = 4;
   universe.paint(x, y, size, window.UI.state.selectedElement);
 };
