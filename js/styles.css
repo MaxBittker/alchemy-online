@@ -4,13 +4,17 @@
   --button-shadow: #404040;
   --window-frame: #0a0a0a;
   --button-highlight: #ffffff;
-
+  --active-menu: #803f41;
+  --menu: #b19a92;
   --border-sunken-outer: inset -1px -1px var(--button-highlight),
     inset 1px 1px var(--window-frame);
   --border-sunken-inner: inset -2px -2px var(--button-face),
     inset 2px 2px var(--button-shadow);
 }
-
+div {
+  background: url("assets/paper.png");
+  background-size: 100px 100px;
+}
 .ultima {
   filter: drop-shadow(1px 3px 3px black);
   border-image-source: url("assets/ultima.png");
@@ -116,11 +120,13 @@ body {
   border-color: transparent;
   border-radius: 30px; */
   /* background: url("assets/ultima_tile.png"); */
-  background: url("https://www.webomator.com/grafx2/blog/IEEE_forge.jpg");
-  background: url("https://orderinchoas.files.wordpress.com/2013/05/366728330_8f15645d0d_m.jpg");
+  /* background: url("https://www.webomator.com/grafx2/blog/IEEE_forge.jpg"); */
+  background: url("assets/paper.png");
   background-repeat: repeat;
-  background-size: 150px;
-  backdrop-filter: sepia(100%) contrast(0.9) hue-rotate(-20deg) brightness(0.15);
+  background-color: rgb(72, 88, 72);
+  /* background-size: 150px;
+   */
+  /* backdrop-filter: sepia(100%) contrast(0.9) hue-rotate(-20deg) brightness(0.15); */
 }
 
 #scene {
@@ -134,7 +140,7 @@ body {
 canvas {
   position: absolute;
   top: 0px;
-  bottom: 0;
+  bottom: 70px;
   right: 0px;
   left: 0px;
   margin: 20px;
@@ -184,9 +190,15 @@ button {
   border-color: white;
   dominant-baseline: middle;
   text-anchor: middle;
-  background-color: #af8e82;
+  background-color: var(--menu);
   border: none;
   font-family: NotoSansSymbols, serif;
+  box-shadow: none !important;
+  border: 1px outset gainsboro;
+}
+button.selected {
+  box-shadow: none !important;
+  border: 1px inset gainsboro;
 }
 .active button {
   background-color: gainsboro;
@@ -257,22 +269,6 @@ button.selected {
   -webkit-transition: opacity 1s linear;
   opacity: 0;
 }
-#fps {
-  pointer-events: none;
-  /* font-size: 18px; */
-  line-height: 0.9;
-  z-index: 20;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 2px;
-  background-color: rgba(255, 255, 255, 0.4);
-  text-align: right;
-  display: inline-block;
-  white-space: pre;
-  font-family: monospace;
-  user-select: none;
-}
 
 @media only screen and (max-width: 600px) {
   #welcome {
@@ -315,11 +311,11 @@ button.selected {
   line-height: 0px;
 }
 .window {
-  background-color: #af8e82;
+  background-color: var(--menu);
   /* background: url("assets/ultima_tile.png"); */
 }
 .title-bar {
-  background-color: #803f41 !important;
+  background-color: var(--active-menu) !important;
   background: none;
   zoom: 1.8;
   padding: 1px;
@@ -336,7 +332,7 @@ button:not(:disabled):active {
 .mat-box {
   fill: rgba(255, 255, 255, 0.9);
   transition: fill 0.25s;
-  background: url("assets/ultima_tile.png");
+  /* background: url("assets/ultima_tile.png"); */
 }
 
 .mat-box:hover {
@@ -373,12 +369,12 @@ svg text {
 .tch {
   position: absolute;
   z-index: 15;
-  filter: drop-shadow(1px 1px 2px #500);
+  /* filter: drop-shadow(1px 1px 2px #500); */
 }
 
 img {
   user-select: none;
-  filter: drop-shadow(1px 1px 1px #500);
+  /* filter: drop-shadow(1px 1px 1px #500); */
 }
 
 g.clause.disabled {
@@ -390,4 +386,60 @@ g.clause.disabled {
 }
 text {
   /* filter: drop-shadow(1px 1px 3px red); */
+}
+#bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background-color: var(--active-menu);
+  border: 1px solid black;
+  font-size: 20px;
+  box-shadow: 0px 0px 5px #000000;
+  display: flex;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+#bar img {
+  display: inline-block;
+  /* max-width: 33%; */
+  /* height: auto; */
+  /* background-image: url("assets/pentagramanimation.gif"); */
+  /* background-size: 30px 30px; */
+}
+#start img {
+  /* filter: saturate(20); */
+  height: 20px;
+  width: 20px;
+}
+#start {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 80px;
+  background-color: var(--menu);
+  height: 27px;
+  margin: 1px;
+  box-sizing: border-box;
+  /* line-height: 0; */
+  text-align: center;
+  border: 3px outset var(--menu);
+}
+#fps {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+
+  right: 0;
+  width: 100px;
+  background-color: var(--menu);
+  height: 27px;
+  margin: 2px;
+  box-sizing: border-box;
+  /* text-align: right; */
+
+  border: 3px inset var(--menu);
 }

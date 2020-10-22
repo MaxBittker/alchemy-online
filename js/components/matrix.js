@@ -108,7 +108,7 @@ class Matrix extends React.Component {
     let inset = isCenter ? 4 : 2;
     return (
       <g
-        filter="url(#filter1)"
+        // filter="url(#filter1)"
         key={`${x}-${y}`}
         transform={`translate(${x * 55 + 15},${y * 55 + 15})`}
         className={isCenter ? "disabled" : ""}

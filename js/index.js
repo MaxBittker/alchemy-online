@@ -7,9 +7,9 @@ import {} from "./setup";
 import { startApp } from "./app";
 
 let ratio = 8;
-let width = 120;
+let width = 100;
 // window.innerWidth / ratio;
-let height = 120;
+let height = 100;
 // window.innerHeight / ratio;
 //todo scale ratio according to size;
 
@@ -51,9 +51,10 @@ let resize = () => {
     // if (screen_width - window.innerHeight < 400) {
     // landscape compressed
     let border = 40 * 2;
-    canvasStyle = `height: ${window.innerHeight - border}px; margin:10px`;
+    canvasStyle = `height: ${window.innerHeight -
+      (border + 60)}px; margin:10px`;
     canvasSize = window.innerHeight - border;
-    let hudWidth = screen_width - window.innerHeight - 32;
+    let hudWidth = screen_width - window.innerHeight + 40;
 
     HUDStyle = `width: ${hudWidth}px; margin: 10px;`;
   } else {
