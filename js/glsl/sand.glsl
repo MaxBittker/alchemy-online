@@ -68,17 +68,16 @@ void main() {
     hue = 0.78;
     saturation = 0.6;
     lightness = 0.8 + energy * 0.25 + noise * 0.1;
-    a = 0.8;
+    a = 0.7;
     if (isSnapshot) {
       a = 1.0;
     }
   } else if (type == 4) { // Zoop
-    hue = 0.8 + (noise * -0.2);
-    hue += data.g * 0.4;
+    hue = 0.1 + (noise * -0.1);
 
     saturation = 0.7;
-    lightness += 0.6;
-    // * (noise + 0.5);
+    lightness += 0.2;
+    //  * (noise + 0.5);
     if (isSnapshot) {
       hue += -0.1;
     }
