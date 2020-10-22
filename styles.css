@@ -106,7 +106,6 @@ body {
   font-size: 30px;
   height: 100%;
 
-  background-size: 20px;
   /* background: url("http://1-background.com/images/vellum/vellum-old-vellum-background1.jpg"); */
   /* background: url("assets/ultima_tile.png"); */
   /* 
@@ -122,10 +121,11 @@ body {
   /* background: url("assets/ultima_tile.png"); */
   /* background: url("https://www.webomator.com/grafx2/blog/IEEE_forge.jpg"); */
   background: url("assets/paper.png");
+
+  /* /* background-size: 1000px 1000px; */
   background-repeat: repeat;
   background-color: rgb(72, 88, 72);
-  /* background-size: 150px;
-   */
+  background-size: 120px 120px;
   /* backdrop-filter: sepia(100%) contrast(0.9) hue-rotate(-20deg) brightness(0.15); */
 }
 
@@ -394,7 +394,8 @@ text {
   right: 0;
   height: 30px;
   background-color: var(--active-menu);
-  border: 1px solid black;
+  border: 2px outset var(--active-menu);
+
   font-size: 20px;
   box-shadow: 0px 0px 5px #000000;
   display: flex;
