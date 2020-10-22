@@ -106,7 +106,7 @@ body {
   font-size: 30px;
   height: 100%;
 
-  background-size: 20px 20px;
+  background-size: 20px;
   /* background: url("http://1-background.com/images/vellum/vellum-old-vellum-background1.jpg"); */
   /* background: url("assets/ultima_tile.png"); */
   /* 
@@ -410,8 +410,8 @@ text {
 }
 #start img {
   /* filter: saturate(20); */
-  height: 20px;
-  width: 20px;
+  /* height: 30px; */
+  width: 30px;
 }
 #start {
   display: flex;

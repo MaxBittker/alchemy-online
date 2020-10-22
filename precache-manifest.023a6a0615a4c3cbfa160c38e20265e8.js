@@ -124,7 +124,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/gif.worker.js"
   },
   {
-    "revision": "e8a50e1243145b95721e0e5716e1b436",
+    "revision": "11c2661e21473ef6014a5f0f6ef236d8",
     "url": "/alchemy-online/index.html"
   },
   {
@@ -136,7 +136,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/manifest.json"
   },
   {
-    "revision": "d4c860c52229443847dfc84f8484cd18",
+    "revision": "d7c883acf88b15a28c24e242cb13a06a",
     "url": "/alchemy-online/styles.css"
   }
 ]);
