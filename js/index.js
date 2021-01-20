@@ -7,9 +7,9 @@ import {} from "./setup";
 import { startApp } from "./app";
 
 let ratio = 8;
-let width = 100;
+let width = 128;
 // window.innerWidth / ratio;
-let height = 100;
+let height = 128;
 // window.innerHeight / ratio;
 //todo scale ratio according to size;
 

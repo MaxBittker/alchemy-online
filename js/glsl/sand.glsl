@@ -19,6 +19,7 @@ const float PI2 = 2. * 3.14159265358979323846;
 
 // clang-format on
 
+
 void main() {
   vec2 guv = uv;
   vec3 color;
@@ -27,11 +28,8 @@ void main() {
   grid = floor(guv * (resolution / dpi));
 
   float noise = snoise3(vec3(grid, t * 0.05));
-  vec2 noise_2d = vec2(floor(0.5 + noise),
-                       floor(0.5 + snoise3(vec3(grid, (t + 20.) * 0.05))));
 
   vec2 textCoord = (guv * vec2(0.5, -0.5)) + vec2(0.5);
-  vec2 sampleCoord = textCoord + (noise_2d / (resolution / 2.));
 
   vec4 data = texture2D(dataTexture, textCoord);
   vec4 last = texture2D(backBuffer, vec2(textCoord.x, 1.0 - textCoord.y));
@@ -46,25 +44,25 @@ void main() {
   float a = 1.0;
   float brightness = 0.0;
 
-  if (type == 10) { // Air
+  if (type == 0) { // Air
     hue = 0.0;
     saturation = 0.1;
-    lightness = 1.0;
-    a = 0.0;
+    // lightness = 1.0;
+    a = 0.2;
     if (isSnapshot) {
       a = 1.0;
     }
-  } else if (type == 0) { // Glass
+  } else if (type == 1) { // Glass
     hue = 0.1;
     saturation = 0.1;
     // lightness = 0.7;
-  } else if (type == 1) { // Sand
+  } else if (type == 2) { // Sand
     hue = 0.1;
     lightness += 0.2;
-  } else if (type == 2) { // plant
+  } else if (type == 3) { // plant
     hue = 0.4;
     saturation += 0.2;
-  } else if (type == 3) { // water
+  } else if (type == 4) { // water
     hue = 0.58;
     saturation -= 0.1;
     lightness += noise * 0.1;
@@ -72,7 +70,7 @@ void main() {
     if (isSnapshot) {
       a = 1.0;
     }
-  } else if (type == 4) { // Zoop
+  } else if (type == 5) { // Zoop
     hue = 0.05 + (noise * -0.1);
 
     saturation -= 0.1;
@@ -83,7 +81,7 @@ void main() {
       hue += -0.1;
     }
 
-  } else if (type == 5) { // Fish
+  } else if (type == 6) { // Fish
     hue = 0.8;
     lightness += 0.2;
     hue += energy * 0.2;

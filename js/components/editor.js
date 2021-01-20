@@ -10,7 +10,7 @@ let probabilityMap = [
   { p: 3, symbol: "⚂" },
   { p: 4, symbol: "⚃" },
   { p: 5, symbol: "⚄" },
-  { p: 6, symbol: "⚅" }
+  { p: 6, symbol: "⚅" },
 ];
 class Editor extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Editor extends React.Component {
     this.state = {
       selectedElement: props.selectedElement,
       clause_index: props.clause_index,
-      clause: Editor.getRule(props.selectedElement, props.clause_index)
+      clause: Editor.getRule(props.selectedElement, props.clause_index),
     };
     window.Editor = this;
   }
@@ -38,15 +38,15 @@ class Editor extends React.Component {
       selector,
       effector,
       symmetry,
-      probability: probabilityMap.find(v => v.p == probability)
+      probability: probabilityMap.find((v) => v.p == probability),
     };
   }
   static getDerivedStateFromProps(props, state) {
     let { selectedElement, clause_index } = props;
-    if (selectedElement != state.selectedElement && selectedElement < 6) {
+    if (selectedElement != state.selectedElement && selectedElement <= 6) {
       return {
         selectedElement,
-        clause: Editor.getRule(selectedElement, clause_index)
+        clause: Editor.getRule(selectedElement, clause_index),
       };
     }
 
@@ -58,7 +58,7 @@ class Editor extends React.Component {
       selector: j_selector,
       effector: j_effector,
       symmetry: j_symmetry,
-      probability
+      probability,
     } = clause;
 
     let selector = new Selector(...j_selector);
@@ -85,7 +85,7 @@ class Editor extends React.Component {
 
     this.setState(
       {
-        clause
+        clause,
       },
       this.setRule
     );
@@ -102,7 +102,7 @@ class Editor extends React.Component {
 
     this.setState(
       {
-        clause
+        clause,
       },
       this.setRule
     );
@@ -113,7 +113,6 @@ class Editor extends React.Component {
     let { clause } = this.state;
     // console.log(clause);
     let { selector, effector, symmetry, probability } = clause;
-    console.log(symmetry);
     return (
       <div className="MatrixMenu">
         <svg
@@ -131,7 +130,7 @@ class Editor extends React.Component {
               className="mat-circle"
               style={{
                 strokeWidth: 1,
-                fill: "rgba(255,255,255,0.2)"
+                fill: "rgba(255,255,255,0.2)",
               }}
             ></circle>
 
@@ -139,7 +138,7 @@ class Editor extends React.Component {
               x="8"
               y="72"
               style={{ fontSize: "35px" }}
-              onContextMenu={e => {
+              onContextMenu={(e) => {
                 e.preventDefault();
                 this.incSymmetry(-1);
               }}
@@ -155,7 +154,7 @@ class Editor extends React.Component {
             className="mat-circle"
             style={{
               strokeWidth: 1,
-              fill: "rgba(255,255,255,0.2)"
+              fill: "rgba(255,255,255,0.2)",
             }}
           ></circle>
 
@@ -163,7 +162,7 @@ class Editor extends React.Component {
             x="8"
             y="129"
             style={{ fontSize: "35px" }}
-            onContextMenu={e => {
+            onContextMenu={(e) => {
               e.preventDefault();
               this.incProbability(-1);
             }}
@@ -180,10 +179,7 @@ class Editor extends React.Component {
                   options={SlotOptions}
                   grid={selector}
                   isSelector
-                  setGrid={newGrid => {
-                    if (probability.p == 0) {
-                      return;
-                    }
+                  setGrid={(newGrid) => {
                     let { clause } = this.state;
                     clause.selector = newGrid;
                     this.setState({ clause }, this.setRule);
@@ -200,10 +196,7 @@ class Editor extends React.Component {
                   selectedElement={selectedElement}
                   options={SlotOptions}
                   grid={effector}
-                  setGrid={newGrid => {
-                    if (probability.p == 0) {
-                      return;
-                    }
+                  setGrid={(newGrid) => {
                     let { clause } = this.state;
                     clause.effector = newGrid;
                     this.setState({ clause }, this.setRule);

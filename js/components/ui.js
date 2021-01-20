@@ -19,7 +19,7 @@ const OrganicButton = ({ onClick, className, style, children }) => {
       onClick={onClick}
       className={className}
       style={{
-        ...style
+        ...style,
       }}
     >
       {children}
@@ -46,7 +46,7 @@ const ElementButton = (name, selectedElement, setElement) => {
       className={selected ? `selected ${name}` : name}
       key={name}
       draggable
-      onDragStart={e => {
+      onDragStart={(e) => {
         // e.currentTarget.style.boxShadow = "none";
         e.dataTransfer.setData("text/plain", elementID);
       }}
@@ -57,7 +57,7 @@ const ElementButton = (name, selectedElement, setElement) => {
         background,
         backgroundColor: color,
         borderColor: color,
-        filter: selected || `saturate(0.4) `
+        filter: selected || `saturate(0.4) `,
         // lineHeight: 0
       }}
     >
@@ -79,7 +79,7 @@ class Index extends React.Component {
       size: 1,
       dataURL: null,
       currentSubmission: null,
-      selectedElement: Species.Rule2
+      selectedElement: Species.Rule2,
     };
     window.UI = this;
   }
@@ -105,7 +105,7 @@ class Index extends React.Component {
   setSize(event, size) {
     event.preventDefault();
     this.setState({
-      size
+      size,
     });
   }
   reset() {
@@ -218,7 +218,7 @@ class Index extends React.Component {
         : "";
 
     let activeSpecies = Object.keys(Species).filter(
-      name => name.length > 2 && name != "Wild"
+      (name) => name.length > 2 && name != "Wild"
     );
 
     return (
@@ -322,28 +322,26 @@ class Index extends React.Component {
               📷
             </OrganicButton> */}
 
-            {activeSpecies.map(n =>
-              ElementButton(n, selectedElement, id =>
+            {activeSpecies.map((n) =>
+              ElementButton(n, selectedElement, (id) =>
                 this.setState({ selectedElement: id })
               )
             )}
             <img style={{ width: "100%" }} src="assets/barb_wire.gif"></img>
-            {selectedElement != Species.Empty && (
-              <>
-                <Editor
-                  selectedElement={selectedElement}
-                  clause_index={0}
-                ></Editor>
-                <Editor
-                  selectedElement={selectedElement}
-                  clause_index={1}
-                ></Editor>
-                <Editor
-                  selectedElement={selectedElement}
-                  clause_index={2}
-                ></Editor>
-              </>
-            )}
+            <>
+              <Editor
+                selectedElement={selectedElement}
+                clause_index={0}
+              ></Editor>
+              <Editor
+                selectedElement={selectedElement}
+                clause_index={1}
+              ></Editor>
+              <Editor
+                selectedElement={selectedElement}
+                clause_index={2}
+              ></Editor>
+            </>
 
             {this.state.dataURL && (
               <Menu close={() => this.closeMenu()}>

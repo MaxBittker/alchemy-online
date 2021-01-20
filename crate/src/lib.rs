@@ -2,6 +2,7 @@ extern crate cfg_if;
 extern crate js_sys;
 extern crate wasm_bindgen;
 extern crate web_sys;
+mod rules;
 mod species;
 pub mod utils;
 use species::Clause;
@@ -53,7 +54,7 @@ pub struct Universe {
     cells: Vec<Cell>,
     undo_stack: VecDeque<Vec<Cell>>,
     generation: u8,
-    rule_sets: [species::Rule; 6],
+    rule_sets: [species::Rule; 7],
     time: u8,
 }
 
@@ -182,9 +183,14 @@ impl Universe {
                     continue;
                 }
                 if self.get_cell(px, py).species == Species::Empty || species == Species::Empty {
+                    let mut energy = 16 + (js_sys::Math::random() * 16.) as u8;
+
+                    if species == Species::Empty {
+                        energy = 1;
+                    }
                     self.cells[i] = Cell {
                         species: species,
-                        energy: 16 + (js_sys::Math::random() * 16.) as u8,
+                        energy: energy,
                         age: 0,
                         clock: self.generation,
                     };
@@ -226,7 +232,7 @@ impl Universe {
             time: 0,
             undo_stack: VecDeque::with_capacity(50),
             generation: 0,
-            rule_sets: species::build_rule(),
+            rule_sets: rules::build_rule(),
         }
     }
 }
