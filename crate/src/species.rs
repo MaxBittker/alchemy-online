@@ -1,3 +1,5 @@
+use std::cmp::max;
+
 use super::utils::*;
 // use js_sys::Array;
 use Cell;
@@ -364,7 +366,7 @@ pub fn build_rule() -> [Rule; 6] {
                             Species::Wild,
                             Species::Wild,
                             Species::Wild,
-                            Species::Wild,
+                            Species::Rule3,
                             Species::Wild,
                             Species::Empty,
                             Species::Wild,
@@ -557,7 +559,7 @@ pub fn build_rule() -> [Rule; 6] {
                             Species::Wild,
                             Species::Wild,
                             Species::Wild,
-                            Species::Wild,
+                            Species::Rule6,
                             Species::Rule6,
                             Species::Wild,
                             Species::Wild,
@@ -567,7 +569,7 @@ pub fn build_rule() -> [Rule; 6] {
                 },
                 Clause {
                     probability: 4,
-                    symmetry: SymmetryMode::None,
+                    symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [
                             Species::Wild,
@@ -575,7 +577,7 @@ pub fn build_rule() -> [Rule; 6] {
                             Species::Wild,
                             Species::Wild,
                             Species::Wild,
-                            Species::Wild,
+                            Species::Rule6,
                             Species::Wild,
                             Species::Wild,
                             Species::Wild,
@@ -588,7 +590,7 @@ pub fn build_rule() -> [Rule; 6] {
                             Species::Wild,
                             Species::Wild,
                             Species::Empty,
-                            Species::Wild,
+                            Species::Rule6,
                             Species::Wild,
                             Species::Wild,
                             Species::Wild,
@@ -623,6 +625,18 @@ pub fn check_cell(slot: Species, cell: Cell) -> bool {
         _ => cell.species == slot,
     }
 }
+pub fn get_energy(cell: Cell) -> usize {
+    match cell.species {
+        Species::Empty => 0,
+        _ => cell.energy as usize,
+    }
+}
+pub fn process_coord(coord: (i32, i32), rx: i32, ry: i32, r: usize) -> (i32, i32) {
+    let (mut dx, mut dy) = rot_right(coord, r);
+    dx *= rx;
+    dy *= ry;
+    return (dx, dy);
+}
 pub fn execute_clause_orientation(
     cell: Cell,
     mut api: SandApi,
@@ -631,31 +645,67 @@ pub fn execute_clause_orientation(
     ry: i32,
     r: usize,
 ) -> (bool, SandApi) {
+    // let mut starting_energy = 0;
+
+    // for x in 0..clause.selector.grid.len() {
+    //     let (dx, dy) = process_coord(matrix_index(x), rx, ry, r);
+    //     starting_energy += get_energy(api.get(dx, dy));
+    // }
+
     for x in 0..clause.selector.grid.len() {
-        let (mut dx, mut dy) = rot_right(matrix_index(x), r);
-        dx *= rx;
-        dy *= ry;
+        let (dx, dy) = process_coord(matrix_index(x), rx, ry, r);
+
         if (dx != 0 || dy != 0) && !check_cell(clause.selector.grid[x], api.get(dx, dy)) {
             return (false, api);
         }
     }
+    let mut n_reagents = 0;
+    let mut reaction_energy: usize = 0;
+    let mut n_products = 0;
     for x in 0..clause.effector.grid.len() {
-        let (mut dx, mut dy) = rot_right(matrix_index(x), r);
-        dx *= rx;
-        dy *= ry;
+        let (dx, dy) = process_coord(matrix_index(x), rx, ry, r);
         let out_slot = clause.effector.grid[x];
+        let target = api.get(dx, dy);
+        match out_slot {
+            Species::Wild => (),
+            _ => {
+                if target.species != Species::Empty {
+                    n_reagents += 1;
+                    reaction_energy += get_energy(target);
+                }
+                if out_slot != Species::Empty {
+                    n_products += 1;
+                }
+            }
+        }
+    }
+
+    let (out_e, mut rem) = div_rem_usize(reaction_energy, max(n_products, 1));
+
+    if n_products > n_reagents && out_e < 1 {
+        // failed due to insufficient energy
+        return (false, api);
+    }
+
+    for x in 0..clause.effector.grid.len() {
+        let (dx, dy) = process_coord(matrix_index(x), rx, ry, r);
+        let out_slot = clause.effector.grid[x];
+
         match out_slot {
             Species::Empty => api.set(dx, dy, EMPTY_CELL),
             Species::Wild => (),
-            _ => api.set(
-                dx,
-                dy,
-                Cell {
-                    species: out_slot,
-                    energy: (cell.energy as i32 + rand_dir_2()) as u8,
-                    ..cell
-                },
-            ),
+            _ => {
+                api.set(
+                    dx,
+                    dy,
+                    Cell {
+                        species: out_slot,
+                        energy: (out_e + rem) as u8,
+                        ..cell
+                    },
+                );
+                rem = 0;
+            }
         }
     }
 

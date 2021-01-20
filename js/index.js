@@ -46,13 +46,14 @@ let resize = () => {
 
   let canvasStyle = "";
   let HUDStyle = "";
+  let border = 40 * 2;
 
   if (screen_width - 150 > screen_height) {
     // if (screen_width - window.innerHeight < 400) {
     // landscape compressed
-    let border = 40 * 2;
-    canvasStyle = `height: ${window.innerHeight -
-      (border + 60)}px; margin:10px`;
+    canvasStyle = `height: ${
+      window.innerHeight - (border + 60)
+    }px; margin:10px`;
     canvasSize = window.innerHeight - border;
     let hudWidth = screen_width - window.innerHeight + 40;
 

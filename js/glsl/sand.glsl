@@ -41,8 +41,8 @@ void main() {
   float age = data.b;
 
   float hue = 0.0;
-  float saturation = 0.6;
-  float lightness = 0.4 + energy * 0.3;
+  float saturation =  0.4 + (energy*1.8) + (age *0.3) ;
+  float lightness = 0.5 + energy * 1.8;
   float a = 1.0;
   float brightness = 0.0;
 
@@ -57,18 +57,17 @@ void main() {
   } else if (type == 0) { // Glass
     hue = 0.1;
     saturation = 0.1;
-    lightness = 0.7;
+    // lightness = 0.7;
   } else if (type == 1) { // Sand
     hue = 0.1;
-    saturation = 0.6 + (age * 0.3);
-    lightness = 1.0 - energy * 0.2;
+    lightness += 0.2;
   } else if (type == 2) { // plant
     hue = 0.4;
-    saturation = 0.8;
+    saturation += 0.2;
   } else if (type == 3) { // water
-    hue = 0.78;
-    saturation = 0.6;
-    lightness = 0.5 + energy * 0.25 + noise * 0.1;
+    hue = 0.58;
+    saturation -= 0.1;
+    lightness += noise * 0.1;
     a = 0.9;
     if (isSnapshot) {
       a = 1.0;
@@ -76,7 +75,7 @@ void main() {
   } else if (type == 4) { // Zoop
     hue = 0.05 + (noise * -0.1);
 
-    saturation = 0.6;
+    saturation -= 0.1;
     lightness *= 0.6;
     lightness += 0.5;
     //  * (noise + 0.5);
@@ -85,9 +84,9 @@ void main() {
     }
 
   } else if (type == 5) { // Fish
-    hue = 0.4;
+    hue = 0.8;
     lightness += 0.2;
-    hue += data.g * 0.2;
+    hue += energy * 0.2;
   }
   if (isSnapshot == false) {
     lightness *= (0.975 + snoise2(floor(guv * resolution / dpi)) * 0.15);

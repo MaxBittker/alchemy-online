@@ -2,6 +2,19 @@ use cfg_if::cfg_if;
 // use wasm_bindgen::prelude::*;
 // use web_sys::console;
 
+pub fn div_rem<T: std::ops::Div<Output = T> + std::ops::Rem<Output = T> + Copy>(
+    x: T,
+    y: T,
+) -> (T, T) {
+    let quot = x / y;
+    let rem = x % y;
+    (quot, rem)
+}
+
+pub fn div_rem_usize(x: usize, y: usize) -> (usize, usize) {
+    div_rem(x, y)
+}
+
 pub fn matrix_index(n: usize) -> (i32, i32) {
     match n {
         0 => (-1, -1),

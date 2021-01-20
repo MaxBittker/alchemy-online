@@ -25,14 +25,14 @@ pub struct Cell {
 }
 
 impl Cell {
-    pub fn new(species: Species) -> Cell {
-        Cell {
-            species: species,
-            energy: 10 + (js_sys::Math::random() * 230.) as u8,
-            age: 0,
-            clock: 0,
-        }
-    }
+    // pub fn new(species: Species) -> Cell {
+    //     Cell {
+    //         species: species,
+    //         energy: 10 + (js_sys::Math::random() * 8.) as u8,
+    //         age: 0,
+    //         clock: 0,
+    //     }
+    // }
 
     pub fn update(&self, api: SandApi) {
         self.species.update(*self, api);
@@ -184,9 +184,7 @@ impl Universe {
                 if self.get_cell(px, py).species == Species::Empty || species == Species::Empty {
                     self.cells[i] = Cell {
                         species: species,
-                        energy: 20
-                            + (js_sys::Math::random() * 150.) as u8
-                            + ((self.generation % 127) as i8 - 60).abs() as u8,
+                        energy: 16 + (js_sys::Math::random() * 16.) as u8,
                         age: 0,
                         clock: self.generation,
                     };
