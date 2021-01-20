@@ -19,60 +19,60 @@ let ruleSymbols = {
   [Species.Rule3]: "☽",
   [Species.Rule4]: "🝆",
   [Species.Rule5]: "🜁",
-  [Species.Rule6]: "🜏"
+  [Species.Rule6]: "🜏",
 };
 
 let SymmetryOptions = [
-  {
-    key: SymmetryMode.None,
-    symbol: "ⵔ"
-  },
+  // {
+  //   key: SymmetryMode.None,
+  //   symbol: "ⵔ",
+  // },
   {
     key: SymmetryMode.Horizontal,
-    symbol: "🜕"
+    symbol: "🜕",
   },
-  {
-    key: SymmetryMode.Vertical,
-    symbol: "🜔"
-  },
+  // {
+  //   key: SymmetryMode.Vertical,
+  //   symbol: "🜔",
+  // },
   {
     key: SymmetryMode.Quad,
-    symbol: "🜨"
-  }
+    symbol: "🜨",
+  },
 ];
 let SlotOptions = [
   {
     key: Species.Empty,
-    symbol: "×"
+    symbol: "×",
   },
   {
     key: Species.Wild,
-    symbol: " "
+    symbol: " ",
   },
   {
     key: Species.Rule1,
-    symbol: ruleSymbols[Species.Rule1]
+    symbol: ruleSymbols[Species.Rule1],
   },
   {
     key: Species.Rule2,
-    symbol: ruleSymbols[Species.Rule2]
+    symbol: ruleSymbols[Species.Rule2],
   },
   {
     key: Species.Rule3,
-    symbol: ruleSymbols[Species.Rule3]
+    symbol: ruleSymbols[Species.Rule3],
   },
   {
     key: Species.Rule4,
-    symbol: ruleSymbols[Species.Rule4]
+    symbol: ruleSymbols[Species.Rule4],
   },
   {
     key: Species.Rule5,
-    symbol: ruleSymbols[Species.Rule5]
+    symbol: ruleSymbols[Species.Rule5],
   },
   {
     key: Species.Rule6,
-    symbol: ruleSymbols[Species.Rule6]
-  }
+    symbol: ruleSymbols[Species.Rule6],
+  },
 ];
 
 function grid_index(x, y) {
@@ -90,12 +90,12 @@ class Matrix extends React.Component {
     if (isCenter) {
       myCell = selectedElement;
     }
-    let { symbol } = options.find(m => m.key == myCell);
-    let incSlot = i => {
+    let { symbol } = options.find((m) => m.key == myCell);
+    let incSlot = (i) => {
       if (isCenter) return;
 
       let { grid, options } = this.props;
-      let slotIndex = options.findIndex(e => e.key == myCell);
+      let slotIndex = options.findIndex((e) => e.key == myCell);
       slotIndex = (slotIndex + options.length + i) % options.length;
       let next = options[slotIndex];
 
@@ -112,12 +112,12 @@ class Matrix extends React.Component {
         key={`${x}-${y}`}
         transform={`translate(${x * 55 + 15},${y * 55 + 15})`}
         className={isCenter ? "disabled" : ""}
-        onContextMenu={e => {
+        onContextMenu={(e) => {
           e.preventDefault();
           incSlot(-1, isCenter);
         }}
         onClick={() => incSlot(1, isCenter)}
-        onDrop={e => {
+        onDrop={(e) => {
           if (isCenter) return;
 
           var element = e.dataTransfer.getData("text");
@@ -125,7 +125,7 @@ class Matrix extends React.Component {
           let { setGrid } = this.props;
           setGrid(grid);
         }}
-        onDragOver={e => e.preventDefault()}
+        onDragOver={(e) => e.preventDefault()}
       >
         <rect
           x={inset}
@@ -135,7 +135,7 @@ class Matrix extends React.Component {
           className="mat-box"
           style={{
             fill: symbol == " " ? "#b0b0b055" : window.pallette[myCell],
-            strokeWidth: 1
+            strokeWidth: 1,
           }}
         />
         <text x={25} y={30} style={{ fontSize: "30px" }}>
@@ -196,7 +196,7 @@ class Matrix extends React.Component {
 
           this.gridSquare(2, 0),
           this.gridSquare(2, 1),
-          this.gridSquare(2, 2)
+          this.gridSquare(2, 2),
         ]}
       </g>
     );

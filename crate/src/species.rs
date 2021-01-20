@@ -28,10 +28,10 @@ pub enum Species {
 #[repr(u8)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SymmetryMode {
-    None = 0,
-    Horizontal = 1,
-    Vertical = 2,
-    Quad = 3,
+    // None = 0,
+    Horizontal = 0,
+    // Vertical = 2,
+    Quad = 1,
 }
 
 #[wasm_bindgen]
@@ -85,7 +85,7 @@ impl Clause {
     pub fn new_null() -> Clause {
         Clause {
             probability: 0,
-            symmetry: SymmetryMode::None,
+            symmetry: SymmetryMode::Horizontal,
             selector: Selector {
                 grid: [
                     Species::Wild,
@@ -316,7 +316,7 @@ pub fn build_rule() -> [Rule; 6] {
                 },
                 Clause {
                     probability: 1,
-                    symmetry: SymmetryMode::None,
+                    symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [
                             Species::Wild,
@@ -445,7 +445,7 @@ pub fn build_rule() -> [Rule; 6] {
             clauses: [
                 Clause {
                     probability: 5,
-                    symmetry: SymmetryMode::None,
+                    symmetry: SymmetryMode::Quad,
                     selector: Selector {
                         grid: [
                             Species::Wild,
@@ -717,18 +717,18 @@ pub fn execute_clause(cell: Cell, api: SandApi, clause: Clause) -> (bool, SandAp
         return (false, api);
     }
     match clause.symmetry {
-        SymmetryMode::None => {
-            return execute_clause_orientation(cell, api, clause, 1, 1, 0);
-        }
-        SymmetryMode::Vertical => {
-            let dy = rand_dir_2();
-            let (success, api) = execute_clause_orientation(cell, api, clause, 1, dy, 0);
+        // SymmetryMode::None => {
+        //     return execute_clause_orientation(cell, api, clause, 1, 1, 0);
+        // }
+        // SymmetryMode::Vertical => {
+        //     let dy = rand_dir_2();
+        //     let (success, api) = execute_clause_orientation(cell, api, clause, 1, dy, 0);
 
-            if success {
-                return (true, api);
-            }
-            return execute_clause_orientation(cell, api, clause, 1, dy * -1, 0);
-        }
+        //     if success {
+        //         return (true, api);
+        //     }
+        //     return execute_clause_orientation(cell, api, clause, 1, dy * -1, 0);
+        // }
         SymmetryMode::Horizontal => {
             let dx = rand_dir_2();
             let (success, api) = execute_clause_orientation(cell, api, clause, dx, 1, 0);
