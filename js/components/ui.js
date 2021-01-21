@@ -227,17 +227,17 @@ class Index extends React.Component {
           {" "}
           <div className="title-bar-text">Alchemi Online</div>
           <div className="title-bar-controls">
-            <button
+            {/* <button
               aria-label="Minimize"
               onClick={() => {
                 document.body.classList.add("faded");
               }}
             ></button>
-            <button aria-label="Maximize"></button>
+            <button aria-label="Maximize"></button> */}
             <button
               aria-label="Close"
               onClick={() => {
-                document.body.classList.add("faded");
+                this.reset();
               }}
             ></button>
           </div>
@@ -288,7 +288,7 @@ class Index extends React.Component {
               </svg>
             </OrganicButton> */}
 
-            <OrganicButton onClick={() => this.reset()}>↻</OrganicButton>
+            {/* <OrganicButton onClick={() => this.reset()}>↻</OrganicButton> */}
             {/* <Link
               to={{
                 pathname: "/info/",
