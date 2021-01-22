@@ -73,8 +73,10 @@ void main() {
     }
   } else if (type == 5) { // fire
     hue = 0.05 + (noise * -0.1);
+    saturation += 0.1;
 
-    lightness += 0.1;
+   lightness = 0.6+ energy * 1.7;
+
     //  * (noise + 0.5);
     if (isSnapshot) {
       hue += -0.1;
