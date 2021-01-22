@@ -193,7 +193,7 @@ button {
   border: none;
   font-family: NotoSansSymbols, serif;
   box-shadow: none !important;
-  border: 1px outset gainsboro;
+  border: 2px outset gainsboro;
 }
 button.selected {
   box-shadow: none !important;
@@ -315,6 +315,12 @@ button.selected {
   line-height: 0;
   font-size: 14px !important;
   margin-right: 10px;
+}
+.hint {
+  font-size: 15px !important;
+  margin: auto;
+  text-align: center;
+  text-shadow: 0px 0.5px 0.5px gainsboro;
 }
 
 button:not(:disabled):active {

@@ -57,7 +57,7 @@ const ElementButton = (name, selectedElement, setElement) => {
         background,
         backgroundColor: color,
         borderColor: color,
-        filter: selected || `saturate(0.4) `,
+        filter: selected || `saturate(0.8) `,
         // lineHeight: 0
       }}
     >
@@ -342,6 +342,7 @@ class Index extends React.Component {
                 clause_index={2}
               ></Editor>
             </>
+            <div className="hint">drag and drop tiles to construct rules</div>
 
             {this.state.dataURL && (
               <Menu close={() => this.closeMenu()}>

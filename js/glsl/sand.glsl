@@ -39,8 +39,8 @@ void main() {
   float age = data.b;
 
   float hue = 0.0;
-  float saturation =  0.4 + (energy*1.8) + (age *0.3) ;
-  float lightness = 0.5 + energy * 1.8;
+  float saturation =  0.2 + (energy*1.9) + (age *0.2) ;
+  float lightness = 0.6 - energy * .1;
   float a = 1.0;
   float brightness = 0.0;
 
@@ -54,7 +54,7 @@ void main() {
     }
   } else if (type == 1) { // Glass
     hue = 0.1;
-    saturation = 0.1;
+    saturation *= 0.3;
     // lightness = 0.7;
   } else if (type == 2) { // Sand
     hue = 0.1;
@@ -66,16 +66,14 @@ void main() {
     hue = 0.58;
     saturation -= 0.1;
     lightness += noise * 0.1;
-    a = 0.9;
+    // a = 0.9;
     if (isSnapshot) {
       a = 1.0;
     }
   } else if (type == 5) { // Zoop
     hue = 0.05 + (noise * -0.1);
 
-    saturation -= 0.1;
-    lightness *= 0.6;
-    lightness += 0.5;
+    lightness += 0.2;
     //  * (noise + 0.5);
     if (isSnapshot) {
       hue += -0.1;

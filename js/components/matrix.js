@@ -104,11 +104,10 @@ class Matrix extends React.Component {
       let { setGrid } = this.props;
       setGrid(grid);
     };
-    let size = isCenter ? "42" : 46;
+    let size = isCenter ? 44 : 46;
     let inset = isCenter ? 4 : 2;
     return (
       <g
-        // filter="url(#filter1)"
         key={`${x}-${y}`}
         transform={`translate(${x * 55 + 15},${y * 55 + 15})`}
         className={isCenter ? "disabled" : ""}
@@ -127,20 +126,38 @@ class Matrix extends React.Component {
         }}
         onDragOver={(e) => e.preventDefault()}
       >
-        <rect
-          x={inset}
-          y={inset}
-          width={size}
-          height={size}
-          className="mat-box"
-          style={{
-            fill: symbol == " " ? "#b0b0b055" : window.pallette[myCell],
-            strokeWidth: 1,
-          }}
-        />
-        <text x={25} y={30} style={{ fontSize: "30px" }}>
-          {isCenter || symbol == "?" ? ruleSymbols[selectedElement] : symbol}
-        </text>
+        <foreignObject x={inset} y={inset} width={size} height={size}>
+          <button
+            className="mat-box"
+            draggable="true"
+            style={{
+              width: size,
+              height: size,
+              filter: "saturate(0.8)",
+              backgroundColor:
+                symbol == " " ? "#b0b0b055" : window.pallette[myCell],
+              borderColor:
+                symbol == " " ? "#b0b0b055" : window.pallette[myCell],
+              borderWidth: 3,
+              fontSize: "30px",
+            }}
+            onDragStart={(e) => {
+              let target = e.target;
+              target.style.width = "30px";
+              target.style.height = "30px";
+              target.style.fontSize = "18px";
+
+              setTimeout(function () {
+                target.style.width = size + "px";
+                target.style.height = size + "px";
+                target.style.fontSize = "30px";
+              }, 1);
+              e.dataTransfer.setData("text/plain", myCell);
+            }}
+          >
+            {isCenter || symbol == "?" ? ruleSymbols[selectedElement] : symbol}
+          </button>
+        </foreignObject>
       </g>
     );
   }
@@ -149,42 +166,6 @@ class Matrix extends React.Component {
     let { isSelector } = this.props;
     return (
       <g>
-        <filter id="filter1">
-          <feFlood floodColor="#444" result="COLOR-red" />
-
-          <feMorphology
-            operator="dilate"
-            radius="2"
-            in="SourceAlpha"
-            result="STROKE_10"
-          />
-
-          <feConvolveMatrix
-            order="8,8"
-            divisor="1"
-            kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1"
-            in="STROKE_10"
-            result="BEVEL_20"
-          />
-
-          <feOffset dx="0.5" dy="0.5" in="BEVEL_0" result="BEVEL_25" />
-          <feComposite
-            operator="out"
-            in="BEVEL_25"
-            in2="STROKE_10"
-            result="BEVEL_30"
-          />
-          <feComposite
-            in="COLOR-red"
-            in2="BEVEL_30"
-            operator="in"
-            result="BEVEL_40"
-          />
-          <feMerge result="BEVEL_50">
-            <feMergeNode in="BEVEL_40" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
         {[
           this.gridSquare(0, 0),
           this.gridSquare(0, 1),
