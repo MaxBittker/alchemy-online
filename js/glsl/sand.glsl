@@ -40,7 +40,7 @@ void main() {
 
   float hue = 0.0;
   float saturation =  0.2 + (energy*1.9) + (age *0.2) ;
-  float lightness = 0.6 - energy * .1;
+  float lightness = 0.7 - energy * .1;
   float a = 1.0;
   float brightness = 0.0;
 
@@ -58,10 +58,11 @@ void main() {
     // lightness = 0.7;
   } else if (type == 2) { // Sand
     hue = 0.1;
-    lightness += 0.2;
+    lightness += 0.1;
   } else if (type == 3) { // plant
     hue = 0.4;
     saturation += 0.2;
+    lightness-=0.1;
   } else if (type == 4) { // water
     hue = 0.58;
     saturation -= 0.1;
@@ -70,16 +71,16 @@ void main() {
     if (isSnapshot) {
       a = 1.0;
     }
-  } else if (type == 5) { // Zoop
+  } else if (type == 5) { // fire
     hue = 0.05 + (noise * -0.1);
 
-    lightness += 0.2;
+    lightness += 0.1;
     //  * (noise + 0.5);
     if (isSnapshot) {
       hue += -0.1;
     }
 
-  } else if (type == 6) { // Fish
+  } else if (type == 6) { // purple
     hue = 0.8;
     lightness += 0.2;
     hue += energy * 0.2;
