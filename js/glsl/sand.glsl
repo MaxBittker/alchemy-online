@@ -47,10 +47,11 @@ void main() {
   if (type == 0) { // Air
     hue = 0.0;
     saturation = 0.1;
-    // lightness = 1.0;
     a = 0.2;
     if (isSnapshot) {
-      a = 1.0;
+    lightness = 1.0;
+
+      a = 0.9;
     }
   } else if (type == 1) { // Glass
     hue = 0.1;
@@ -75,7 +76,7 @@ void main() {
     hue = 0.05 + (noise * -0.1);
     saturation += 0.1;
 
-   lightness = 0.6+ energy * 1.7;
+   lightness = 0.65+ energy * 1.7;
 
     //  * (noise + 0.5);
     if (isSnapshot) {

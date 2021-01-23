@@ -47,7 +47,7 @@ let SlotOptions = [
   },
   {
     key: Species.Wild,
-    symbol: " ",
+    symbol: "*",
   },
   {
     key: Species.Rule1,
@@ -83,20 +83,26 @@ class Matrix extends React.Component {
     super(props);
   }
 
-  gridSquare(x, y, isCenter) {
+  gridSquare(x, y, isSelector, isCenter) {
     let { grid, options, selectedElement } = this.props;
-
+    let inactive = isSelector && isCenter;
     let myCell = grid[grid_index(x, y)];
-    if (isCenter) {
+    if (inactive) {
       myCell = selectedElement;
     }
     let { symbol } = options.find((m) => m.key == myCell);
     let incSlot = (i) => {
-      if (isCenter) return;
+      if (inactive) return;
 
       let { grid, options } = this.props;
       let slotIndex = options.findIndex((e) => e.key == myCell);
       slotIndex = (slotIndex + options.length + i) % options.length;
+      if (
+        isCenter &&
+        slotIndex == options.findIndex((e) => e.key === Species.Wild)
+      ) {
+        slotIndex = (slotIndex + options.length + i) % options.length;
+      }
       let next = options[slotIndex];
 
       grid[grid_index(x, y)] = next.key;
@@ -110,14 +116,14 @@ class Matrix extends React.Component {
       <g
         key={`${x}-${y}`}
         transform={`translate(${x * 55 + 15},${y * 55 + 15})`}
-        className={isCenter ? "disabled" : ""}
+        className={inactive ? "disabled" : ""}
         onContextMenu={(e) => {
           e.preventDefault();
-          incSlot(-1, isCenter);
+          incSlot(-1, inactive);
         }}
-        onClick={() => incSlot(1, isCenter)}
+        onClick={() => incSlot(1)}
         onDrop={(e) => {
-          if (isCenter) return;
+          if (inactive) return;
 
           var element = e.dataTransfer.getData("text");
           grid[grid_index(x, y)] = parseInt(element, 10);
@@ -134,10 +140,11 @@ class Matrix extends React.Component {
               width: size,
               height: size,
               filter: "saturate(0.8)",
+              color: symbol == "*" ? "#888" : "black",
               backgroundColor:
-                symbol == " " ? "#b0b0b055" : window.pallette[myCell],
+                symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
               borderColor:
-                symbol == " " ? "#b0b0b055" : window.pallette[myCell],
+                symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
               borderWidth: 3,
               fontSize: "30px",
             }}
@@ -155,7 +162,7 @@ class Matrix extends React.Component {
               e.dataTransfer.setData("text/plain", myCell);
             }}
           >
-            {isCenter || symbol == "?" ? ruleSymbols[selectedElement] : symbol}
+            {inactive || symbol == "?" ? ruleSymbols[selectedElement] : symbol}
           </button>
         </foreignObject>
       </g>
@@ -167,17 +174,17 @@ class Matrix extends React.Component {
     return (
       <g>
         {[
-          this.gridSquare(0, 0),
-          this.gridSquare(0, 1),
-          this.gridSquare(0, 2),
+          this.gridSquare(0, 0, isSelector),
+          this.gridSquare(0, 1, isSelector),
+          this.gridSquare(0, 2, isSelector),
 
-          this.gridSquare(1, 0),
-          this.gridSquare(1, 1, isSelector),
-          this.gridSquare(1, 2),
+          this.gridSquare(1, 0, isSelector),
+          this.gridSquare(1, 1, isSelector, true),
+          this.gridSquare(1, 2, isSelector),
 
-          this.gridSquare(2, 0),
-          this.gridSquare(2, 1),
-          this.gridSquare(2, 2),
+          this.gridSquare(2, 0, isSelector),
+          this.gridSquare(2, 1, isSelector),
+          this.gridSquare(2, 2, isSelector),
         ]}
       </g>
     );

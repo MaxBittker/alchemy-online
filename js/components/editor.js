@@ -211,4 +211,4 @@ class Editor extends React.Component {
   }
 }
 
-export { Editor };
+export { Editor, probabilityMap };
