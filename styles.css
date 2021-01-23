@@ -197,7 +197,7 @@ button {
 }
 button.selected {
   box-shadow: none !important;
-  border: 1px inset gainsboro;
+  border: 2px inset gainsboro;
 }
 .active button {
   background-color: gainsboro;
@@ -321,6 +321,19 @@ button.selected {
   margin: auto;
   text-align: center;
   text-shadow: 0px 0.5px 0.5px gainsboro;
+}
+.hud-body button#clear-button {
+  margin: 0 0 0 auto;
+  float: right;
+  width: auto;
+  height: 20px;
+  line-height: 0px;
+  font-size: 12px;
+  padding: 5px;
+  background-color: gray;
+}
+.hud-body button.clear-button:active {
+  border: 2px inset gainsboro !important;
 }
 
 button:not(:disabled):active {
