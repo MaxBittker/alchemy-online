@@ -124,8 +124,8 @@ class Editor extends React.Component {
             className={classNames({ disabled: probability.p == 0 }, "symmetry")}
           >
             <circle
-              cx={8}
-              cy={68}
+              cx={10}
+              cy={98}
               r="20"
               className="mat-circle"
               style={{
@@ -135,8 +135,8 @@ class Editor extends React.Component {
             ></circle>
 
             <text
-              x="8"
-              y="72"
+              x="10"
+              y={98 + 4}
               style={{ fontSize: "35px" }}
               onContextMenu={(e) => {
                 e.preventDefault();
@@ -147,7 +147,7 @@ class Editor extends React.Component {
               {SymmetryOptions[symmetry].symbol}
             </text>
           </g>
-          <circle
+          {/* <circle
             cx={8}
             cy={125}
             r="20"
@@ -156,9 +156,9 @@ class Editor extends React.Component {
               strokeWidth: 1,
               fill: "rgba(255,255,255,0.2)",
             }}
-          ></circle>
+          ></circle> */}
 
-          <text
+          {/* <text
             x="8"
             y="129"
             style={{ fontSize: "35px" }}
@@ -169,7 +169,7 @@ class Editor extends React.Component {
             onClick={() => this.incProbability(1)}
           >
             {probability.symbol}
-          </text>
+          </text> */}
 
           <g className={classNames({ disabled: probability.p == 0 }, "clause")}>
             <g transform="translate(20,0)">

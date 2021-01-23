@@ -66,7 +66,7 @@ void main() {
     lightness-=0.1;
   } else if (type == 4) { // water
     hue = 0.58;
-    saturation -= 0.1;
+    saturation -= 0.05;
     lightness += noise * 0.1;
     // a = 0.9;
     if (isSnapshot) {
@@ -74,7 +74,7 @@ void main() {
     }
   } else if (type == 5) { // fire
     hue = 0.05 + (noise * -0.1);
-    saturation += 0.1;
+    saturation += 0.2;
 
    lightness = 0.65+ energy * 1.7;
 

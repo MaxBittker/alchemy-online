@@ -62,7 +62,7 @@ pub fn build_rule() -> [Rule; 7] {
                 ),
             },
             Clause {
-                probability: 2,
+                probability: 1,
 
                 symmetry: SymmetryMode::Horizontal,
                 selector: Selector::new(
@@ -92,7 +92,7 @@ pub fn build_rule() -> [Rule; 7] {
         //green
         Rule::new(
             Clause {
-                probability: 5,
+                probability: 1,
                 symmetry: SymmetryMode::Horizontal,
                 selector: Selector::new(
                     Species::Empty,
@@ -227,18 +227,18 @@ pub fn build_rule() -> [Rule; 7] {
         ),
         Rule::new(
             Clause {
-                probability: 5,
+                probability: 1,
                 symmetry: SymmetryMode::Quad,
                 selector: Selector::new(
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
                     Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
+                    Species::Empty,
                 ),
                 effector: Effector::new(
                     Species::Wild,
@@ -279,7 +279,7 @@ pub fn build_rule() -> [Rule; 7] {
                 ),
             },
             Clause {
-                probability: 2,
+                probability: 1,
                 symmetry: SymmetryMode::Quad,
                 selector: Selector::new(
                     Species::Wild,
@@ -310,14 +310,14 @@ pub fn build_rule() -> [Rule; 7] {
                 probability: 1,
                 symmetry: SymmetryMode::Quad,
                 selector: Selector::new(
-                    Species::Wild,
                     Species::Empty,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
                     Species::Empty,
                     Species::Wild,
                     Species::Empty,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
                     Species::Wild,
                 ),
                 effector: Effector::new(
@@ -325,36 +325,36 @@ pub fn build_rule() -> [Rule; 7] {
                     Species::Wild,
                     Species::Wild,
                     Species::Wild,
+                    Species::Empty,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
                     Species::Rule6,
-                    Species::Rule6,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
                 ),
             },
             Clause {
-                probability: 4,
+                probability: 1,
                 symmetry: SymmetryMode::Quad,
                 selector: Selector::new(
                     Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Rule6,
-                    Species::Wild,
-                    Species::Wild,
-                    Species::Wild,
-                ),
-                effector: Effector::new(
-                    Species::Wild,
+                    Species::Empty,
                     Species::Wild,
                     Species::Wild,
                     Species::Wild,
                     Species::Empty,
+                    Species::Wild,
+                    Species::Empty,
+                    Species::Wild,
+                ),
+                effector: Effector::new(
+                    Species::Wild,
+                    Species::Empty,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Rule6,
                     Species::Rule6,
                     Species::Wild,
-                    Species::Wild,
+                    Species::Empty,
                     Species::Wild,
                 ),
             },
