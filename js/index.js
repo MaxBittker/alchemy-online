@@ -52,7 +52,7 @@ let resize = () => {
   // if (screen_width - window.innerHeight < 400) {
   // landscape compressed
 
-  let hudWidth = 357;
+  let hudWidth = 361;
 
   canvasStyle = `height: ${Math.min(
     window.innerHeight - border - HUDheight,
@@ -71,17 +71,7 @@ let resize = () => {
       screen_width - border
     }px; top: 10px; margin:auto; margin-top:10px ; `;
   }
-  // } else {
-  // landscape wide
-  // canvasStyle = `height: ${window.innerHeight}px`;
-  // canvasSize = window.innerHeight - border;
-  // let hudWidth = (screen_width - window.innerHeight) / 2 - 7;
-  // HUDStyle = `width: ${hudWidth}px; margin: 2px;`;
-  // }
-  //  else {
-  //portrait (mobile)
-  // canvasSize = screen_width;
-  // canvasStyle = `width: ${screen_width}px; `;
+
   HUD.style = HUDStyle;
   canvas.style = canvasStyle;
 };

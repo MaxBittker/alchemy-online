@@ -15,12 +15,12 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
   if (gl) {
     regl = reglBuilder({
       gl,
-      attributes: { preserveDrawingBuffer: isSnapshot }
+      attributes: { preserveDrawingBuffer: isSnapshot },
     });
   } else {
     regl = reglBuilder({
       canvas,
-      attributes: { preserveDrawingBuffer: isSnapshot }
+      attributes: { preserveDrawingBuffer: isSnapshot },
     });
   }
   const lastFrame = regl.texture();
@@ -38,13 +38,13 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
         srcRGB: "src alpha",
         srcAlpha: 1,
         dstRGB: "one minus src alpha",
-        dstAlpha: 1
+        dstAlpha: 1,
       },
       equation: {
         rgb: "add",
-        alpha: "add"
+        alpha: "add",
       },
-      color: [0, 0, 0, 0]
+      color: [0, 0, 0, 0],
     },
     frag: fsh,
     uniforms: {
@@ -58,11 +58,11 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
 
       resolution: ({ viewportWidth, viewportHeight }) => [
         viewportWidth,
-        viewportHeight
+        viewportHeight,
       ],
       dpi: 4,
       isSnapshot,
-      backBuffer: lastFrame
+      backBuffer: lastFrame,
     },
 
     vert: vsh,
@@ -71,11 +71,11 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
       position: [
         [-1, 4],
         [-1, -1],
-        [4, -1]
-      ]
+        [4, -1],
+      ],
     },
     // Our triangle has 3 vertices
-    count: 3
+    count: 3,
   });
 
   return {
@@ -86,11 +86,11 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
       // lastFrame({
       //   copy: true
       // });
-    }
+    },
   };
 };
 
-let snapshot = universe => {
+let snapshot = (universe) => {
   let canvas = document.createElement("canvas");
   canvas.width = universe.width() / 2;
   canvas.height = universe.height() / 2;
@@ -115,7 +115,7 @@ let exportGif = (universe, cb) => {
     quality: 10,
     width: canvas.width,
     height: canvas.height,
-    transparent: "rgba(0,0,0,0)"
+    transparent: "rgba(0,0,0,0)",
   });
   let frames = [];
 
@@ -172,7 +172,7 @@ let exportGif = (universe, cb) => {
     gif.addFrame(frame, { delay: 16 });
   }
 
-  gif.on("finished", function(blob) {
+  gif.on("finished", function (blob) {
     // window.open(URL.createObjectURL(blob));
     cb(URL.createObjectURL(blob));
   });
@@ -198,14 +198,14 @@ let exportGif = (universe, cb) => {
 let pallette = () => {
   let canvas = document.createElement("canvas");
 
-  let species = Object.values(Species).filter(k => !isNaN(parseFloat(k)));
+  let species = Object.values(Species).filter((k) => !isNaN(parseFloat(k)));
   let range = Math.max(...species) + 1;
   let universe = Universe.new(range, 1);
   canvas.width = range;
   canvas.height = 3;
   universe.reset();
 
-  species.forEach(id => universe.paint(id, 0, 2, id));
+  species.forEach((id) => universe.paint(id, 0, 2, id));
   universe.paint(Species.Empty, 0, 2, Species.Empty);
   let render = startWebGL({ universe, canvas, isSnapshot: true }).draw;
   render();
@@ -213,7 +213,7 @@ let pallette = () => {
   let data = new Uint8Array(range * 4);
   ctx.readPixels(0, 0, range, 1, ctx.RGBA, ctx.UNSIGNED_BYTE, data);
   let colors = {};
-  species.forEach(id => {
+  species.forEach((id) => {
     let index = id * 4;
     let color = `rgba(${data[index]},${data[index + 1]}, ${
       data[index + 2]

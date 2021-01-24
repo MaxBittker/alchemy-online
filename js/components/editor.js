@@ -115,11 +115,7 @@ class Editor extends React.Component {
     let { selector, effector, symmetry, probability } = clause;
     return (
       <div className="MatrixMenu">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 15 355 170"
-          width="100%"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="160px">
           <g
             transform="translate(178,0)"
             className={classNames({ disabled: probability.p == 0 }, "symmetry")}
@@ -137,7 +133,7 @@ class Editor extends React.Component {
 
             <text
               x="0"
-              y={42 + 4}
+              y={30}
               style={{ fontSize: "30px" }}
               onContextMenu={(e) => {
                 e.preventDefault();
@@ -173,7 +169,7 @@ class Editor extends React.Component {
           </text> */}
 
           <g className={classNames({ disabled: probability.p == 0 }, "clause")}>
-            <g transform="translate(0,0)">
+            <g transform="translate(-2,0)">
               {selector && (
                 <Matrix
                   selectedElement={selectedElement}
@@ -188,10 +184,10 @@ class Editor extends React.Component {
                 />
               )}
             </g>
-            <g transform="translate(169,78)">
+            <g transform="translate(169,63)">
               <image href="assets/gold_arrow.png" height="28" width="23" />
             </g>
-            <g transform="translate(200,0)">
+            <g transform="translate(202,0)">
               {effector && (
                 <Matrix
                   selectedElement={selectedElement}

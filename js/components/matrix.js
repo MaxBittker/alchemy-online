@@ -111,11 +111,11 @@ class Matrix extends React.Component {
       setGrid(grid);
     };
     let size = isCenter ? 50 : 50;
-    let inset = isCenter ? 1 : 1;
+    let inset = isCenter ? 2 : 2;
     return (
       <g
         key={`${x}-${y}`}
-        transform={`translate(${x * 51},${y * 51 + 15})`}
+        transform={`translate(${x * 51},${y * 51})`}
         className={inactive ? "disabled" : ""}
         onContextMenu={(e) => {
           e.preventDefault();
