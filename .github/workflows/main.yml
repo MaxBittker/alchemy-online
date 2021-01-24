@@ -24,11 +24,7 @@ jobs:
           FOLDER: dist # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
-
-name: ItchDeploy
-on: [push]
-jobs:
-  build-and-deploy:
+  build-and-deploy-itch:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
