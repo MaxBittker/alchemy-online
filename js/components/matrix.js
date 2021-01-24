@@ -110,8 +110,8 @@ class Matrix extends React.Component {
       let { setGrid } = this.props;
       setGrid(grid);
     };
-    let size = isCenter ? 44 : 46;
-    let inset = isCenter ? 4 : 2;
+    let size = isCenter ? 50 : 50;
+    let inset = isCenter ? 1 : 1;
     return (
       <g
         key={`${x}-${y}`}

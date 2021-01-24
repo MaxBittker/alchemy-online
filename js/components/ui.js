@@ -267,7 +267,15 @@ class Index extends React.Component {
           </div>
         </div>
         <div className="window-body hud-body">
-          <div id="hud-buttons">
+          <div
+            id="hud-buttons"
+            style={{
+              backgroundColor: pallette_data[selectedElement].replace(
+                "0.9",
+                "0.2"
+              ),
+            }}
+          >
             {/* <OrganicButton
               onClick={() => this.togglePause()}
               className={paused ? "selected" : ""}

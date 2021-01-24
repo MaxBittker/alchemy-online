@@ -12,7 +12,7 @@
     inset 2px 2px var(--button-shadow);
 }
 div {
-  background: url("assets/paper.png") !important;
+  background-image: url("assets/paper.png") !important;
   background-size: 100px 100px !important;
 }
 .ultima {
@@ -142,23 +142,17 @@ canvas {
   right: 0px;
   left: 0px;
   margin: 20px;
-  /* width: 100%; */
   height: 100vh;
   z-index: 1;
-  /* max-width: calc(100%); */
   line-height: 0.6;
-  /* width: calc(100% - 0px); */
-  /* max-width: ca100%; */
   margin: auto;
   margin-bottom: 0px;
-  /* border: 1px black solid; */
 }
 
 #sand-canvas {
   z-index: 2;
   margin: auto;
   /* filter: drop-shadow(2px 4px 6px gray); */
-  /* cursor: pointer; */
 }
 
 canvas,
@@ -176,7 +170,8 @@ img {
 button {
   cursor: url("assets/default32x32.cur"), auto !important;
 
-  text-shadow: 0px 1px 1px rgb(153, 147, 147);
+  text-shadow: 0px 1px 2px rgb(190, 178, 178);
+
   z-index: 3;
   /* zoom: 1.25; */
   position: relative;
@@ -238,9 +233,9 @@ button.selected {
   flex-wrap: wrap;
 }
 #hud-buttons button {
-  margin: 3px;
-  height: 45px;
-  width: 45px;
+  margin: 1.5px;
+  height: 48px;
+  width: 48px;
 
   min-width: 0px;
   font-size: 30px;
@@ -330,21 +325,22 @@ button.selected {
   font-size: 19px !important;
   margin: auto;
   text-align: center;
-  text-shadow: 0px 0.5px 0.5px gainsboro;
+  /* text-shadow: 0px 0.5px 0.5px gainsboro; */
 }
 .hud-body button#clear-button {
   margin: 2px 2px 2px auto;
   float: right;
   width: auto;
-  height: 20px;
-  line-height: 0px;
+  height: 30px;
   font-size: 18px;
   padding: 5px;
-  background-color: gray;
+  background-color: var(--menu);
   text-shadow: 0px 0px 1px gainsboro;
+  align-items: center !important;
+  padding-bottom: 10px;
 }
 .hud-body button.clear-button:active {
-  border: 2px inset gainsboro !important;
+  border: 3px inset gainsboro !important;
 }
 
 button:not(:disabled):active {
@@ -383,7 +379,7 @@ svg {
   /* stroke-linejoin:; */
 }
 svg text {
-  text-shadow: 0px 1px 1px rgb(153, 147, 147);
+  text-shadow: 0px 1px 1px rgb(190, 178, 178);
 
   dominant-baseline: middle;
   text-anchor: middle;

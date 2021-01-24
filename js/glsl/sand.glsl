@@ -28,6 +28,7 @@ void main() {
   grid = floor(guv * (resolution / dpi));
 
   float noise = snoise3(vec3(grid, t * 0.05));
+  float slownoise = snoise3(vec3(grid, t * 0.01));
 
   vec2 textCoord = (guv * vec2(0.5, -0.5)) + vec2(0.5);
 
@@ -45,18 +46,20 @@ void main() {
   float brightness = 0.0;
 
   if (type == 0) { // Air
-    hue = 0.0;
-    saturation = 0.1;
+    hue = 0.7;
+    saturation = 0.0;
+    
     a = 0.0 ;
     if (isSnapshot) {
-    lightness = 1.0;
+    lightness = 0.9;
 
-      a = 0.9;
+      a = 1.0;
     }
-  } else if (type == 1) { // Glass
+  } else if (type == 1) { // wall
     hue = 0.1;
     saturation *= 0.3;
-    // lightness = 0.7;
+    lightness *= 0.5 ;
+    lightness += slownoise*0.4;
   } else if (type == 2) { // Sand
     hue = 0.1;
     lightness += 0.1;
