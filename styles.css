@@ -107,23 +107,8 @@ body {
   font-size: 30px;
   height: 100%;
 
-  /* background: url("http://1-background.com/images/vellum/vellum-old-vellum-background1.jpg"); */
-  /* background: url("assets/ultima_tile.png"); */
-  /* 
-  border-image-source: url("https://www.webomator.com/grafx2/blog/IEEE_forge.jpg");
-  border-image-slice: 32;
-  border-image-width: 28px;
-  border-image-repeat: repeat;
-  border-width: 28px;
-  border-style: solid;
-  box-sizing: border-box;
-  border-color: transparent;
-  border-radius: 30px; */
-  /* background: url("assets/ultima_tile.png"); */
-  /* background: url("https://www.webomator.com/grafx2/blog/IEEE_forge.jpg"); */
   background: url("assets/paper.png");
 
-  /* /* background-size: 1000px 1000px; */
   background-repeat: repeat;
   background-color: rgb(77, 88, 79);
   background-size: 120px 120px;
@@ -173,11 +158,8 @@ button {
   text-shadow: 0px 1px 2px rgb(190, 178, 178);
 
   z-index: 3;
-  /* zoom: 1.25; */
   position: relative;
-  /* padding: 5px 5px; */
-  /* flex-grow: 1; */
-  /* max-width: 90px; */
+
   fill: var(--main-dark-color);
   /* cursor: grab !important; */
   user-select: none; /* Standard */
@@ -231,6 +213,8 @@ button.selected {
 #hud-buttons {
   display: flex;
   flex-wrap: wrap;
+  padding: 2px;
+  padding-top: 3px;
 }
 #hud-buttons button {
   margin: 1.5px;
@@ -242,6 +226,7 @@ button.selected {
   line-height: 25px;
   padding: 0;
   line-height: 0 !important;
+  border-width: 3px !important;
 }
 #HUD a {
   /* flex-grow: 1; */
@@ -552,4 +537,15 @@ bigger {
   font-size: 1.6rem;
   line-height: 0;
   vertical-align: middle;
+}
+
+.chain-hr {
+  border: 0;
+  width: 100%;
+  height: 16px;
+  background-color: transparent;
+  background-image: url("assets/chain02..png");
+  background-repeat: repeat-x;
+  background-size: 16px 16px;
+  overflow: hidden;
 }
