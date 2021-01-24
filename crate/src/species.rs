@@ -223,13 +223,6 @@ pub fn execute_clause_orientation(
     ry: i32,
     r: usize,
 ) -> (bool, SandApi) {
-    // let mut starting_energy = 0;
-
-    // for x in 0..clause.selector.grid.len() {
-    //     let (dx, dy) = process_coord(matrix_index(x), rx, ry, r);
-    //     starting_energy += get_energy(api.get(dx, dy));
-    // }
-
     for x in 0..clause.selector.grid.len() {
         let (dx, dy) = process_coord(matrix_index(x), rx, ry, r);
 

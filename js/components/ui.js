@@ -384,7 +384,7 @@ class Index extends React.Component {
                 id="clear-button"
               >
                 {" "}
-                clear
+                reset
               </button>
             </>
 

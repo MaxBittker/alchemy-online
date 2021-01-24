@@ -38,10 +38,10 @@ canvas.width = width * ratio * Math.ceil(window.devicePixelRatio);
 canvas.height = height * ratio * Math.ceil(window.devicePixelRatio);
 
 const HUD = document.getElementById("HUD");
-let canvasSize;
+// let canvasSize;
 let resize = () => {
   let screen_width = window.innerWidth;
-  let HUDheight = 50;
+  let HUDheight = 34;
   let screen_height = window.innerHeight - HUDheight;
 
   let canvasStyle = "";
@@ -59,9 +59,18 @@ let resize = () => {
     // Infinity
     window.innerWidth - (hudWidth + border + 40)
   )}px; margin:10px; margin-right: ${hudWidth + 40}px; margin-left:auto;`;
-  canvasSize = window.innerHeight - border;
+  // canvasSize = window.innerHeight - border;
 
   HUDStyle = `width: ${hudWidth}px; margin: 10px;`;
+
+  if (screen_width < 600) {
+    HUDStyle = `margin: 40px 10px; margin-top:${
+      screen_width + 10
+    }px; margin-bottom: ${HUDheight}px ;padding-bottom: 40px`;
+    canvasStyle = `width:${screen_width - border}; height: ${
+      screen_width - border
+    }px; top: 10px; margin:auto; margin-top:10px ; `;
+  }
   // } else {
   // landscape wide
   // canvasStyle = `height: ${window.innerHeight}px`;
