@@ -145,6 +145,8 @@ class Matrix extends React.Component {
                 symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
               borderColor:
                 symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
+              backgroundImage: 'url("assets/paper.png")',
+              backgroundSize: "100px 100px",
               borderWidth: 3,
               fontSize: "30px",
               borderStyle: " outset",
