@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production --output-public-path /alchemy-online/",
+    "build-itch": "webpack --mode=production ",
     "start": "webpack-dev-server -d",
     "deploy": "webpack --mode=production && gh-pages -d dist"
   },
