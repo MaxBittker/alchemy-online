@@ -2,7 +2,7 @@
 
 # Alchemy Online
 
-[Alchemy Online](!https://maxbittker.itch.io/alchemy-online) is a compact magical workstation well-suited for transmutation, divination, and recreational summoning.
+[Alchemy Online](https://maxbittker.itch.io/alchemy-online) is a compact magical workstation well-suited for transmutation, divination, and recreational summoning.
 
 Use the principles of cellular automata to investigate the behaviors of the elementary particles and rewrite those very laws with your own computer mouse. 
 
@@ -10,7 +10,7 @@ Please consult the included manuscript for operation & safety guidelines.
 
 🜂 🝊 ☉ ☽ 🜛 🜝 🜏      🜏 🜝 🜛 ☽ ☉🝊 🜂  
 
-Share your alchemical discoveries on [the BBS](!https://maxbittker.itch.io/alchemy-online/community) 
+Share your alchemical discoveries on [the BBS](https://maxbittker.itch.io/alchemy-online/community) 
 
 🜂 🝊 ☉ ☽ 🜛 🜝 🜏     🜏 🜝 🜛 ☽ ☉🝊 🜂  
 
