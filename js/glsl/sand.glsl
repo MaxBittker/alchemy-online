@@ -66,7 +66,7 @@ void main() {
   } else if (type == 3) { // plant
     hue = 0.4;
     saturation += 0.2;
-    // lightness-=0.1;
+    lightness-=0.7*energy;
   } else if (type == 4) { // water
     hue = 0.58;
     // saturation -= 0.05;
@@ -97,12 +97,18 @@ void main() {
   saturation = min(saturation, 1.0);
   lightness = min(lightness, 1.0);
   color = hsv2rgb(vec3(hue, saturation, lightness));
-  // a = 1.0;
-  // if (last.a > 0.7) {
-  //   color.rgb = last.rgb;
-  //   a = last.a * 0.95;
-  // }
-  // color.rgb = max(color.rgb, last.rgb * 0.97);
+
+
+// if(a<0.3){
+//   vec2 cg = floor(grid /(dpi*8.));
+//   float check = mod(cg.x+mod(cg.y,2.0),2.);
+
+//   color = check * vec3(0.2);
+//   if(check>0.8){
+//       // color= vec3(1.0,0.0,0.); 
+//       // a+= 0.9;
+//   }
+//   }
 
   gl_FragColor = vec4(color, a);
 }
