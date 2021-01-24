@@ -45,7 +45,7 @@ jobs:
           npm run build-itch
       - name: Deploy 🚀
         uses: josephbmanley/butler-publish-itchio-action@master
-         env:
+        env:
            BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
            CHANNEL: gh
            ITCH_GAME: alchemy-online
