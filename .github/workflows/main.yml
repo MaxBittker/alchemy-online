@@ -25,7 +25,7 @@ jobs:
           CLEAN: true # Automatically remove deleted files from the deploy branch
 
 
-name: Build and Deploy Itch
+name: ItchDeploy
 on: [push]
 jobs:
   build-and-deploy:
@@ -46,11 +46,11 @@ jobs:
       - name: Deploy 🚀
         uses: josephbmanley/butler-publish-itchio-action@master
          env:
-         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-         CHANNEL: gh
-         ITCH_GAME: alchemy-online
-         ITCH_USER: maxbittker
-         PACKAGE: dist
+           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+           CHANNEL: gh
+           ITCH_GAME: alchemy-online
+           ITCH_USER: maxbittker
+           PACKAGE: dist
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
