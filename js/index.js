@@ -92,7 +92,7 @@ window.addEventListener("resize", resize);
 
 let drawSand = startWebGL({ canvas, universe });
 
-let t = parseInt(localStorage.getItem("time"), 10) || 0;
+let t = 0;
 const renderLoop = () => {
   const now = performance.now();
 
@@ -113,7 +113,7 @@ const renderLoop = () => {
 };
 function reset() {
   console.log("reseting");
-  localStorage.setItem("cell_data", null);
+  // localStorage.setItem("cell_data", null);
   universe.reset();
   drawBowl();
 }
