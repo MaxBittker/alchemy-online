@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/alchemy-online/precache-manifest.f0fb12b912f35bce95380ac669b27e95.js"
+  "/alchemy-online/precache-manifest.2d2cc132e3be59ede562564ac1f700d9.js"
 );
 
 self.addEventListener('message', (event) => {
