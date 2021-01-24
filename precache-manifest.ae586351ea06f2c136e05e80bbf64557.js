@@ -4,8 +4,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/1.4026e1f5cea1d1271700.js"
   },
   {
-    "revision": "d2a2c0540ebf82fc3523",
-    "url": "/alchemy-online/2.fa67184ba93bc1109dcb.js"
+    "revision": "84bd30582887f23f8925",
+    "url": "/alchemy-online/2.bd58c7b7265a67330827.js"
   },
   {
     "revision": "1564826234a9ade36f502c02b181c0ed",
@@ -88,6 +88,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/assets/site.webmanifest"
   },
   {
+    "revision": "f98985a53e9201c3fecfebeba7208d66",
+    "url": "/alchemy-online/assets/skell.cur"
+  },
+  {
     "revision": "09fe2f906e1206b95bcfb81a9d7dfed3",
     "url": "/alchemy-online/assets/talkskull.gig.gif"
   },
@@ -116,7 +120,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/assets/ultima_tile.png"
   },
   {
-    "revision": "d2a2c0540ebf82fc3523",
+    "revision": "84bd30582887f23f8925",
     "url": "/alchemy-online/da205a1892a2e7a97b5c.module.wasm"
   },
   {
@@ -124,19 +128,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/gif.worker.js"
   },
   {
-    "revision": "aa43a6319ff331ad8dd67e9b5fcfb493",
+    "revision": "7aa6bf733f9df13c5247c7f9a58366c4",
     "url": "/alchemy-online/index.html"
   },
   {
-    "revision": "2734bcee4667e8f6f97c",
-    "url": "/alchemy-online/main.c0a688291e5dc4fb9fbd.js"
+    "revision": "6de8452da70ac020e79e",
+    "url": "/alchemy-online/main.cd72cdb5887632baea39.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
     "url": "/alchemy-online/manifest.json"
   },
   {
-    "revision": "d1be58c07a90016986a3cb96bda5d738",
+    "revision": "055c6408dc2b136694ecee41c1eeef11",
     "url": "/alchemy-online/styles.css"
   }
 ]);

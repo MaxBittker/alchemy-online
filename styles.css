@@ -87,12 +87,13 @@ body {
   overscroll-behavior-y: none;
   overflow-x: hidden;
   overflow: hidden;
-
-  /* cursor: url("assets/White_sword.cur"), auto; */
 }
 * {
+  /* cursor: url("assets/White_sword.cur"), auto !important; */
+
   cursor: url("assets/default32x32.cur"), auto !important;
   /* cursor: url("assets/SKELETON_04.gif"), auto !important; */
+  /* cursor: url("assets/skell.cur"), auto !important; */
 }
 
 body {
@@ -173,8 +174,9 @@ img {
 }
 
 button {
-  text-shadow: 0px 1px 1px rgb(153, 147, 147);
+  cursor: url("assets/default32x32.cur"), auto !important;
 
+  text-shadow: 0px 1px 1px rgb(153, 147, 147);
   z-index: 3;
   /* zoom: 1.25; */
   position: relative;
@@ -182,7 +184,7 @@ button {
   /* flex-grow: 1; */
   /* max-width: 90px; */
   fill: var(--main-dark-color);
-  cursor: pointer;
+  /* cursor: grab !important; */
   user-select: none; /* Standard */
 
   box-sizing: border-box;
@@ -219,7 +221,6 @@ button.selected {
 #HUD {
   position: absolute;
   right: 0px;
-  max-width: 420px;
   /* display: flex; */
   /* flex-wrap: wrap; */
   z-index: 3;
@@ -229,7 +230,7 @@ button.selected {
   margin: 1px 0px;
   /* display: flex; */
   /* flex-wrap: wrap; */
-  zoom: 1.5;
+  /* zoom: 1.5; */
 }
 
 #hud-buttons {
@@ -237,13 +238,15 @@ button.selected {
   flex-wrap: wrap;
 }
 #hud-buttons button {
-  margin: 2px;
-  height: 30px;
-  width: 30px;
+  margin: 3px;
+  height: 45px;
+  width: 45px;
+
   min-width: 0px;
-  font-size: 18px;
+  font-size: 30px;
   line-height: 25px;
   padding: 0;
+  line-height: 0 !important;
 }
 #HUD a {
   /* flex-grow: 1; */
@@ -311,37 +314,49 @@ button.selected {
   padding: 1px;
   text-shadow: 1px 1px 1px var(--window-frame);
 }
+.title-bar-controls button {
+  height: 16px;
+  line-height: 0;
+  padding-bottom: 2px;
+  padding-left: 1px;
+  font-weight: bold;
+}
 .title-bar .title-bar-text {
   line-height: 0;
   font-size: 14px !important;
   margin-right: 10px;
 }
 .hint {
-  font-size: 15px !important;
+  font-size: 19px !important;
   margin: auto;
   text-align: center;
   text-shadow: 0px 0.5px 0.5px gainsboro;
 }
 .hud-body button#clear-button {
-  margin: 0 0 0 auto;
+  margin: 2px 2px 2px auto;
   float: right;
   width: auto;
   height: 20px;
   line-height: 0px;
-  font-size: 12px;
+  font-size: 18px;
   padding: 5px;
   background-color: gray;
+  text-shadow: 0px 0px 1px gainsboro;
 }
 .hud-body button.clear-button:active {
   border: 2px inset gainsboro !important;
 }
 
 button:not(:disabled):active {
-  padding: 1px 5px !important;
+  /* padding: 1px 5px !important; */
+  border-style: inset !important;
 }
 .mat-box {
   fill: rgba(255, 255, 255, 0.9);
   transition: fill 0.25s;
+  background: inherit;
+  min-width: 0px;
+  padding: 0 !important;
   /* background: url("assets/ultima_tile.png"); */
 }
 
@@ -373,6 +388,9 @@ svg text {
   dominant-baseline: middle;
   text-anchor: middle;
   stroke-width: 0 !important;
+}
+.MatrixMenu {
+  width: 100%;
 }
 .MatrixMenu svg {
   stroke: #5a5a5a;
@@ -427,12 +445,14 @@ text {
   width: 30px;
 }
 #start {
+  user-select: none;
   display: flex;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 3px;
+  padding-right: 3px;
   z-index: 1;
-  width: 80px;
+  /* width: 80px; */
   background-color: var(--menu) !important;
   height: 27px;
   margin: 1px;
@@ -441,6 +461,12 @@ text {
   text-align: center;
   border: 3px outset var(--menu);
   text-shadow: 1px 1px 1px gainsboro;
+}
+#start:hover {
+  filter: drop-shadow(0px 0px 3px gold);
+}
+#start img {
+  filter: drop-shadow(0px 0px 2px gold);
 }
 #fps {
   position: absolute;
@@ -470,4 +496,61 @@ text {
 }
 #quote p {
   font-size: 40px;
+}
+
+#start-content {
+  position: absolute;
+  /* height: 500px; */
+  width: 300px;
+  left: 0;
+  bottom: 28px;
+  z-index: 4;
+  padding: 5px;
+  zoom: 1.2;
+}
+
+#start-content p {
+  text-align: justify;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 3px;
+  font-family: NotoSansSymbols, serif;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+a {
+  color: black;
+  font-size: 18px;
+  text-decoration: none;
+  font-family: NotoSansSymbols, serif;
+}
+a:hover {
+  text-decoration: underline 1px black;
+}
+
+.credit {
+  text-align: right !important;
+
+  /* font-size: 18px; */
+}
+blockquote {
+  font-family: NotoSansSymbols, serif;
+  padding-right: 4px;
+  text-align: right;
+  font-size: 18px;
+  line-height: 20px;
+}
+h3 {
+  font-size: 1.6rem;
+}
+bigger {
+  font-family: NotoSansSymbols, serif;
+  font-size: 1.6rem;
+  line-height: 0;
+  vertical-align: middle;
 }
