@@ -23,3 +23,38 @@ jobs:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: dist # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
+
+
+name: Build and Deploy Itch
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          cd crate
+          cargo build
+          cd ..
+          npm install
+          npm run build-itch
+      - name: Deploy 🚀
+        uses: josephbmanley/butler-publish-itchio-action@master
+         env:
+         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+         CHANNEL: gh
+         ITCH_GAME: alchemy-online
+         ITCH_USER: maxbittker
+         PACKAGE: dist
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: dist # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+
+ 
