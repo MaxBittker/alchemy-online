@@ -5,7 +5,7 @@
   --window-frame: #0a0a0a;
   --button-highlight: #ffffff;
   --active-menu: #803f41;
-  --menu: #b19a92;
+  --menu: #a18982;
   --border-sunken-outer: inset -1px -1px var(--button-highlight),
     inset 1px 1px var(--window-frame);
   --border-sunken-inner: inset -2px -2px var(--button-face),
@@ -13,7 +13,7 @@
 }
 div {
   background: url("assets/paper.png") !important;
-  background-size: 100px 100px;
+  background-size: 100px 100px !important;
 }
 .ultima {
   filter: drop-shadow(1px 3px 3px black);
@@ -83,10 +83,10 @@ svg {
 }
 html,
 body {
-  overscroll-behavior-x: none;
-  overscroll-behavior-y: none;
-  overflow-x: hidden;
-  overflow: hidden;
+  /* overscroll-behavior-x: none; */
+  /* overscroll-behavior-y: none; */
+  /* overflow-x: hidden; */
+  /* overflow: hidden; */
 }
 * {
   /* cursor: url("assets/White_sword.cur"), auto !important; */
@@ -315,9 +315,9 @@ button.selected {
   text-shadow: 1px 1px 1px var(--window-frame);
 }
 .title-bar-controls button {
-  height: 16px;
+  height: 15px;
   line-height: 0;
-  padding-bottom: 2px;
+  padding-bottom: 3px;
   padding-left: 1px;
   font-weight: bold;
 }
@@ -418,10 +418,11 @@ text {
   /* filter: drop-shadow(1px 1px 3px red); */
 }
 #bar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 6;
   height: 30px;
   background-color: var(--active-menu) !important;
   border: 2px outset var(--active-menu);
@@ -463,7 +464,7 @@ text {
   text-shadow: 1px 1px 1px gainsboro;
 }
 #start:hover {
-  filter: drop-shadow(0px 0px 3px gold);
+  /* filter: drop-shadow(0px 0px 3px gold); */
 }
 #start img {
   filter: drop-shadow(0px 0px 2px gold);
@@ -517,6 +518,9 @@ text {
   font-family: NotoSansSymbols, serif;
 }
 
+details[open] > summary #start {
+  border: 3px inset gainsboro;
+}
 details > summary {
   list-style: none;
 }
