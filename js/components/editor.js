@@ -117,27 +117,28 @@ class Editor extends React.Component {
       <div className="MatrixMenu">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="-12 10 410 180"
+          viewBox="0 15 355 170"
           width="100%"
         >
           <g
+            transform="translate(178,0)"
             className={classNames({ disabled: probability.p == 0 }, "symmetry")}
           >
-            <circle
-              cx={10}
-              cy={98}
+            {/* <circle
+              cx={0}
+              cy={42}
               r="20"
               className="mat-circle"
               style={{
                 strokeWidth: 1,
-                fill: "rgba(255,255,255,0.2)",
+                fill: "rgba(255,255,255,0.0)",
               }}
-            ></circle>
+            ></circle> */}
 
             <text
-              x="10"
-              y={98 + 4}
-              style={{ fontSize: "35px" }}
+              x="0"
+              y={42 + 4}
+              style={{ fontSize: "30px" }}
               onContextMenu={(e) => {
                 e.preventDefault();
                 this.incSymmetry(-1);
@@ -172,7 +173,7 @@ class Editor extends React.Component {
           </text> */}
 
           <g className={classNames({ disabled: probability.p == 0 }, "clause")}>
-            <g transform="translate(20,0)">
+            <g transform="translate(0,0)">
               {selector && (
                 <Matrix
                   selectedElement={selectedElement}
@@ -187,10 +188,10 @@ class Editor extends React.Component {
                 />
               )}
             </g>
-            <g transform="translate(204,80)">
-              <image href="assets/gold_arrow.png" height="25" width="20" />
+            <g transform="translate(169,78)">
+              <image href="assets/gold_arrow.png" height="28" width="23" />
             </g>
-            <g transform="translate(215,0)">
+            <g transform="translate(200,0)">
               {effector && (
                 <Matrix
                   selectedElement={selectedElement}

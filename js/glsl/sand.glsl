@@ -39,7 +39,7 @@ void main() {
   float age = data.b;
 
   float hue = 0.0;
-  float saturation =  0.2 + (energy*1.9) + (age *0.2) ;
+  float saturation =  0.3 + (energy*1.9) + (age *0.2) ;
   float lightness = 0.7 - energy * .1;
   float a = 1.0;
   float brightness = 0.0;
@@ -47,7 +47,7 @@ void main() {
   if (type == 0) { // Air
     hue = 0.0;
     saturation = 0.1;
-    a = 0.2;
+    a = 0.0 ;
     if (isSnapshot) {
     lightness = 1.0;
 
@@ -63,11 +63,11 @@ void main() {
   } else if (type == 3) { // plant
     hue = 0.4;
     saturation += 0.2;
-    lightness-=0.1;
+    // lightness-=0.1;
   } else if (type == 4) { // water
     hue = 0.58;
-    saturation -= 0.05;
-    lightness += noise * 0.1;
+    // saturation -= 0.05;
+    lightness -= noise * 0.1;
     // a = 0.9;
     if (isSnapshot) {
       a = 1.0;

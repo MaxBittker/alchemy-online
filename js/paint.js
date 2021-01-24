@@ -20,11 +20,11 @@ const eventDistance = (a, b) => {
   );
 };
 
-const magnitude = a => {
+const magnitude = (a) => {
   return Math.sqrt(Math.pow(a.clientX, 2) + Math.pow(a.clientY, 2), 2);
 };
 
-const norm = a => {
+const norm = (a) => {
   let mag = magnitude(a);
   return { clientX: a.clientX / mag, clientY: a.clientY / mag };
 };
@@ -42,7 +42,7 @@ let painting = false;
 let lastPaint = null;
 let repeat = null;
 
-canvas.addEventListener("mousedown", event => {
+canvas.addEventListener("mousedown", (event) => {
   event.preventDefault();
 
   universe.push_undo();
@@ -54,7 +54,7 @@ canvas.addEventListener("mousedown", event => {
   lastPaint = event;
 });
 
-document.body.addEventListener("mouseup", event => {
+document.body.addEventListener("mouseup", (event) => {
   clearInterval(repeat);
   if (painting) {
     event.preventDefault();
@@ -63,17 +63,17 @@ document.body.addEventListener("mouseup", event => {
   }
 });
 
-canvas.addEventListener("mousemove", event => {
+canvas.addEventListener("mousemove", (event) => {
   clearInterval(repeat);
   smoothPaint(event);
 });
 
-canvas.addEventListener("mouseleave", event => {
+canvas.addEventListener("mouseleave", (event) => {
   clearInterval(repeat);
   lastPaint = null;
 });
 
-canvas.addEventListener("touchstart", event => {
+canvas.addEventListener("touchstart", (event) => {
   if (event.cancelable) {
     event.preventDefault();
   }
@@ -86,7 +86,7 @@ canvas.addEventListener("touchstart", event => {
   handleTouches(event);
 });
 
-canvas.addEventListener("touchend", event => {
+canvas.addEventListener("touchend", (event) => {
   if (event.cancelable) {
     event.preventDefault();
   }
@@ -95,7 +95,7 @@ canvas.addEventListener("touchend", event => {
   clearInterval(repeat);
 });
 
-canvas.addEventListener("touchmove", event => {
+canvas.addEventListener("touchmove", (event) => {
   if (!window.paused) {
     if (event.cancelable) {
       event.preventDefault();
@@ -137,7 +137,7 @@ function smoothPaint(event) {
   lastPaint = event;
 }
 
-const handleTouches = event => {
+const handleTouches = (event) => {
   let touches = Array.from(event.touches);
   if (touches.length == 1) {
     smoothPaint(touches[0]);
@@ -147,8 +147,15 @@ const handleTouches = event => {
 };
 
 function convertEventCoordinates(event) {
-  const boundingRect = canvas.getBoundingClientRect();
+  let bw = 28;
+  let boundingRect = canvas.getBoundingClientRect();
 
+  boundingRect = {
+    left: boundingRect.left + bw,
+    top: boundingRect.top + bw,
+    width: boundingRect.width - bw * 2,
+    height: boundingRect.height - bw * 2,
+  };
   const scaleX =
     canvas.width /
     (ratio * Math.ceil(window.devicePixelRatio)) /
@@ -165,7 +172,7 @@ function convertEventCoordinates(event) {
   const y = Math.min(Math.floor(canvasTop), height - 1);
   return [x, y];
 }
-const paint = event => {
+const paint = (event) => {
   if (!painting) {
     return;
   }

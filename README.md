@@ -1,6 +1,6 @@
 <meta charset="utf-8"/>
 
-# tile toy
+# Alchemy Online
 
 cellular automata
 alchemy table

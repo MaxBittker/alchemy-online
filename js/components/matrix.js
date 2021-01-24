@@ -13,12 +13,12 @@ console.log(Species);
 //   // .filter()
 // }
 let ruleSymbols = {
-  [Species.Empty]: "×",
-  [Species.Rule1]: "🜊",
+  [Species.Empty]: "🜂",
+  [Species.Rule1]: "🝊",
   [Species.Rule2]: "☉",
   [Species.Rule3]: "☽",
-  [Species.Rule4]: "🝆",
-  [Species.Rule5]: "🜁",
+  [Species.Rule4]: "🜛",
+  [Species.Rule5]: "🜝",
   [Species.Rule6]: "🜏",
 };
 
@@ -43,7 +43,7 @@ let SymmetryOptions = [
 let SlotOptions = [
   {
     key: Species.Empty,
-    symbol: "×",
+    symbol: ruleSymbols[Species.Empty],
   },
   {
     key: Species.Wild,
@@ -115,7 +115,7 @@ class Matrix extends React.Component {
     return (
       <g
         key={`${x}-${y}`}
-        transform={`translate(${x * 55 + 15},${y * 55 + 15})`}
+        transform={`translate(${x * 51},${y * 51 + 15})`}
         className={inactive ? "disabled" : ""}
         onContextMenu={(e) => {
           e.preventDefault();
@@ -137,8 +137,8 @@ class Matrix extends React.Component {
             className="mat-box"
             draggable="true"
             style={{
-              width: size,
-              height: size,
+              width: size - inset,
+              height: size - inset,
               filter: "saturate(0.8)",
               color: symbol == "*" ? "#888" : "black",
               backgroundColor:
@@ -147,18 +147,11 @@ class Matrix extends React.Component {
                 symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
               borderWidth: 3,
               fontSize: "30px",
+              borderStyle: " outset",
+              lineHeight: 0,
+              verticalAlign: "middle",
             }}
             onDragStart={(e) => {
-              let target = e.target;
-              target.style.width = "30px";
-              target.style.height = "30px";
-              target.style.fontSize = "18px";
-
-              setTimeout(function () {
-                target.style.width = size + "px";
-                target.style.height = size + "px";
-                target.style.fontSize = "30px";
-              }, 1);
               e.dataTransfer.setData("text/plain", myCell);
             }}
           >

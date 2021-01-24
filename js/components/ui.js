@@ -14,19 +14,7 @@ import { Clause, Selector, Effector } from "../../crate/pkg";
 window.species = Species;
 let pallette_data = pallette();
 window.pallette = pallette_data;
-const OrganicButton = ({ onClick, className, style, children }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={className}
-      style={{
-        ...style,
-      }}
-    >
-      {children}
-    </button>
-  );
-};
+
 function resetClause(element, clause_index) {
   let selector = new Selector(
     Species.Wild,
@@ -270,11 +258,12 @@ class Index extends React.Component {
             ></button>
             <button aria-label="Maximize"></button> */}
             <button
-              aria-label="Close"
               onClick={() => {
                 this.reset();
               }}
-            ></button>
+            >
+              ×
+            </button>
           </div>
         </div>
         <div className="window-body hud-body">
@@ -376,6 +365,8 @@ class Index extends React.Component {
                 selectedElement={selectedElement}
                 clause_index={2}
               ></Editor>
+              <div className="hint">drag and drop tiles to construct rules</div>
+
               <button
                 onClick={() => {
                   let s = selectedElement;
@@ -393,10 +384,9 @@ class Index extends React.Component {
                 id="clear-button"
               >
                 {" "}
-                clear rule
+                clear
               </button>
             </>
-            <div className="hint">drag and drop tiles to construct rules</div>
 
             {this.state.dataURL && (
               <Menu close={() => this.closeMenu()}>
