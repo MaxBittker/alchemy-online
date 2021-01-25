@@ -368,8 +368,7 @@ class Index extends React.Component {
                 this.setState({ selectedElement: id })
               )
             )}
-            <img style={{ width: "100%" }} src="assets/barb_wire.gif"></img>
-            {/* <hr className="chain-hr"></hr> */}
+            <hr className="chain-hr2"></hr>
             <>
               <Editor
                 selectedElement={selectedElement}
@@ -405,6 +404,7 @@ class Index extends React.Component {
                 reset
               </button>
             </>
+            <hr className="chain-hr2"></hr>
 
             {this.state.dataURL && (
               <Menu close={() => this.closeMenu()}>
