@@ -5,12 +5,12 @@ import { Matrix, SymmetryOptions, SlotOptions } from "./matrix";
 
 let probabilityMap = [
   { p: 0, symbol: "×" },
-  { p: 1, symbol: "⚀" },
-  { p: 2, symbol: "⚁" },
-  { p: 3, symbol: "⚂" },
-  { p: 4, symbol: "⚃" },
-  { p: 5, symbol: "⚄" },
-  { p: 6, symbol: "⚅" },
+  { p: 1, symbol: "\xa0" },
+  // { p: 2, symbol: "⚁" },
+  // { p: 3, symbol: "⚂" },
+  // { p: 4, symbol: "⚃" },
+  // { p: 5, symbol: "⚄" },
+  // { p: 6, symbol: "⚅" },
 ];
 class Editor extends React.Component {
   constructor(props) {
@@ -116,25 +116,14 @@ class Editor extends React.Component {
     return (
       <div className="MatrixMenu">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="160px">
-          <g
-            transform="translate(178,0)"
-            className={classNames({ disabled: probability.p == 0 }, "symmetry")}
-          >
-            {/* <circle
-              cx={0}
-              cy={42}
-              r="20"
-              className="mat-circle"
-              style={{
-                strokeWidth: 1,
-                fill: "rgba(255,255,255,0.0)",
-              }}
-            ></circle> */}
-
+          <g transform="translate(178,0)" className="symmetry">
             <text
               x="0"
               y={30}
-              style={{ fontSize: "30px" }}
+              style={{
+                fontSize: "30px",
+                opacity: probability.p == 0 ? 0.2 : 1.0,
+              }}
               onContextMenu={(e) => {
                 e.preventDefault();
                 this.incSymmetry(-1);
@@ -142,6 +131,26 @@ class Editor extends React.Component {
               onClick={() => this.incSymmetry(1)}
             >
               {SymmetryOptions[symmetry].symbol}
+            </text>
+            <image
+              x="-10"
+              y="65"
+              href="assets/gold_arrow.png"
+              height="28"
+              width="23"
+              style={{ opacity: probability.p == "×" ? "0.7" : "1.0" }}
+            />
+            <text
+              x="0"
+              y="80"
+              style={{ fontSize: "45px", fill: "#d03f41" }}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                this.incProbability(-1);
+              }}
+              onClick={() => this.incProbability(1)}
+            >
+              {probability.symbol}
             </text>
           </g>
           {/* <circle
@@ -154,19 +163,6 @@ class Editor extends React.Component {
               fill: "rgba(255,255,255,0.2)",
             }}
           ></circle> */}
-
-          {/* <text
-            x="8"
-            y="129"
-            style={{ fontSize: "35px" }}
-            onContextMenu={(e) => {
-              e.preventDefault();
-              this.incProbability(-1);
-            }}
-            onClick={() => this.incProbability(1)}
-          >
-            {probability.symbol}
-          </text> */}
 
           <g className={classNames({ disabled: probability.p == 0 }, "clause")}>
             <g transform="translate(-2,0)">
@@ -184,9 +180,7 @@ class Editor extends React.Component {
                 />
               )}
             </g>
-            <g transform="translate(169,63)">
-              <image href="assets/gold_arrow.png" height="28" width="23" />
-            </g>
+
             <g transform="translate(202,0)">
               {effector && (
                 <Matrix

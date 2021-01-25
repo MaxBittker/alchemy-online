@@ -84,8 +84,8 @@ impl Clause {
     }
     pub fn new_null() -> Clause {
         Clause {
-            probability: 1,
-            symmetry: SymmetryMode::Horizontal,
+            probability: 0,
+            symmetry: SymmetryMode::Quad,
             selector: Selector {
                 grid: [
                     Species::Wild,
@@ -285,8 +285,9 @@ pub fn execute_clause_orientation(
 
 pub fn execute_clause(cell: Cell, api: SandApi, clause: Clause) -> (bool, SandApi) {
     // if clause.probability == 0 || rand_int(2i32.pow((clause.probability) as u32)) > 1 {
-    //     return (false, api);
-    // }
+    if clause.probability == 0 {
+        return (false, api);
+    }
     match clause.symmetry {
         // SymmetryMode::None => {
         //     return execute_clause_orientation(cell, api, clause, 1, 1, 0);

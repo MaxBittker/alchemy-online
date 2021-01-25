@@ -360,6 +360,7 @@ class Index extends React.Component {
               )
             )}
             <img style={{ width: "100%" }} src="assets/barb_wire.gif"></img>
+            {/* <hr className="chain-hr"></hr> */}
             <>
               <Editor
                 selectedElement={selectedElement}
