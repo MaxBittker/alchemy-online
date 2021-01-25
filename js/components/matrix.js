@@ -126,7 +126,12 @@ class Matrix extends React.Component {
           if (inactive) return;
 
           var element = e.dataTransfer.getData("text");
-          grid[grid_index(x, y)] = parseInt(element, 10);
+          let elementID = parseInt(element, 10);
+          if (!SlotOptions.find((m) => m.key == elementID)) {
+            return;
+          }
+
+          grid[grid_index(x, y)] = elementID;
           let { setGrid } = this.props;
           setGrid(grid);
         }}
