@@ -69,13 +69,22 @@ const ElementButton = (name, selectedElement, setElement) => {
       className={selected ? `selected ${name}` : name}
       key={name}
       draggable
+      onClick={() => {
+        setElement(elementID);
+      }}
       onDragStart={(e) => {
         // e.currentTarget.style.boxShadow = "none";
         e.dataTransfer.setData("text/plain", elementID);
       }}
-      onClick={() => {
-        setElement(elementID);
+      onDrop={(e) => {
+        //this is for tiny accidentaly drags
+        let element = e.dataTransfer.getData("text");
+        let id = parseInt(element, 10);
+        if (id == elementID) {
+          setElement(elementID);
+        }
       }}
+      onDragOver={(e) => e.preventDefault()}
       style={{
         background,
         backgroundColor: color,
