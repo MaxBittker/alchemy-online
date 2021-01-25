@@ -156,7 +156,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/gif.worker.js"
   },
   {
-    "revision": "b252086f8b6d2e9fd0c35bf1511bfb73",
+    "revision": "341f2dbadebba996ac31a0204804a192",
     "url": "/alchemy-online/index.html"
   },
   {
