@@ -60,6 +60,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/assets/browserconfig.xml"
   },
   {
+    "revision": "15492840b640795c478ef1e1ca57c235",
+    "url": "/alchemy-online/assets/chain01..png"
+  },
+  {
     "revision": "a5b5de36f8817950da09aa13faff6400",
     "url": "/alchemy-online/assets/chain02..png"
   },
@@ -74,6 +78,22 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f3e98858b8f2ed42f50d614a2ce1e9a0",
     "url": "/alchemy-online/assets/gold_arrow.png"
+  },
+  {
+    "revision": "4852aa6e40e7d0d8521c2309070c2bec",
+    "url": "/alchemy-online/assets/hr1.png"
+  },
+  {
+    "revision": "0fcab13da410e74233f1dc3d1f9aa854",
+    "url": "/alchemy-online/assets/hr2.png"
+  },
+  {
+    "revision": "55773060957f12a6e52df354a2b9a88d",
+    "url": "/alchemy-online/assets/hr3.png"
+  },
+  {
+    "revision": "fe5bb6e01f09900ee630fbc018493e87",
+    "url": "/alchemy-online/assets/hr4.png"
   },
   {
     "revision": "3ed59c98ec041d25145e97a30e3e3a0c",
@@ -98,6 +118,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f98985a53e9201c3fecfebeba7208d66",
     "url": "/alchemy-online/assets/skell.cur"
+  },
+  {
+    "revision": "5edf649846c93084723bdf3c78d68e37",
+    "url": "/alchemy-online/assets/snakehr.gif"
   },
   {
     "revision": "09fe2f906e1206b95bcfb81a9d7dfed3",
