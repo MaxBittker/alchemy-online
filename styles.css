@@ -487,7 +487,7 @@ text {
   bottom: 28px;
   z-index: 4;
   padding: 5px;
-  zoom: 1.2;
+  zoom: 1.1;
 }
 
 #start-content p {
@@ -508,7 +508,7 @@ details > summary::-webkit-details-marker {
   display: none;
 }
 a {
-  color: black;
+  color: rgb(151, 34, 34);
   font-size: 18px;
   text-decoration: none;
   font-family: NotoSansSymbols, serif;

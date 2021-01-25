@@ -4,12 +4,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/1.4026e1f5cea1d1271700.js"
   },
   {
-    "revision": "52207ba57e9d5c7a104f",
-    "url": "/alchemy-online/2.38ce3f0d58d3a8df3bd4.js"
+    "revision": "f46663b7296571c4303f",
+    "url": "/alchemy-online/2.2a1068edc16122479761.js"
   },
   {
-    "revision": "52207ba57e9d5c7a104f",
-    "url": "/alchemy-online/8f12ba31d775de28ce65.module.wasm"
+    "revision": "f46663b7296571c4303f",
+    "url": "/alchemy-online/865943deb8973e9bfe1f.module.wasm"
   },
   {
     "revision": "1564826234a9ade36f502c02b181c0ed",
@@ -58,6 +58,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a493ba0aa0b8ec8068d786d7248bb92c",
     "url": "/alchemy-online/assets/browserconfig.xml"
+  },
+  {
+    "revision": "a5b5de36f8817950da09aa13faff6400",
+    "url": "/alchemy-online/assets/chain02..png"
   },
   {
     "revision": "299e57e54f0d3d93a4cba00b10582b3b",
@@ -128,19 +132,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/gif.worker.js"
   },
   {
-    "revision": "34d673168f935f1f46b04256e59c67fd",
+    "revision": "b0bf86f705cf55a1a855914166c4b947",
     "url": "/alchemy-online/index.html"
   },
   {
-    "revision": "381a04692c085b6cd5d1",
-    "url": "/alchemy-online/main.7e64f6932ef428ed430f.js"
+    "revision": "54a61962b1622ec856d9",
+    "url": "/alchemy-online/main.0d5b54f50ad91f25ac4b.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
     "url": "/alchemy-online/manifest.json"
   },
   {
-    "revision": "d6f5922cebe245162dbaedcec1f4f1d5",
+    "revision": "0f1f932c588be3e07e6e37150a5af557",
     "url": "/alchemy-online/styles.css"
   }
 ]);
