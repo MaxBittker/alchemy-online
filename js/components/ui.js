@@ -269,7 +269,7 @@ class Index extends React.Component {
                 this.reset();
               }}
             >
-              ×
+              ⏻
             </button>
           </div>
         </div>
