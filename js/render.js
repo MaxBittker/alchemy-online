@@ -49,7 +49,6 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
     frag: fsh,
     uniforms: {
       t: ({ tick }) => tick,
-      skyTime: () => window.skyTime || 0,
       dataTexture: () => {
         cell_pointer = universe.cells();
         cells = new Uint8Array(memory.buffer, cell_pointer, width * height * 4);
