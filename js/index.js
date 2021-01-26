@@ -1,9 +1,10 @@
-import { Universe, Species } from "../crate/pkg";
+import { Universe } from "../crate/pkg";
 
 import { startWebGL } from "./render";
 import { fps } from "./fps";
 import {} from "./paint";
 import {} from "./setup";
+import { boot } from "./boot";
 import { startApp } from "./app";
 
 let ratio = 8;
@@ -20,17 +21,11 @@ let d = n - 6;
 console.log(width, height);
 const universe = Universe.new(width, height);
 
-function drawBowl() {
-  universe.paint(h, h, d + 2, Species.Rule1);
-  // universe.paint(h - 30, d - 3, 20, Species.Rule1);
-  // universe.paint(h + 30, d - 3, 20, Species.Rule1);
-  universe.paint(h, h, d - 2, Species.Empty);
-}
 window.u = universe;
 window.universe = universe;
 
 startApp();
-drawBowl();
+boot(width, height);
 
 const canvas = document.getElementById("sand-canvas");
 
@@ -101,11 +96,12 @@ const renderLoop = () => {
   drawSand.draw();
   requestAnimationFrame(renderLoop);
 };
+
 function reset() {
   console.log("reseting");
   // localStorage.setItem("cell_data", null);
-  universe.reset();
-  drawBowl();
+  // universe.reset();
+  boot(width, height);
 }
 
 // window.Editor.setRule();

@@ -14,7 +14,9 @@ import { Clause, Selector, Effector } from "../../crate/pkg";
 window.species = Species;
 let pallette_data = pallette();
 window.pallette = pallette_data;
-
+let activeSpecies = Object.keys(Species).filter(
+  (name) => name.length > 2 && name != "Wild"
+);
 function resetClause(element, clause_index) {
   let selector = new Selector(
     Species.Wild,
@@ -249,10 +251,6 @@ class Index extends React.Component {
         ? `#${currentSubmission.id}`
         : "";
 
-    let activeSpecies = Object.keys(Species).filter(
-      (name) => name.length > 2 && name != "Wild"
-    );
-
     return (
       <div className="window fade " id="HUD">
         <div className="title-bar">
@@ -423,4 +421,4 @@ class Index extends React.Component {
   }
 }
 
-export { Index, ruleSymbols };
+export { Index, ruleSymbols, activeSpecies };
