@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import { memory } from "../../crate/pkg/sandtable_bg";
 import { Species } from "../../crate/pkg/sandtable";
@@ -7,9 +6,9 @@ import { Species } from "../../crate/pkg/sandtable";
 import { height, universe, width, reset } from "../index.js";
 import { exportGif, pallette } from "../render.js";
 import Menu from "./menu.js";
-import { Editor, probabilityMap } from "./editor";
-import { ruleSymbols, SymmetryOptions } from "./matrix";
-import { Clause, Selector, Effector } from "../../crate/pkg";
+import { Editor } from "./editor";
+import { resetClause, mutate } from "./rules";
+import { ruleSymbols } from "./matrix";
 
 window.species = Species;
 let pallette_data = pallette();
@@ -17,41 +16,7 @@ window.pallette = pallette_data;
 let activeSpecies = Object.keys(Species).filter(
   (name) => name.length > 2 && name != "Wild"
 );
-function resetClause(element, clause_index) {
-  let selector = new Selector(
-    Species.Wild,
-    Species.Wild,
-    Species.Wild,
 
-    Species.Wild,
-    element,
-    Species.Wild,
-
-    Species.Wild,
-    Species.Wild,
-    Species.Wild
-  );
-  let effector = new Effector(
-    Species.Wild,
-    Species.Wild,
-    Species.Wild,
-
-    Species.Wild,
-    element,
-    Species.Wild,
-
-    Species.Wild,
-    Species.Wild,
-    Species.Wild
-  );
-  let r_clause = new Clause(
-    probabilityMap[1].p,
-    SymmetryOptions[0].key,
-    selector,
-    effector
-  );
-  universe.set_clause(r_clause, element, clause_index);
-}
 const ElementButton = (name, selectedElement, setElement) => {
   let elementID = Species[name];
 
@@ -381,7 +346,25 @@ class Index extends React.Component {
                 clause_index={2}
               ></Editor>
               <div className="hint">drag and drop tiles to construct rules</div>
-
+              <button
+                onClick={() => {
+                  let s = selectedElement;
+                  mutate(selectedElement, 0);
+                  mutate(selectedElement, 1);
+                  mutate(selectedElement, 2);
+                  this.setState(
+                    {
+                      selectedElement:
+                        (selectedElement + 1) % activeSpecies.length,
+                    },
+                    () => this.setState({ selectedElement: s })
+                  );
+                }}
+                id="clear-button"
+              >
+                {" "}
+                Mutate
+              </button>
               <button
                 onClick={() => {
                   let s = selectedElement;

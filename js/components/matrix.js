@@ -1,9 +1,6 @@
 import React from "react";
 import { Species, SymmetryMode } from "../../crate/pkg";
 
-console.log(SymmetryMode);
-console.log(Species);
-
 // function keys(en) {
 //   return Object.keys(en)
 //     .filter(k => isNaN(parseFloat(k)))
@@ -191,4 +188,4 @@ class Matrix extends React.Component {
   }
 }
 
-export { Matrix, ruleSymbols, SymmetryOptions, SlotOptions };
+export { Matrix, ruleSymbols, SymmetryOptions, SlotOptions, grid_index };

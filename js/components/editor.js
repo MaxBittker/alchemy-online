@@ -2,7 +2,6 @@ import React from "react";
 import classNames from "classnames";
 import { Clause, Selector, Effector } from "../../crate/pkg";
 import { Matrix, SymmetryOptions, SlotOptions } from "./matrix";
-
 let probabilityMap = [
   { p: 0, symbol: "×" },
   { p: 1, symbol: "\xa0" },
@@ -22,16 +21,15 @@ class Editor extends React.Component {
     };
     window.Editor = this;
   }
+
   static getRule(selectedElement, clause_index) {
-    console.log(selectedElement, clause_index);
     let clause = window.u.clause(selectedElement, clause_index);
-    // let clause = rule.clause(clause_index);
     const selector = Array.from(
       new Uint8Array(memory.buffer, clause.selector.grid(), 9)
-    );
+    ).slice(0);
     const effector = Array.from(
       new Uint8Array(memory.buffer, clause.effector.grid(), 9)
-    );
+    ).slice(0);
     const symmetry = clause.symmetry();
     const probability = clause.probability();
     return {
