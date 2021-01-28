@@ -2,16 +2,13 @@ extern crate cfg_if;
 extern crate js_sys;
 extern crate wasm_bindgen;
 extern crate web_sys;
+mod execute;
 mod rules;
-mod species;
 pub mod utils;
-use species::Clause;
-use species::Rule;
-// use utils::*;
-use species::Species;
+use execute::Clause;
+use execute::Rule;
+use execute::Species;
 use std::collections::VecDeque;
-// use std::f32;
-// use std::float;
 use wasm_bindgen::prelude::*;
 // use web_sys::console;
 
@@ -54,7 +51,7 @@ pub struct Universe {
     cells: Vec<Cell>,
     undo_stack: VecDeque<Vec<Cell>>,
     generation: u8,
-    rule_sets: [species::Rule; 7],
+    rule_sets: [execute::Rule; 7],
     time: u8,
 }
 

@@ -3,8 +3,8 @@ import classNames from "classnames";
 import { Clause, Selector, Effector } from "../../crate/pkg";
 import { Matrix, SymmetryOptions, SlotOptions } from "./matrix";
 let probabilityMap = [
-  { p: 0, symbol: "×" },
-  { p: 1, symbol: "\xa0" },
+  { p: 0, symbol: "\xa0×\xa0" },
+  { p: 1, symbol: "\xa0\xa0\xa0" },
   // { p: 2, symbol: "⚁" },
   // { p: 3, symbol: "⚂" },
   // { p: 4, symbol: "⚃" },

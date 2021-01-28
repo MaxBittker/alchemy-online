@@ -1,4 +1,4 @@
-use crate::species::{Clause, Effector, Rule, Selector, Species, SymmetryMode};
+use crate::execute::{Clause, Effector, Rule, Selector, Species, SymmetryMode};
 
 pub fn build_rule() -> [Rule; 7] {
     return [
@@ -112,9 +112,9 @@ pub fn build_rule() -> [Rule; 7] {
                     Species::Wild,
                     Species::Empty,
                     Species::Wild,
-                    Species::Wild,
                     Species::Rule3,
-                    Species::Wild,
+                    Species::Rule3,
+                    Species::Rule3,
                 ),
             },
             Clause {
