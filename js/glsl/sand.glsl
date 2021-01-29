@@ -98,17 +98,5 @@ void main() {
   lightness = min(lightness, 1.0);
   color = hsv2rgb(vec3(hue, saturation, lightness));
 
-
-// if(a<0.3){
-//   vec2 cg = floor(grid /(dpi*8.));
-//   float check = mod(cg.x+mod(cg.y,2.0),2.);
-
-//   color = check * vec3(0.2);
-//   if(check>0.8){
-//       // color= vec3(1.0,0.0,0.); 
-//       // a+= 0.9;
-//   }
-//   }
-
   gl_FragColor = vec4(color, a);
 }
