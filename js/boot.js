@@ -5,7 +5,7 @@ function sleep(ms) {
 }
 
 async function boot(width, height) {
-  for (let r = 0; r <= width * 1.5 + 2; r += 16) {
+  for (let r = 0; r <= width * 1.7; r += 28) {
     for (let s = 6; s >= 1; s -= 1) {
       let rr = r - s * 4;
       universe.paint(width / 2, height / 2, rr + 5, Species.Empty);
@@ -15,7 +15,7 @@ async function boot(width, height) {
   }
 
   for (let r = 0; r <= width - 2; r += 2) {
-    universe.paint(width / 2, height / 2, r - 4, Species.Empty);
+    universe.paint(width / 2, height / 2, r - 5, Species.Empty);
     await sleep(8);
   }
 
