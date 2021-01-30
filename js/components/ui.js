@@ -337,6 +337,7 @@ class Index extends React.Component {
                 selectedElement={selectedElement}
                 clause_index={0}
               ></Editor>
+
               <Editor
                 selectedElement={selectedElement}
                 clause_index={1}

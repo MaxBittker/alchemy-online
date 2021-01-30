@@ -1,5 +1,5 @@
 import React from "react";
-import classNames from "classnames";
+// import classNames from "classnames";
 import { Clause, Selector, Effector } from "../../crate/pkg";
 import { Matrix, SymmetryOptions, SlotOptions } from "./matrix";
 let probabilityMap = [
@@ -113,88 +113,82 @@ class Editor extends React.Component {
     let { selector, effector, symmetry, probability } = clause;
     return (
       <div className="MatrixMenu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="160px">
-          <g transform="translate(178,0)" className="symmetry">
-            <text
-              x="0"
-              y={30}
-              style={{
-                fontSize: "30px",
-                opacity: probability.p == 0 ? 0.2 : 1.0,
-              }}
-              onContextMenu={(e) => {
-                e.preventDefault();
-                this.incSymmetry(-1);
-              }}
-              onClick={() => this.incSymmetry(1)}
-            >
-              {SymmetryOptions[symmetry].symbol}
-            </text>
-            <image
-              x="-10"
-              y="65"
-              href="assets/gold_arrow.png"
-              height="28"
-              width="23"
-              style={{ opacity: probability.p == "×" ? "0.7" : "1.0" }}
-            />
-            <text
-              x="0"
-              y="80"
-              style={{ fontSize: "45px", fill: "#d03f41" }}
-              onContextMenu={(e) => {
-                e.preventDefault();
-                this.incProbability(-1);
-              }}
-              onClick={() => this.incProbability(1)}
-            >
-              {probability.symbol}
-            </text>
-          </g>
-          {/* <circle
-            cx={8}
-            cy={125}
-            r="20"
-            className="mat-circle"
+        <div className="TileGrid">
+          <div
+            className="center"
             style={{
-              strokeWidth: 1,
-              fill: "rgba(255,255,255,0.2)",
+              fontSize: "30px",
+              opacity: probability.p == 0 ? 0.2 : 1.0,
+              gridColumn: 2,
+              gridRow: 1,
             }}
-          ></circle> */}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              this.incSymmetry(-1);
+            }}
+            onClick={() => this.incSymmetry(1)}
+          >
+            {SymmetryOptions[symmetry].symbol}
+          </div>
+          <img
+            // className="center"
+            src="assets/gold_arrow.png"
+            height="23px"
+            width="23px"
+            style={{
+              opacity: probability.p == "×" ? "0.7" : "1.0",
+              gridColumn: 2,
+              gridRow: 2,
+              margin: "auto",
+            }}
+          />
+          <div
+            className="center"
+            style={{
+              fontSize: "45px",
+              color: "#d03f41",
+              gridColumn: 2,
+              gridRow: 2,
+              overflow: "hidden",
+            }}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              this.incProbability(-1);
+            }}
+            onClick={() => this.incProbability(1)}
+          >
+            {probability.symbol}
+          </div>
 
-          <g className={classNames({ disabled: probability.p == 0 }, "clause")}>
-            <g transform="translate(-2,0)">
-              {selector && (
-                <Matrix
-                  selectedElement={selectedElement}
-                  options={SlotOptions}
-                  grid={selector}
-                  isSelector
-                  setGrid={(newGrid) => {
-                    let { clause } = this.state;
-                    clause.selector = newGrid;
-                    this.setState({ clause }, this.setRule);
-                  }}
-                />
-              )}
-            </g>
+          {/* <g className={classNames({ disabled: probability.p == 0 }, "clause")}> */}
+          {selector && (
+            <Matrix
+              selectedElement={selectedElement}
+              options={SlotOptions}
+              grid={selector}
+              isSelector
+              setGrid={(newGrid) => {
+                let { clause } = this.state;
+                clause.selector = newGrid;
+                this.setState({ clause }, this.setRule);
+              }}
+            />
+          )}
 
-            <g transform="translate(202,0)">
-              {effector && (
-                <Matrix
-                  selectedElement={selectedElement}
-                  options={SlotOptions}
-                  grid={effector}
-                  setGrid={(newGrid) => {
-                    let { clause } = this.state;
-                    clause.effector = newGrid;
-                    this.setState({ clause }, this.setRule);
-                  }}
-                />
-              )}
-            </g>
-          </g>
-        </svg>
+          {effector && (
+            <Matrix
+              selectedElement={selectedElement}
+              options={SlotOptions}
+              grid={effector}
+              setGrid={(newGrid) => {
+                let { clause } = this.state;
+                clause.effector = newGrid;
+                this.setState({ clause }, this.setRule);
+              }}
+            />
+          )}
+          {/* </g> */}
+        </div>
       </div>
     );
   }

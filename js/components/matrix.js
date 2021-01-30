@@ -1,5 +1,6 @@
 import React from "react";
 import { Species, SymmetryMode } from "../../crate/pkg";
+import classNames from "classnames";
 
 // function keys(en) {
 //   return Object.keys(en)
@@ -110,7 +111,7 @@ class Matrix extends React.Component {
     let size = isCenter ? 50 : 50;
     let inset = isCenter ? 2 : 2;
     return (
-      <g
+      <div
         key={`${x}-${y}`}
         transform={`translate(${x * 51},${y * 51})`}
         className={inactive ? "disabled" : ""}
@@ -134,42 +135,39 @@ class Matrix extends React.Component {
         }}
         onDragOver={(e) => e.preventDefault()}
       >
-        <foreignObject x={inset} y={inset} width={size} height={size}>
-          <button
-            className="mat-box"
-            draggable="true"
-            style={{
-              width: size - inset,
-              height: size - inset,
-              filter: "saturate(0.8)",
-              color: symbol == "*" ? "#888" : "black",
-              backgroundColor:
-                symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
-              borderColor:
-                symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
-              backgroundImage: 'url("assets/paper.png")',
-              backgroundSize: "100px 100px",
-              borderWidth: 3,
-              fontSize: "30px",
-              borderStyle: " outset",
-              lineHeight: 0,
-              verticalAlign: "middle",
-            }}
-            onDragStart={(e) => {
-              e.dataTransfer.setData("text/plain", myCell);
-            }}
-          >
-            {inactive || symbol == "?" ? ruleSymbols[selectedElement] : symbol}
-          </button>
-        </foreignObject>
-      </g>
+        <button
+          className="mat-box"
+          draggable="true"
+          style={{
+            width: size - inset,
+            height: size - inset,
+            filter: "saturate(0.8)",
+            color: symbol == "*" ? "#888" : "black",
+            backgroundColor:
+              symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
+            borderColor: symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
+            backgroundImage: 'url("assets/paper.png")',
+            backgroundSize: "100px 100px",
+            borderWidth: 3,
+            fontSize: "30px",
+            borderStyle: " outset",
+            lineHeight: 0,
+            verticalAlign: "middle",
+          }}
+          onDragStart={(e) => {
+            e.dataTransfer.setData("text/plain", myCell);
+          }}
+        >
+          {inactive || symbol == "?" ? ruleSymbols[selectedElement] : symbol}
+        </button>
+      </div>
     );
   }
   render() {
     // let { data } = this.state;
     let { isSelector } = this.props;
     return (
-      <g>
+      <div className="matrix-grid">
         {[
           this.gridSquare(0, 0, isSelector),
           this.gridSquare(0, 1, isSelector),
@@ -183,7 +181,7 @@ class Matrix extends React.Component {
           this.gridSquare(2, 1, isSelector),
           this.gridSquare(2, 2, isSelector),
         ]}
-      </g>
+      </div>
     );
   }
 }
