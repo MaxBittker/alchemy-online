@@ -114,7 +114,6 @@ class Matrix extends React.Component {
       <div
         key={`${x}-${y}`}
         transform={`translate(${x * 51},${y * 51})`}
-        className={inactive ? "disabled" : ""}
         onContextMenu={(e) => {
           e.preventDefault();
           incSlot(-1, inactive);
