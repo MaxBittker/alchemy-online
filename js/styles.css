@@ -345,13 +345,6 @@ button:not(:disabled):active {
   stroke: rgb(231, 243, 246) !important;
   stroke-width: 4px;
 }
-.disabled rect {
-  /* fill: #c0c0c0 !important; */
-  /* opacity: 0.8; */
-}
-.disabled rect:hover {
-  /* fill: #c0c0c0 !important; */
-}
 
 svg {
   user-select: none;
@@ -388,16 +381,14 @@ img {
   /* filter: drop-shadow(1px 1px 1px #500); */
 }
 
-g.clause.disabled {
+.disabled button {
   opacity: 0.5;
   filter: brightness(0.7);
 }
 .symmetry.disabled > text {
   opacity: 0.2;
 }
-text {
-  /* filter: drop-shadow(1px 1px 3px red); */
-}
+
 #bar {
   position: fixed;
   bottom: 0;

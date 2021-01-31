@@ -165,9 +165,14 @@ class Matrix extends React.Component {
   }
   render() {
     // let { data } = this.state;
-    let { isSelector } = this.props;
+    let { isSelector, isDisabled } = this.props;
     return (
-      <div className="matrix-grid">
+      <div
+        className={classNames(
+          { disabled: this.props.isDisabled },
+          "matrix-grid"
+        )}
+      >
         {[
           this.gridSquare(0, 0, isSelector),
           this.gridSquare(0, 1, isSelector),

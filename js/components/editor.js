@@ -23,21 +23,27 @@ class Editor extends React.Component {
   }
 
   static getRule(selectedElement, clause_index) {
-    let clause = window.u.clause(selectedElement, clause_index);
-    const selector = Array.from(
-      new Uint8Array(memory.buffer, clause.selector.grid(), 9)
-    ).slice(0);
-    const effector = Array.from(
-      new Uint8Array(memory.buffer, clause.effector.grid(), 9)
-    ).slice(0);
-    const symmetry = clause.symmetry();
-    const probability = clause.probability();
-    return {
-      selector,
-      effector,
-      symmetry,
-      probability: probabilityMap.find((v) => v.p == probability),
-    };
+    try {
+      let clause = window.u.clause(selectedElement, clause_index);
+      const selector = Array.from(
+        new Uint8Array(memory.buffer, clause.selector.grid(), 9)
+      ).slice(0);
+      const effector = Array.from(
+        new Uint8Array(memory.buffer, clause.effector.grid(), 9)
+      ).slice(0);
+
+      const symmetry = clause.symmetry();
+      const probability = clause.probability();
+      return {
+        selector,
+        effector,
+        symmetry,
+        probability: probabilityMap.find((v) => v.p == probability),
+      };
+    } catch (e) {
+      console.error(e);
+      return;
+    }
   }
   static getDerivedStateFromProps(props, state) {
     let { selectedElement, clause_index } = props;
@@ -160,13 +166,13 @@ class Editor extends React.Component {
             {probability.symbol}
           </div>
 
-          {/* <g className={classNames({ disabled: probability.p == 0 }, "clause")}> */}
           {selector && (
             <Matrix
               selectedElement={selectedElement}
               options={SlotOptions}
               grid={selector}
               isSelector
+              isDisabled={probability.p == 0}
               setGrid={(newGrid) => {
                 let { clause } = this.state;
                 clause.selector = newGrid;
@@ -180,6 +186,7 @@ class Editor extends React.Component {
               selectedElement={selectedElement}
               options={SlotOptions}
               grid={effector}
+              isDisabled={probability.p == 0}
               setGrid={(newGrid) => {
                 let { clause } = this.state;
                 clause.effector = newGrid;
