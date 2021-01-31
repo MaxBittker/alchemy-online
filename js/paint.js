@@ -112,15 +112,11 @@ function smoothPaint(event) {
   if (!painting) {
     return;
   }
-  let size = 2;
+  let size = 3;
 
   let i = 0;
   paint(startEvent);
-  if (
-    lastPaint &&
-    window.UI.state.selectedElement != Species.Fish &&
-    window.UI.state.selectedElement != Species.GoldFish
-  ) {
+  if (lastPaint) {
     while (eventDistance(startEvent, lastPaint) > size / 3) {
       let d = eventDistance(startEvent, lastPaint);
       startEvent = add(
@@ -180,6 +176,6 @@ const paint = (event) => {
   const [x, y] = convertEventCoordinates(event);
   if (window.UI.state.selectedElement < 0) return;
 
-  let size = 4;
+  let size = 3;
   universe.paint(x, y, size, window.UI.state.selectedElement);
 };

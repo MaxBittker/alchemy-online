@@ -204,8 +204,8 @@ let pallette = () => {
   canvas.height = 3;
   universe.reset();
 
-  species.forEach((id) => universe.paint(id, 0, 2, id));
-  universe.paint(Species.Empty, 0, 2, Species.Empty);
+  species.forEach((id) => universe.paint(id, 0, 1, id));
+  universe.paint(Species.Empty, 0, 1, Species.Empty);
   let render = startWebGL({ universe, canvas, isSnapshot: true }).draw;
   render();
   let ctx = canvas.getContext("webgl");

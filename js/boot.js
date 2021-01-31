@@ -22,8 +22,8 @@ async function boot(width, height) {
   for (let a = 0; a <= 180; a += 2) {
     let x = (width / 2 + 10) * Math.cos(a * (Math.PI / 180));
     let y = (height / 2 + 10) * Math.sin(a * (Math.PI / 180));
-    universe.paint(width / 2 + x, height / 2 + y, 20, Species.Empty);
-    universe.paint(width / 2 - x, height / 2 - y, 20, Species.Empty);
+    universe.paint(width / 2 + x, height / 2 + y, 21, Species.Empty);
+    universe.paint(width / 2 - x, height / 2 - y, 21, Species.Empty);
     await sleep(8);
   }
 }
