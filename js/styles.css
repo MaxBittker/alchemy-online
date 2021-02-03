@@ -575,3 +575,11 @@ bigger {
   justify-content: center;
   align-items: center;
 }
+
+#hud-buttons button.swap {
+  margin: auto;
+  margin-top: -58px;
+  border: none;
+  background: transparent;
+  font-size: 25px;
+}

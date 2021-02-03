@@ -47,6 +47,29 @@ function resetClause(element, clause_index) {
   universe.set_clause(r_clause, element, clause_index);
 }
 
+function swapClauses(element, c1, c2) {
+  let clause = window.u.clause(element, c1);
+
+  const selector = Array.from(
+    new Uint8Array(memory.buffer, clause.selector.grid(), 9)
+  ).slice(0);
+  const effector = Array.from(
+    new Uint8Array(memory.buffer, clause.effector.grid(), 9)
+  ).slice(0);
+  let symmetry = clause.symmetry();
+  let probability = clause.probability();
+
+  let new_s = new Selector(...selector);
+  let new_e = new Effector(...effector);
+  let r_clause = new Clause(probability, symmetry, new_s, new_e);
+
+  let clause2 = window.u.clause(element, c2);
+
+  window.u.set_clause(clause2, element, c1);
+
+  window.u.set_clause(r_clause, element, c2);
+}
+
 function mutate(element, clause_index) {
   let clause = window.u.clause(element, clause_index);
 
@@ -200,4 +223,4 @@ function mutate(element, clause_index) {
   window.u.set_clause(r_clause, element, clause_index);
 }
 
-export { resetClause, mutate };
+export { resetClause, mutate, swapClauses };

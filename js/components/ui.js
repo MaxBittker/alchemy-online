@@ -7,7 +7,7 @@ import { height, universe, width, reset } from "../index.js";
 import { exportGif, pallette } from "../render.js";
 import Menu from "./menu.js";
 import { Editor } from "./editor";
-import { resetClause, mutate } from "./rules";
+import { resetClause, mutate, swapClauses } from "./rules";
 import { ruleSymbols } from "./matrix";
 
 window.species = Species;
@@ -208,6 +208,16 @@ class Index extends React.Component {
     // universe.push_undo();
     // this.pause();
   }
+  refresh() {
+    let { selectedElement } = this.state;
+    let s = selectedElement;
+    this.setState(
+      {
+        selectedElement: (selectedElement + 1) % activeSpecies.length,
+      },
+      () => this.setState({ selectedElement: s })
+    );
+  }
 
   render() {
     let { ff, selectedElement, currentSubmission, paused } = this.state;
@@ -337,11 +347,29 @@ class Index extends React.Component {
                 selectedElement={selectedElement}
                 clause_index={0}
               ></Editor>
-
+              <button
+                className="swap"
+                onClick={() => {
+                  swapClauses(selectedElement, 0, 1);
+                  this.refresh();
+                }}
+              >
+                ⇅
+              </button>
               <Editor
                 selectedElement={selectedElement}
                 clause_index={1}
               ></Editor>
+              <button
+                className="swap"
+                onClick={() => {
+                  swapClauses(selectedElement, 1, 2);
+                  this.refresh();
+                }}
+              >
+                ⇅
+              </button>
+
               <Editor
                 selectedElement={selectedElement}
                 clause_index={2}
@@ -349,17 +377,10 @@ class Index extends React.Component {
               <div className="hint">drag and drop tiles to construct rules</div>
               <button
                 onClick={() => {
-                  let s = selectedElement;
                   mutate(selectedElement, 0);
                   mutate(selectedElement, 1);
                   mutate(selectedElement, 2);
-                  this.setState(
-                    {
-                      selectedElement:
-                        (selectedElement + 1) % activeSpecies.length,
-                    },
-                    () => this.setState({ selectedElement: s })
-                  );
+                  this.refresh();
                 }}
                 id="clear-button"
               >
