@@ -67,7 +67,7 @@ const ElementButton = (name, selectedElement, setElement) => {
   );
 };
 
-class Index extends React.Component {
+class ElementEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -426,4 +426,4 @@ class Index extends React.Component {
   }
 }
 
-export { Index, ruleSymbols, activeSpecies };
+export { ElementEditor, ruleSymbols, activeSpecies };

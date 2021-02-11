@@ -36,7 +36,7 @@ const HUD = document.getElementById("HUD");
 // let canvasSize;
 let resize = () => {
   let screen_width = window.innerWidth;
-  let HUDheight = 34;
+  let HUDheight = 45;
   let screen_height = window.innerHeight - HUDheight;
 
   let canvasStyle = "";

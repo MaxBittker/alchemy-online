@@ -14,12 +14,12 @@ async function boot(width, height) {
     }
   }
 
-  for (let r = 0; r <= width - 2; r += 2) {
+  for (let r = 0; r <= width - 2; r += 4) {
     universe.paint(width / 2, height / 2, r - 5, Species.Empty);
     await sleep(8);
   }
 
-  for (let a = 0; a <= 180; a += 2) {
+  for (let a = 0; a <= 180; a += 4) {
     let x = (width / 2 + 10) * Math.cos(a * (Math.PI / 180));
     let y = (height / 2 + 10) * Math.sin(a * (Math.PI / 180));
     universe.paint(width / 2 + x, height / 2 + y, 21, Species.Empty);
