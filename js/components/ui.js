@@ -387,7 +387,7 @@ class ElementEditor extends React.Component {
                 {" "}
                 Mutate
               </button>
-              <button
+              {/* <button
                 onClick={() => {
                   let s = selectedElement;
                   resetClause(selectedElement, 0);
@@ -405,7 +405,7 @@ class ElementEditor extends React.Component {
               >
                 {" "}
                 reset
-              </button>
+              </button> */}
             </>
             <hr className="chain-hr2"></hr>
 

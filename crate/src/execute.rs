@@ -254,10 +254,10 @@ pub fn execute_clause_orientation(
     let (out_e, mut rem) = div_rem_usize(reaction_energy, max(n_products, 1));
 
     if n_products > n_reagents && out_e < 1
-    // && !once_in_u(100 * max(n_products - n_reagents as usize, 1))
+    && !once_in_u(50 * max(n_products - n_reagents as usize, 1))
     {
         // failed due to insufficient energy
-        // return (false, api);
+        return (false, api);
     }
 
     for x in 0..clause.effector.grid.len() {
