@@ -354,7 +354,7 @@ class ElementEditor extends React.Component {
                   this.refresh();
                 }}
               >
-                ⇅
+                ↓
               </button>
               <Editor
                 selectedElement={selectedElement}
@@ -367,7 +367,7 @@ class ElementEditor extends React.Component {
                   this.refresh();
                 }}
               >
-                ⇅
+                ↓
               </button>
 
               <Editor

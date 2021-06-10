@@ -86,6 +86,11 @@ const renderLoop = () => {
     if (!window.paused) {
       fps.render(); // new
       universe.tick();
+      // let heatmap = [];
+      // for (var i = 0; i < 3 * 7; i++) {
+      //   heatmap[i] = universe.heatmap(i);
+      // }
+      // console.log(heatmap);
     }
     let elapsed_time = performance.now() - now;
     if (elapsed_time > 16) {

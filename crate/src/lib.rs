@@ -32,8 +32,8 @@ impl Cell {
     //     }
     // }
 
-    pub fn update(&self, api: SandApi) {
-        self.species.update(*self, api);
+    pub fn update(&self, api: SandApi) -> usize {
+        return self.species.update(*self, api);
     }
 }
 
@@ -52,6 +52,7 @@ pub struct Universe {
     undo_stack: VecDeque<Vec<Cell>>,
     generation: u8,
     rule_sets: [execute::Rule; 7],
+    heatmap: [usize; 7 * 3],
     time: u8,
 }
 
@@ -111,7 +112,9 @@ impl Universe {
         // let dx = self.winds[(self.width * self.height / 2) as usize].dx;
         // let js: JsValue = (dx).into();
         // console::log_2(&"dx: ".into(), &js);
-
+        for i in 0..self.heatmap.len() {
+            self.heatmap[i] = 0;
+        }
         self.generation = self.generation.wrapping_add(1) % 2;
         for x in 0..self.width {
             let scanx = if self.generation % 2 == 0 {
@@ -124,7 +127,7 @@ impl Universe {
                 // let idx = self.get_index(scanx, self.height - (1 + y));
                 let cell = self.get_cell(scanx, y);
 
-                Universe::update_cell(
+                let result = Universe::update_cell(
                     cell,
                     SandApi {
                         universe: self,
@@ -132,10 +135,18 @@ impl Universe {
                         y,
                     },
                 );
+                if result < 99 {
+                    self.heatmap[cell.species as usize * 3 + result] += 1;
+                }
             }
         }
         // self.time = self.time.wrapping_add(1);
     }
+
+    pub fn heatmap(&self, i: usize) -> usize {
+        self.heatmap[i]
+    }
+
     pub fn rule(&self, i: usize) -> Rule {
         self.rule_sets[i]
     }
@@ -232,6 +243,7 @@ impl Universe {
             time: 0,
             undo_stack: VecDeque::with_capacity(50),
             generation: 0,
+            heatmap: [0; 3 * 7],
             rule_sets: rules::build_rule(),
         }
     }
@@ -253,11 +265,11 @@ impl Universe {
         return self.cells[i];
     }
 
-    fn update_cell(cell: Cell, api: SandApi) {
+    fn update_cell(cell: Cell, api: SandApi) -> usize {
         if cell.clock == api.universe.generation {
-            return;
+            return 99;
         }
 
-        cell.update(api);
+        return cell.update(api);
     }
 }

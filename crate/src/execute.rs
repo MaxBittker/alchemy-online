@@ -182,10 +182,10 @@ impl Effector {
 }
 
 impl Species {
-    pub fn update(&self, cell: Cell, api: SandApi) {
+    pub fn update(&self, cell: Cell, api: SandApi) -> usize {
         let rule_sets = api.universe.rule_sets;
         match self {
-            Species::Wild => {}
+            Species::Wild => 99,
             Species::Empty => execute_rule(cell, api, rule_sets[0]),
             Species::Rule1 => execute_rule(cell, api, rule_sets[1]),
             Species::Rule2 => execute_rule(cell, api, rule_sets[2]),
@@ -253,11 +253,12 @@ pub fn execute_clause_orientation(
 
     let (out_e, mut rem) = div_rem_usize(reaction_energy, max(n_products, 1));
 
-    if n_products > n_reagents && out_e < 1
-    && !once_in_u(50 * max(n_products - n_reagents as usize, 1))
+    if n_products > n_reagents
+        && out_e < 1
+        && !once_in_u(50 * max(n_products - n_reagents as usize, 1))
     {
         // failed due to insufficient energy
-        return (false, api);
+        // return (false, api);
     }
 
     for x in 0..clause.effector.grid.len() {
@@ -273,7 +274,8 @@ pub fn execute_clause_orientation(
                     dy,
                     Cell {
                         species: out_slot,
-                        energy: (out_e + rem) as u8,
+                        energy: 25,
+                        // (out_e + rem) as u8,
                         ..cell
                     },
                 );
@@ -339,18 +341,19 @@ pub fn execute_clause(cell: Cell, api: SandApi, clause: Clause) -> (bool, SandAp
     }
 }
 
-pub fn execute_rule(cell: Cell, i_api: SandApi, rule: Rule) {
+pub fn execute_rule(cell: Cell, i_api: SandApi, rule: Rule) -> usize {
     let mut api = i_api;
     let r = 0;
-    //  rand_uint(rule.clauses.len());
-
+    // let r = rand_uint(rule.clauses.len());
     for c in 0..rule.clauses.len() {
-        let clause = rule.clauses[(c + r) % rule.clauses.len()];
+        let actual_clause = (c + r) % rule.clauses.len();
+        let clause = rule.clauses[actual_clause];
 
         let (success, o_api) = execute_clause(cell, api, clause);
         if success {
-            break;
+            return actual_clause;
         };
         api = o_api;
     }
+    return 99;
 }

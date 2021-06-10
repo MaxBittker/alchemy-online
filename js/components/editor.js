@@ -18,10 +18,30 @@ class Editor extends React.Component {
       selectedElement: props.selectedElement,
       clause_index: props.clause_index,
       clause: Editor.getRule(props.selectedElement, props.clause_index),
+      heat: 0,
     };
     window.Editor = this;
+    console.log("startingInterval");
+    window.poll = window.setInterval(() => this.pollHeat(), 200);
   }
+  pollHeat() {
+    let { selectedElement, clause_index } = this.props;
+    // console.log(`polling ${selectedElement} ${clause_index}`);
 
+    let total =
+      universe.heatmap(selectedElement * 3) +
+      universe.heatmap(selectedElement * 3 + 1) +
+      universe.heatmap(selectedElement * 3 + 2);
+
+    let heat = total
+      ? universe.heatmap(selectedElement * 3 + clause_index) / total
+      : 0;
+    if (heat > 0) {
+      heat += 0.2;
+    }
+    heat = Math.floor(heat * 25) / 25;
+    this.setState({ heat });
+  }
   static getRule(selectedElement, clause_index) {
     try {
       let clause = window.u.clause(selectedElement, clause_index);
@@ -42,16 +62,24 @@ class Editor extends React.Component {
       };
     } catch (e) {
       console.error(e);
-      return;
+      throw e;
     }
   }
   static getDerivedStateFromProps(props, state) {
     let { selectedElement, clause_index } = props;
     if (selectedElement != state.selectedElement && selectedElement <= 6) {
-      return {
-        selectedElement,
-        clause: Editor.getRule(selectedElement, clause_index),
-      };
+      try {
+        let clause = Editor.getRule(selectedElement, clause_index);
+        return {
+          selectedElement,
+          clause,
+        };
+      } catch (e) {
+        return {
+          selectedElement,
+          clause: state.clause,
+        };
+      }
     }
 
     return null;
@@ -113,8 +141,8 @@ class Editor extends React.Component {
   }
 
   render() {
-    let { selectedElement } = this.props;
-    let { clause } = this.state;
+    let { selectedElement, clause_index } = this.props;
+    let { clause, heat } = this.state;
     // console.log(clause);
     let { selector, effector, symmetry, probability } = clause;
     return (
@@ -146,7 +174,13 @@ class Editor extends React.Component {
               gridColumn: 2,
               gridRow: 2,
               margin: "auto",
+              filter: `drop-shadow(0px 0px ${heat * 10}px gold)`,
             }}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              this.incProbability(-1);
+            }}
+            onClick={() => this.incProbability(1)}
           />
           <div
             className="center"
@@ -156,6 +190,7 @@ class Editor extends React.Component {
               gridColumn: 2,
               gridRow: 2,
               overflow: "hidden",
+              willChange: "opacity",
             }}
             onContextMenu={(e) => {
               e.preventDefault();
