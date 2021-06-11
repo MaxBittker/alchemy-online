@@ -75,7 +75,9 @@ let resize = () => {
 resize();
 window.addEventListener("deviceorientation", resize, true);
 window.addEventListener("resize", resize);
-
+window.addEventListener("drop", (e) => {
+  e.preventDefault();
+});
 let drawSand = startWebGL({ canvas, universe });
 
 let t = 0;
