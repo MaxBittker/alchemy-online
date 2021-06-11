@@ -264,19 +264,25 @@ pub fn execute_clause_orientation(
     for x in 0..clause.effector.grid.len() {
         let (dx, dy) = process_coord(matrix_index(x), rx, ry, r);
         let out_slot = clause.effector.grid[x];
-
         match out_slot {
             Species::Empty => api.set(dx, dy, EMPTY_CELL),
             Species::Wild => (),
             _ => {
+                let mut nbr = api.get(dx, dy);
+                if nbr.energy == 0 {
+                    nbr.energy = cell.energy;
+                }
+                nbr.energy = ((nbr.energy as i32).saturating_add(rand_dir_2())) as u8;
+                if nbr.energy > 35 {
+                    nbr.energy = 35;
+                }
                 api.set(
                     dx,
                     dy,
                     Cell {
                         species: out_slot,
-                        energy: 25,
                         // (out_e + rem) as u8,
-                        ..cell
+                        ..nbr
                     },
                 );
                 rem = 0;
@@ -316,27 +322,28 @@ pub fn execute_clause(cell: Cell, api: SandApi, clause: Clause) -> (bool, SandAp
         }
         SymmetryMode::Quad => {
             let mut r = rand_uint(4);
-            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
+            let flip = rand_dir_2();
+            let (success, api) = execute_clause_orientation(cell, api, clause, flip, 1, r);
 
             if success {
                 return (success, api);
             }
             r = (r + 1) % 4;
-            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
-
-            if success {
-                return (success, api);
-            }
-            r = (r + 1) % 4;
-
-            let (success, api) = execute_clause_orientation(cell, api, clause, 1, 1, r);
+            let (success, api) = execute_clause_orientation(cell, api, clause, flip, 1, r);
 
             if success {
                 return (success, api);
             }
             r = (r + 1) % 4;
 
-            return execute_clause_orientation(cell, api, clause, 1, 1, r);
+            let (success, api) = execute_clause_orientation(cell, api, clause, flip, 1, r);
+
+            if success {
+                return (success, api);
+            }
+            r = (r + 1) % 4;
+
+            return execute_clause_orientation(cell, api, clause, flip, 1, r);
         }
     }
 }

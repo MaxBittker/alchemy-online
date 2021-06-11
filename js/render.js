@@ -59,7 +59,7 @@ let startWebGL = ({ canvas, universe, isSnapshot = false, gl }) => {
         viewportWidth,
         viewportHeight,
       ],
-      dpi: 2,
+      dpi: (window.ratio || 4) / 4,
       isSnapshot,
       backBuffer: lastFrame,
     },

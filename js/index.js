@@ -7,7 +7,8 @@ import {} from "./setup";
 import { boot } from "./boot";
 import { startApp } from "./app";
 
-let ratio = 8;
+let ratio = 4;
+window.ratio = ratio;
 let width = 100;
 // window.innerWidth / ratio;
 let height = 100;

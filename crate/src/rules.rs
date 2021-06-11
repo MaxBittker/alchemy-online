@@ -140,10 +140,9 @@ pub fn build_rule() -> [Rule; 7] {
                     Species::Wild,
                     Species::Rule3,
                     Species::Wild,
-                     Species::Wild,
+                    Species::Wild,
                 ),
             },
-  
             Clause {
                 probability: 1,
                 symmetry: SymmetryMode::Horizontal,

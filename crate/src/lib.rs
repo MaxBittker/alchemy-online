@@ -39,7 +39,7 @@ impl Cell {
 
 static EMPTY_CELL: Cell = Cell {
     species: Species::Empty,
-    energy: 0,
+    energy: 15,
     age: 0,
     clock: 0,
 };

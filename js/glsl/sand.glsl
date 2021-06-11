@@ -23,12 +23,7 @@ const float PI2 = 2. * 3.14159265358979323846;
 void main() {
   vec2 guv = uv;
   vec3 color;
-  vec2 grid = floor(guv * (resolution / (dpi * 2.)));
 
-  grid = floor(guv * (resolution / dpi));
-
-  float noise = snoise3(vec3(grid, t * 0.05));
-  float slownoise = snoise3(vec3(grid, t * 0.01));
 
   vec2 textCoord = (guv * vec2(0.5, -0.5)) + vec2(0.5);
 
@@ -40,10 +35,18 @@ void main() {
   float age = data.b;
 
   float hue = 0.0;
-  float saturation =  0.3 + (energy*1.9) + (age *0.2) ;
-  float lightness = 0.7 - energy * .1;
+  float saturation =  0.35 + (energy*1.5) + (age *0.2) ;
+  float lightness = 0.7 - energy * .08;
   float a = 1.0;
   float brightness = 0.0;
+  float speed = 0.01;
+  // if(type == 4 || type == 5){
+  //   // speed = 0.05;
+  // }
+  vec2 grid =   floor(guv * (resolution / (dpi)));
+  grid.x+=energy*255.;
+  float noise = snoise3(vec3(grid, t * speed));
+
 
   if (type == 0) { // Air
     hue = 0.7;
@@ -59,7 +62,7 @@ void main() {
     hue = 0.1;
     saturation *= 0.3;
     lightness *= 0.5 ;
-    lightness += slownoise*0.4;
+    lightness += noise*0.3;
   } else if (type == 2) { // Sand
     hue = 0.1;
     lightness += 0.1;
@@ -92,7 +95,8 @@ void main() {
     hue += energy * 0.2;
   }
   if (isSnapshot == false) {
-    lightness *= (0.975 + snoise2(floor(guv * resolution / dpi)) * 0.15);
+
+    lightness *= (0.975 + snoise2(floor(grid)) * 0.15);
   }
   saturation = min(saturation, 1.0);
   lightness = min(lightness, 1.0);
