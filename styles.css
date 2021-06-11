@@ -366,6 +366,10 @@ svg text {
 .MatrixMenu {
   width: 100%;
 }
+.MatrixMenu.fake {
+  transform: scale(0.94);
+  transform-origin: top left;
+}
 .MatrixMenu svg {
   stroke: #5a5a5a;
   /* opacity: 0.8; */
