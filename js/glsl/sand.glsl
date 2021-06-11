@@ -75,9 +75,9 @@ void main() {
     // saturation -= 0.05;
     lightness -= noise * 0.1;
     // a = 0.9;
-    if (isSnapshot) {
-      a = 1.0;
-    }
+    // if (isSnapshot) {
+    //   a = 1.0;
+    // }
   } else if (type == 5) { // fire
     hue = 0.05 + (noise * -0.1);
     saturation += 0.2;
