@@ -80,24 +80,24 @@ let drawSand = startWebGL({ canvas, universe });
 
 let t = 0;
 const renderLoop = () => {
-  const now = performance.now();
+  // const now = performance.now();
 
-  let max_tick_per_frame = window.ff ? 100 : 1;
-  for (var i = 0; i < max_tick_per_frame; i++) {
-    if (!window.paused) {
-      fps.render(); // new
-      universe.tick();
-      // let heatmap = [];
-      // for (var i = 0; i < 3 * 7; i++) {
-      //   heatmap[i] = universe.heatmap(i);
-      // }
-      // console.log(heatmap);
-    }
-    let elapsed_time = performance.now() - now;
-    if (elapsed_time > 16) {
-      break;
-    }
+  // let max_tick_per_frame = window.ff ? 100 : 1;
+  // for (var i = 0; i < max_tick_per_frame; i++) {
+  if (!window.paused) {
+    fps.render(); // new
+    universe.tick();
+    // let heatmap = [];
+    // for (var i = 0; i < 3 * 7; i++) {
+    //   heatmap[i] = universe.heatmap(i);
+    // }
+    // console.log(heatmap);
   }
+  // let elapsed_time = performance.now() - now;
+  // if (elapsed_time > 16) {
+  // break;
+  // }
+  // }
   window.t = t;
   drawSand.draw();
   requestAnimationFrame(renderLoop);
