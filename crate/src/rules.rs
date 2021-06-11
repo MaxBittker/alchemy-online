@@ -170,6 +170,7 @@ pub fn build_rule() -> [Rule; 7] {
                 ),
             },
         ),
+        // water blue
         Rule::new(
             Clause {
                 probability: 1,
@@ -223,7 +224,32 @@ pub fn build_rule() -> [Rule; 7] {
                     Species::Wild,
                 ),
             },
-            Clause::new_null(),
+            Clause {
+                probability: 1,
+                symmetry: SymmetryMode::Horizontal,
+                selector: Selector::new(
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Rule4,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                ),
+                effector: Effector::new(
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Rule4,
+                    Species::Rule4,
+                    Species::Wild,
+                    Species::Wild,
+                    Species::Wild,
+                ),
+            },
         ),
         Rule::new(
             Clause {
