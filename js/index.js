@@ -118,4 +118,11 @@ renderLoop();
 
 window.UI.load();
 
+document.addEventListener("keydown", function (event) {
+  if (event.ctrlKey && event.key === "z") {
+    universe.pop_undo();
+    window.UI.refresh();
+  }
+});
+
 export { canvas, width, height, ratio, universe, reset };
