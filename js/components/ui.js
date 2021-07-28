@@ -110,10 +110,8 @@ class ElementEditor extends React.Component {
   reset() {
     // if (window.confirm("Reset your ecosystem?")) {
     this.play();
-    this.setState({ currentSubmission: null });
 
     reset();
-    // }
   }
 
   closeMenu() {
@@ -239,12 +237,46 @@ class ElementEditor extends React.Component {
               }}
             ></button>
             <button aria-label="Maximize"></button> */}
+
+            <button onClick={() => this.reset()}> ⏻</button>
+
             <button
               onClick={() => {
-                this.reset();
+                // reset();
+                universe.pop_undo();
+                // this.refresh();
+                window.UI.refresh();
               }}
+              // style={{ fontSize: 12, lineHeight: 0 }}
             >
-              Reset ⏻
+              ⤺
+            </button>
+            <button
+              onClick={() => this.togglePause()}
+              className={!paused ? "selected playbutton" : "playbutton"}
+            >
+              {paused ? (
+                <svg
+                  className="bsvg"
+                  height="20"
+                  width="20"
+                  id="d"
+                  viewBox="-50 -50 400 400"
+                >
+                  <polygon id="play" points="0,0 , 300,150 0,300" />
+                </svg>
+              ) : (
+                <svg
+                  className="bsvg"
+                  height="20"
+                  width="20"
+                  id="d"
+                  viewBox="-50 -50 400 400"
+                >
+                  <polygon id="bar2" points="0,0 110,0 110,300 0,300" />
+                  <polygon id="bar1" points="190,0 300,0 300,300 190,300" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
@@ -377,6 +409,8 @@ class ElementEditor extends React.Component {
               <div className="hint">drag and drop tiles to construct rules</div>
               <button
                 onClick={() => {
+                  window.u.push_undo();
+
                   mutate(selectedElement, 0);
                   mutate(selectedElement, 1);
                   mutate(selectedElement, 2);

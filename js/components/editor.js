@@ -101,6 +101,8 @@ class Editor extends React.Component {
       selector,
       effector
     );
+    window.u.push_undo();
+
     window.u.set_clause(
       r_clause,
       this.props.selectedElement,

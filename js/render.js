@@ -219,6 +219,7 @@ let pallette = () => {
     }, 0.9)`;
     colors[id] = color;
   });
+  // colors[0] = `rgba(100, 100, 100, 0.9)`;
   return colors;
 };
 

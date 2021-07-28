@@ -68,6 +68,7 @@ function swapClauses(element, c1, c2) {
   window.u.set_clause(clause2, element, c1);
 
   window.u.set_clause(r_clause, element, c2);
+  window.u.push_undo();
 }
 
 function mutate(element, clause_index) {
@@ -184,6 +185,7 @@ function mutate(element, clause_index) {
   let new_e = new Effector(...effector);
   // console.log(probability, symmetry);
   let r_clause = new Clause(probability, symmetry, new_s, new_e);
+
   window.u.set_clause(r_clause, element, clause_index);
 }
 

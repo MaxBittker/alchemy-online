@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Info from "./components/info";
 import { ElementEditor } from "./components/ui";
 import Menu from "./components/menu";
+import { reset } from "./index.js";
 
 function AppRouter() {
   return (
@@ -44,7 +45,6 @@ class PlaybackControls extends React.Component {
 
   reset() {
     this.play();
-    this.setState({ currentSubmission: null });
 
     reset();
   }
@@ -54,9 +54,22 @@ class PlaybackControls extends React.Component {
 
     return (
       <div id="playback">
+        <button onClick={() => this.reset()}> ⏻</button>
+
+        <button
+          onClick={() => {
+            // reset();
+            universe.pop_undo();
+            // this.refresh();
+            window.UI.refresh();
+          }}
+          style={{ fontSize: 18, lineHeight: 0 }}
+        >
+          ⤺
+        </button>
         <button
           onClick={() => this.togglePause()}
-          className={!paused ? "selected" : ""}
+          className={!paused ? "selected playbutton" : "playbutton"}
         >
           {paused ? (
             <svg
@@ -94,7 +107,7 @@ class UI extends React.Component {
   render() {
     return (
       <>
-        <PlaybackControls></PlaybackControls>
+        {/* <PlaybackControls></PlaybackControls> */}
         <ElementEditor></ElementEditor>
       </>
     );

@@ -112,7 +112,7 @@ function smoothPaint(event) {
   if (!painting) {
     return;
   }
-  let size = 3;
+  let size = 1;
 
   let i = 0;
   paint(startEvent);
@@ -176,6 +176,6 @@ const paint = (event) => {
   const [x, y] = convertEventCoordinates(event);
   if (window.UI.state.selectedElement < 0) return;
 
-  let size = 3;
+  let size = 1;
   universe.paint(x, y, size, window.UI.state.selectedElement);
 };

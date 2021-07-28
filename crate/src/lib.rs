@@ -44,12 +44,17 @@ static EMPTY_CELL: Cell = Cell {
     clock: 0,
 };
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct State {
+    cells: Vec<Cell>,
+    rules: [execute::Rule; 7],
+}
 #[wasm_bindgen]
 pub struct Universe {
     width: i32,
     height: i32,
     cells: Vec<Cell>,
-    undo_stack: VecDeque<Vec<Cell>>,
+    undo_stack: VecDeque<State>,
     generation: u8,
     rule_sets: [execute::Rule; 7],
     heatmap: [usize; 7 * 3],
@@ -211,14 +216,20 @@ impl Universe {
     }
 
     pub fn push_undo(&mut self) {
-        self.undo_stack.push_front(self.cells.clone());
+        self.undo_stack.push_front(State {
+            cells: self.cells.clone(),
+            rules: self.rule_sets.clone(),
+        });
         self.undo_stack.truncate(50);
     }
 
     pub fn pop_undo(&mut self) {
         let old_state = self.undo_stack.pop_front();
         match old_state {
-            Some(state) => self.cells = state,
+            Some(state) => {
+                self.cells = state.cells;
+                self.rule_sets = state.rules
+            }
             None => (),
         };
     }
