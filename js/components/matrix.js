@@ -110,6 +110,7 @@ class Matrix extends React.Component {
     };
     let size = isCenter ? 50 : 50;
     let inset = isCenter ? 2 : 2;
+    let isWild = symbol === "*";
     return (
       <div
         key={`${x}-${y}`}
@@ -141,10 +142,9 @@ class Matrix extends React.Component {
             width: size - inset,
             height: size - inset,
             filter: "saturate(0.8)",
-            color: symbol == "*" ? "#888" : "black",
-            backgroundColor:
-              symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
-            borderColor: symbol == "*" ? "#b0b0b055" : window.pallette[myCell],
+            color: isWild ? "#666" : "black",
+            backgroundColor: isWild ? "#dddddd00" : window.pallette[myCell],
+            borderColor: isWild ? "#aaaaaaee" : window.pallette[myCell],
             backgroundImage: 'url("assets/paper.png")',
             backgroundSize: "100px 100px",
             borderWidth: 3,

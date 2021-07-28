@@ -244,7 +244,7 @@ class ElementEditor extends React.Component {
                 this.reset();
               }}
             >
-              ⏻
+              Reset ⏻
             </button>
           </div>
         </div>

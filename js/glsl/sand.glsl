@@ -52,10 +52,10 @@ void main() {
     hue = 0.7;
     saturation = 0.0;
     
-    a = 0.0 ;
+    a = 0.0;
+    lightness = 0.8;
     if (isSnapshot) {
-    lightness = 0.9;
-
+      // lightness = 0.9;
       a = 1.0;
     }
   } else if (type == 1) { // wall
@@ -63,6 +63,9 @@ void main() {
     saturation *= 0.3;
     lightness *= 0.5 ;
     lightness += noise*0.3;
+     if (isSnapshot) {
+      lightness = 0.2;
+    }
   } else if (type == 2) { // Sand
     hue = 0.1;
     lightness += 0.1;
