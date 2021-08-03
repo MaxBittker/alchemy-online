@@ -76,6 +76,7 @@ void main() {
   } else if (type == 4) { // water
     hue = 0.58;
     // saturation -= 0.05;
+    lightness += 0.1;
     lightness -= noise * 0.1;
     // a = 0.9;
     // if (isSnapshot) {

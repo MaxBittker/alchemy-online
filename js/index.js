@@ -81,24 +81,35 @@ window.addEventListener("drop", (e) => {
 let drawSand = startWebGL({ canvas, universe });
 
 let t = 0;
+let nextFrameShouldBe = performance.now();
+const max_tick_per_frame = 3;
+window.speed = 10;
 const renderLoop = () => {
-  // const now = performance.now();
-
-  // let max_tick_per_frame = window.ff ? 100 : 1;
-  // for (var i = 0; i < max_tick_per_frame; i++) {
   if (!window.paused) {
-    fps.render(); // new
-    universe.tick();
+    for (var i = 0; i <= max_tick_per_frame; i++) {
+      // let elapsed_time = performance.now() - lastTick;
+      let timeTillNextFrame = performance.now() - nextFrameShouldBe;
+      let timePerFrame = 1000 / window.speed;
+      let nFramesBehind = Math.floor(timeTillNextFrame / timePerFrame);
+      if (Math.abs(nFramesBehind) > 4) {
+        //bankrupt
+        nextFrameShouldBe = performance.now();
+      }
+      if (timeTillNextFrame > 0 && window.speed > 0) {
+        fps.render(); // new
+        universe.tick();
+        nextFrameShouldBe = nextFrameShouldBe + timePerFrame;
+      } else {
+        break;
+      }
+    }
     // let heatmap = [];
     // for (var i = 0; i < 3 * 7; i++) {
     //   heatmap[i] = universe.heatmap(i);
     // }
     // console.log(heatmap);
   }
-  // let elapsed_time = performance.now() - now;
-  // if (elapsed_time > 16) {
-  // break;
-  // }
+
   // }
   window.t = t;
   drawSand.draw();

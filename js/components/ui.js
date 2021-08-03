@@ -251,7 +251,7 @@ class ElementEditor extends React.Component {
             >
               ⤺
             </button>
-            <button
+            {/* <button
               onClick={() => this.togglePause()}
               className={!paused ? "selected playbutton" : "playbutton"}
             >
@@ -277,7 +277,17 @@ class ElementEditor extends React.Component {
                   <polygon id="bar1" points="190,0 300,0 300,300 190,300" />
                 </svg>
               )}
-            </button>
+            </button> */}
+            <input
+              onChange={(e) =>
+                (window.speed = Math.pow(1.2, e.target.value) - 1)
+              }
+              type="range"
+              style={{ width: 60, margin: 3 }}
+              defaultValue={10}
+              min={0}
+              max={20}
+            ></input>
           </div>
         </div>
         <div className="window-body hud-body">
