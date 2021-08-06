@@ -11,7 +11,10 @@
   --border-sunken-inner: inset -2px -2px var(--button-face),
     inset 2px 2px var(--button-shadow);
 }
-div {
+#bar,
+#HUD,
+.title-bar,
+#hud-buttons {
   background-image: url("assets/paper.png") !important;
   background-size: 100px 100px !important;
 }
@@ -290,12 +293,14 @@ button.selected {
 .title-bar {
   background-color: var(--active-menu) !important;
   background: none;
-  zoom: 1.8;
+  height: 25px;
   padding: 1px;
   text-shadow: 1px 1px 1px var(--window-frame);
 }
 .title-bar-controls button {
-  height: 15px;
+  height: 25px;
+  width: 25px;
+  font-size: 20px;
   line-height: 0;
   padding-bottom: 3px;
   padding-left: 1px;
@@ -304,7 +309,7 @@ button.selected {
 }
 .title-bar .title-bar-text {
   line-height: 0;
-  font-size: 14px !important;
+  font-size: 24px !important;
   margin-right: 10px;
 }
 .hint {
@@ -555,9 +560,20 @@ bigger {
   border: 0;
   width: calc(100% + 6px);
   height: 16px;
-  margin: -2px -3px;
+  margin: 0px -3px;
   background-color: transparent;
   background-image: url(assets/hr4.png);
+  background-repeat: repeat-x;
+  overflow: hidden;
+  background-size: 32px;
+}
+.chain-hr3 {
+  border: 0;
+  width: calc(100% + 6px);
+  height: 8px;
+  margin: 0px -3px;
+  background-color: transparent;
+  background-image: url(assets/hr5.png);
   background-repeat: repeat-x;
   overflow: hidden;
   background-size: 32px;
@@ -567,7 +583,7 @@ bigger {
   display: grid;
   grid-template-columns: 3fr 1fr 3fr;
   grid-template-rows: repeat(3, 50px);
-  margin: 8px 0px;
+  margin: 0px 0px 8px;
   gap: 1px;
 }
 

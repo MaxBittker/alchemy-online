@@ -4,12 +4,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/1.cb06517c9fdc01d6e1cb.js"
   },
   {
-    "revision": "26bdd4fc17c7abe4725b",
-    "url": "/alchemy-online/2.ad7b589f61ae03a30210.js"
-  },
-  {
-    "revision": "26bdd4fc17c7abe4725b",
-    "url": "/alchemy-online/87dbb1c06e50bf300c22.module.wasm"
+    "revision": "2776fc91634e76a08986",
+    "url": "/alchemy-online/2.c421412a287dfbfc16f6.js"
   },
   {
     "revision": "1564826234a9ade36f502c02b181c0ed",
@@ -28,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/assets/DejaVuSans.ttf"
   },
   {
-    "revision": "81988ae76409f14399fb907257c011f6",
+    "revision": "170e092b475335a31ed36a5a81eabe8a",
     "url": "/alchemy-online/assets/NotoSansSymbols.subset.ttf"
   },
   {
@@ -156,23 +152,27 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/assets/wizbook.png"
   },
   {
+    "revision": "2776fc91634e76a08986",
+    "url": "/alchemy-online/ecfbfb432ef247587c36.module.wasm"
+  },
+  {
     "revision": "283ce30c80e2d1eeb6de8436bbfd577c",
     "url": "/alchemy-online/gif.worker.js"
   },
   {
-    "revision": "fbad223bdec6a5a92349403b8c6e2ed0",
+    "revision": "70b43d733465d9e40e44ed0a1c6183a2",
     "url": "/alchemy-online/index.html"
   },
   {
-    "revision": "d52b6b2baab8dbb19086",
-    "url": "/alchemy-online/main.842b00e413ae2a611016.js"
+    "revision": "c8d17bf83dbc7846e53c",
+    "url": "/alchemy-online/main.ea7e64d834e25c53378c.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
     "url": "/alchemy-online/manifest.json"
   },
   {
-    "revision": "19c199b4de6384896fffebf3077b913f",
+    "revision": "cb0bce5b3954a937149a61126b7039ae",
     "url": "/alchemy-online/styles.css"
   }
 ]);
