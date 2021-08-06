@@ -4,8 +4,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/1.cb06517c9fdc01d6e1cb.js"
   },
   {
-    "revision": "2776fc91634e76a08986",
-    "url": "/alchemy-online/2.c421412a287dfbfc16f6.js"
+    "revision": "ed76d6f5d10b4291a4d9",
+    "url": "/alchemy-online/2.51fb9209967c37d0fe78.js"
   },
   {
     "revision": "1564826234a9ade36f502c02b181c0ed",
@@ -152,7 +152,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/assets/wizbook.png"
   },
   {
-    "revision": "2776fc91634e76a08986",
+    "revision": "ed76d6f5d10b4291a4d9",
     "url": "/alchemy-online/ecfbfb432ef247587c36.module.wasm"
   },
   {
@@ -160,12 +160,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/alchemy-online/gif.worker.js"
   },
   {
-    "revision": "70b43d733465d9e40e44ed0a1c6183a2",
+    "revision": "7a2e05c94e025157ad4f7148d4ef822e",
     "url": "/alchemy-online/index.html"
   },
   {
-    "revision": "c8d17bf83dbc7846e53c",
-    "url": "/alchemy-online/main.ea7e64d834e25c53378c.js"
+    "revision": "01e09b6527206ee8f033",
+    "url": "/alchemy-online/main.9bb747ee0bc7336dd6ed.js"
   },
   {
     "revision": "cff710e53c6cd9c29a51289f5eedd352",
