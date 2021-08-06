@@ -13,9 +13,9 @@ const fps = new (class {
     this.lastFrameTimeStamp = now;
     const fps = (1 / delta) * 1000;
 
-    // Save only the latest 100 timings.
+    // Save only the latest 15 timings.
     this.frames.push(fps);
-    if (this.frames.length > 30) {
+    if (this.frames.length > 15) {
       this.frames.shift();
     }
 
@@ -31,9 +31,7 @@ const fps = new (class {
     let mean = sum / this.frames.length;
 
     // Render the statistics.
-    this.fps.textContent = `FPS:${Math.round(mean)
-      .toString()
-      .padStart(3)}`;
+    this.fps.textContent = `FPS:${Math.round(mean).toString().padStart(3)}`;
   }
 })();
 

@@ -86,7 +86,7 @@ void main() {
     hue = 0.05 + (noise * -0.1);
     saturation += 0.2;
 
-   lightness = 0.65+ energy * 1.7;
+   lightness += 0.1 + energy * .6;
 
     //  * (noise + 0.5);
     if (isSnapshot) {

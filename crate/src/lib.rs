@@ -50,6 +50,7 @@ pub struct State {
     rules: [execute::Rule; 7],
 }
 #[wasm_bindgen]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Universe {
     width: i32,
     height: i32,
@@ -256,6 +257,25 @@ impl Universe {
             generation: 0,
             heatmap: [0; 3 * 7],
             rule_sets: rules::build_rule(),
+        }
+    }
+
+    pub fn copy_into(&self, u: &mut Universe) {
+        u.cells = self.cells.clone();
+        u.rule_sets = self.rule_sets.clone();
+    }
+
+    pub fn clone(&self) -> Universe {
+        Universe {
+            cells: self.cells.clone(),
+            rule_sets: self.rule_sets.clone(),
+            undo_stack: VecDeque::with_capacity(50),
+            generation: 0,
+            heatmap: [0; 3 * 7],
+            width: self.width,
+            height: self.height,
+            time: 0,
+            // ..self.clone()
         }
     }
 }

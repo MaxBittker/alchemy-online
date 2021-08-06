@@ -23,6 +23,7 @@ console.log(width, height);
 const universe = Universe.new(width, height);
 
 window.u = universe;
+window.test_universe = universe.clone();
 window.universe = universe;
 
 startApp();
@@ -60,7 +61,7 @@ let resize = () => {
   HUDStyle = `width: ${hudWidth}px; margin: 10px;`;
 
   if (screen_width < 600) {
-    HUDStyle = `margin: 40px 10px; margin-top:${
+    HUDStyle = `margin: 40px 2px; margin-top:${
       screen_width + 10
     }px; margin-bottom: ${HUDheight}px ;padding-bottom: 40px`;
     canvasStyle = `width:${screen_width - border}; height: ${

@@ -238,19 +238,6 @@ class ElementEditor extends React.Component {
             ></button>
             <button aria-label="Maximize"></button> */}
 
-            <button onClick={() => this.reset()}> ⏻</button>
-
-            <button
-              onClick={() => {
-                // reset();
-                universe.pop_undo();
-                // this.refresh();
-                window.UI.refresh();
-              }}
-              // style={{ fontSize: 12, lineHeight: 0 }}
-            >
-              ⤺
-            </button>
             {/* <button
               onClick={() => this.togglePause()}
               className={!paused ? "selected playbutton" : "playbutton"}
@@ -283,11 +270,29 @@ class ElementEditor extends React.Component {
                 (window.speed = Math.pow(1.2, e.target.value) - 1)
               }
               type="range"
-              style={{ width: 60, margin: 3 }}
+              style={{
+                width: 80,
+                margin: "3px 10px",
+                filter: "sepia(.2) brightness(.87)",
+              }}
               defaultValue={10}
+              className="has-box-indicator"
               min={0}
+              step={5}
               max={20}
             ></input>
+            <button
+              onClick={() => {
+                // reset();
+                universe.pop_undo();
+                // this.refresh();
+                window.UI.refresh();
+              }}
+              // style={{ fontSize: 12, lineHeight: 0 }}
+            >
+              ⤺
+            </button>
+            <button onClick={() => this.reset()}> ⏻</button>
           </div>
         </div>
         <div className="window-body hud-body">
@@ -345,26 +350,7 @@ class ElementEditor extends React.Component {
             </OrganicButton> */}
 
             {/* <OrganicButton onClick={() => this.reset()}>↻</OrganicButton> */}
-            {/* <Link
-              to={{
-                pathname: "/info/",
-                hash
-              }}
-            >
-              <OrganicButton style={{ width: "calc(100% - 4px)" }}>
-                Info
-              </OrganicButton>
-            </Link> */}
 
-            {/* <OrganicButton
-              onClick={() => {
-                // reset();
-                universe.pop_undo();
-              }}
-              style={{ fontSize: 18, lineHeight: 0 }}
-            >
-              ↜
-            </OrganicButton> */}
             {/* 
             <OrganicButton
               onClick={() => {
@@ -389,7 +375,7 @@ class ElementEditor extends React.Component {
                 selectedElement={selectedElement}
                 clause_index={0}
               ></Editor>
-              <button
+              {/* <button
                 className="swap"
                 onClick={() => {
                   swapClauses(selectedElement, 0, 1);
@@ -397,12 +383,12 @@ class ElementEditor extends React.Component {
                 }}
               >
                 ↓
-              </button>
+              </button> */}
               <Editor
                 selectedElement={selectedElement}
                 clause_index={1}
               ></Editor>
-              <button
+              {/* <button
                 className="swap"
                 onClick={() => {
                   swapClauses(selectedElement, 1, 2);
@@ -410,8 +396,7 @@ class ElementEditor extends React.Component {
                 }}
               >
                 ↓
-              </button>
-
+              </button> */}
               <Editor
                 selectedElement={selectedElement}
                 clause_index={2}
@@ -420,10 +405,14 @@ class ElementEditor extends React.Component {
               <button
                 onClick={() => {
                   window.u.push_undo();
-
-                  mutate(selectedElement, 0);
-                  mutate(selectedElement, 1);
-                  mutate(selectedElement, 2);
+                  let success = 0;
+                  for (let m = 0; m < 10; m++) {
+                    success += mutate(selectedElement);
+                    if (success > 0) {
+                      break;
+                    }
+                  }
+                  console.log(success);
                   this.refresh();
                 }}
                 id="clear-button"

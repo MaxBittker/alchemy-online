@@ -350,8 +350,8 @@ pub fn execute_clause(cell: Cell, api: SandApi, clause: Clause) -> (bool, SandAp
 
 pub fn execute_rule(cell: Cell, i_api: SandApi, rule: Rule) -> usize {
     let mut api = i_api;
-    let r = 0;
-    // let r = rand_uint(rule.clauses.len());
+    // let r = 0;
+    let r = rand_uint(rule.clauses.len());
     for c in 0..rule.clauses.len() {
         let actual_clause = (c + r) % rule.clauses.len();
         let clause = rule.clauses[actual_clause];

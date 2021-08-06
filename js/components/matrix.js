@@ -144,7 +144,7 @@ class Matrix extends React.Component {
             filter: "saturate(0.8)",
             color: isWild ? "#666" : "black",
             backgroundColor: isWild ? "#dddddd00" : window.pallette[myCell],
-            borderColor: isWild ? "#aaaaaaee" : window.pallette[myCell],
+            borderColor: isWild ? "#aaaaaaaa" : window.pallette[myCell],
             backgroundImage: 'url("assets/paper.png")',
             backgroundSize: "100px 100px",
             borderWidth: 3,
