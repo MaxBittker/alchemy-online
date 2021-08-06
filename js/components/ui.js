@@ -406,7 +406,7 @@ class ElementEditor extends React.Component {
                 onClick={() => {
                   window.u.push_undo();
                   let success = 0;
-                  for (let m = 0; m < 10; m++) {
+                  for (let m = 0; m < 30; m++) {
                     success += mutate(selectedElement);
                     if (success > 0) {
                       break;

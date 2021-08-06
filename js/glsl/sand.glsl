@@ -56,7 +56,7 @@ void main() {
     lightness = 0.8;
     if (isSnapshot) {
       // lightness = 0.9;
-      a = 1.0;
+      a = 0.9;
     }
   } else if (type == 1) { // wall
     hue = 0.1;

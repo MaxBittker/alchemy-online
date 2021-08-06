@@ -239,7 +239,7 @@ function mutate(element) {
     return 0;
   }
 
-  for (var t = 0; t < 60; t++) {
+  for (var t = 0; t < 10; t++) {
     alternate_universe.tick();
   }
   let elementHist_late = getHistogram(alternate_universe);
@@ -248,10 +248,13 @@ function mutate(element) {
     alternate_universe.width() * alternate_universe.height() * 0.95;
   // console.log(availableSpace, elementHist_late[element]);
   if (
-    elementHist < availableSpace &&
-    elementHist_late[element] > availableSpace
+    elementHist_late[element] / (elementHist[element] + 1) > 5 &&
+    availableSpace / elementHist_late[element] > 0.5
   ) {
-    console.log("overgrown!");
+    console.log(
+      "overgrown!",
+      elementHist_late[element] / (elementHist[element] + 1)
+    );
     return 0;
   }
 
